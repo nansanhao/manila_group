@@ -88,9 +88,31 @@ public class Player {
 		this.account_balance += profit;
 	}
 
+	/**
+	 * 加一个判断跟处理，破产后不再花钱
+	 * @param amount
+	 */
 	public void payPos(int amount){
+		//TODO
 		this.account_balance -= amount;
 		this.worker_nb--;
+	}
+
+	/**
+	 * 判断财产是否只剩下0
+	 * @return
+	 */
+	public boolean isBankrupt(){
+		//TODO
+		return true;
+	}
+
+	/**
+	 * 抵押股票还钱的操作
+	 */
+	public void pledgeShares(){
+		//TODO
+
 	}
 
 }

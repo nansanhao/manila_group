@@ -26,7 +26,8 @@ public class Game {
 	private int current_pid;
 	/** 被选为船老大的玩家ID */
 	private int boss_pid;
-	
+	/** 当前游戏的黑市*/
+	private BlackMarket aBlackMarket;
 	/** 游戏的总轮数 */
 	public static final int ROUND_NUMBER = 3;
 	/** 海路的总长度 */
@@ -97,6 +98,15 @@ public class Game {
 	public void setBoss_pid(int boss_pid) {
 		this.boss_pid = boss_pid;
 	}
+
+	public BlackMarket getaBlackMarket() {
+		return aBlackMarket;
+	}
+
+	public void setaBlackMarket(BlackMarket aBlackMarket) {
+		this.aBlackMarket = aBlackMarket;
+	}
+
 	public Game(GameView gv){
 		this.gameV = gv;
 		
@@ -129,13 +139,16 @@ public class Game {
 		this.current_pid = 0;
 		this.boss_pid = -1;
 		this.current_round = 0;
-		this.choosing = true;
+		this.choosing = false;
 		this.gameIsOver = false;
 		
 		this.players = new Player[3];
 		this.players[0] = new Player("路飞", 0, Color.RED);
 		this.players[1] = new Player("杰克", 1, Color.GREEN);
 		this.players[2] = new Player("哥伦布", 2, Color.BLUE);
+
+		//TODO
+		//黑市没有初始化 改一下船的生成 加一艘船 哪艘下海由BOSScontroller拓展完成
 	}
 	
 	/**
@@ -224,4 +237,6 @@ public class Game {
 	public void newVoyage() {
 		//TODO
 	}
+
+
 }
