@@ -30,10 +30,73 @@ public class Game {
 	/** 游戏的总轮数 */
 	public static final int ROUND_NUMBER = 3;
 	/** 海路的总长度 */
-	public static final int SEA_LENGTH = 8;
+	public static final int SEA_LENGTH = 13;
 	
 	private GameView gameV;
-	
+
+	public Player[] getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Player[] players) {
+		this.players = players;
+	}
+
+	public Boat[] getBoats() {
+		return boats;
+	}
+
+	public void setBoats(Boat[] boats) {
+		this.boats = boats;
+	}
+
+	public boolean isChoosing() {
+		return choosing;
+	}
+
+	public void setChoosing(boolean choosing) {
+		this.choosing = choosing;
+	}
+
+	public int getCurrent_pid() {
+		return current_pid;
+	}
+
+	public void setCurrent_pid(int current_pid) {
+		this.current_pid = current_pid;
+	}
+
+	public boolean isGameIsOver() {
+		return gameIsOver;
+	}
+
+	public void setGameIsOver(boolean gameIsOver) {
+		this.gameIsOver = gameIsOver;
+	}
+
+	public int getCurrent_round() {
+		return current_round;
+	}
+
+	public void setCurrent_round(int current_round) {
+		this.current_round = current_round;
+	}
+
+	public GameView getGameV() {
+		return gameV;
+	}
+
+	public void setGameV(GameView gameV) {
+		this.gameV = gameV;
+	}
+
+	public int getBoss_pid() {
+		return boss_pid;
+	}
+
+	public void setBoss_pid(int boss_pid) {
+		this.boss_pid = boss_pid;
+	}
 	public Game(GameView gv){
 		this.gameV = gv;
 		
@@ -119,11 +182,10 @@ public class Game {
 	
 	/**
 	 * 在所有轮结束后，根据船是否到港以及船上海员的归属，为每位玩家分配收益。
+	 * 改变各个区域获利方式
 	 */
 	public void calculateProfits(){
-		// for boats that get to the harbor
-		// share the money by selling the cargo
-
+			//TODO
 		for(Boat s : this.boats){
 			if(s.getPos_in_the_sea() > SEA_LENGTH){
 				s.playerGetProfit(this.players);
@@ -155,71 +217,11 @@ public class Game {
 	public void switchPlayer(){
 		this.current_pid = (this.current_pid+1)%this.players.length;
 	}
-	
-	public Player[] getPlayers() {
-		return players;
-	}
 
-	public void setPlayers(Player[] players) {
-		this.players = players;
+	/**
+	 * 将参数初始化 进入新航程 参考构造器，完成后在构造器中直接调用这个函数
+	 */
+	public void newVoyage() {
+		//TODO
 	}
-
-	public Boat[] getBoats() {
-		return boats;
-	}
-
-	public void setBoats(Boat[] boats) {
-		this.boats = boats;
-	}
-
-	public boolean isChoosing() {
-		return choosing;
-	}
-
-	public void setChoosing(boolean choosing) {
-		this.choosing = choosing;
-	}
-
-	public int getCurrent_pid() {
-		return current_pid;
-	}
-
-	public void setCurrent_pid(int current_pid) {
-		this.current_pid = current_pid;
-	}
-
-	public boolean isGameIsOver() {
-		return gameIsOver;
-	}
-
-	public void setGameIsOver(boolean gameIsOver) {
-		this.gameIsOver = gameIsOver;
-	}
-
-	public int getCurrent_round() {
-		return current_round;
-	}
-
-	public void setCurrent_round(int current_round) {
-		this.current_round = current_round;
-	}
-
-	public GameView getGameV() {
-		return gameV;
-	}
-
-	public void setGameV(GameView gameV) {
-		this.gameV = gameV;
-	}
-
-	public int getBoss_pid() {
-		return boss_pid;
-	}
-
-	public void setBoss_pid(int boss_pid) {
-		this.boss_pid = boss_pid;
-	}
-	
-	
-
 }

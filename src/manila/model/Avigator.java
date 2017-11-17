@@ -6,6 +6,11 @@ package manila.model;
  */
 public class Avigator extends Area{
 
+
+
+    public Avigator(){
+        //TODO
+    }
     /**
      * 领航员可以移动船
      * @param boat 将被移动的船

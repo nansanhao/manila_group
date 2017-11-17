@@ -23,7 +23,7 @@ public class GameView extends JPanel {
 	/** 信息窗口的宽度 */
 	private static final int INFO_W = 300;
 	/** 信息窗口的高度 */
-	private static final int INFO_H = 800;
+	private static final int INFO_H = 1000;
     
 	private Game game;
 	

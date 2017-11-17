@@ -15,6 +15,30 @@ public  abstract class Area {
     /**区域（左上角）在图形界面上的y坐标 */
     protected int posY;
 
+    public Position[] getPos_list() {
+        return pos_list;
+    }
+
+    public void setPos_list(Position[] pos_list) {
+        this.pos_list = pos_list;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
     /**
      * 获得区域当前空着的位置的编号（进入区域时自动从较低的编号开始）
      * @return 当前编号最小的空位所对应的编号值

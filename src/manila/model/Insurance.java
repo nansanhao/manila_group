@@ -5,6 +5,9 @@ package manila.model;
  */
 public class Insurance extends Area{
 
+    public Insurance(){
+        //TODO
+    }
     @Override
     public void playerGetProfit(Player[] players) {
         //TODO

@@ -19,33 +19,6 @@ public class Player {
 	private Color c;
 	/** 持有的股票 */
 	private List<Shares> haveShares;
-	
-	/**
-	 * 玩家构造函数
-	 * @param name 玩家姓名
-	 * @param pid 玩家ID
-	 * @param c 玩家分配的颜色
-	 */
-	public Player(String name, int pid, Color c){
-		this.name = name;
-		this.pid = pid;
-		this.account_balance = 30;
-		this.c = c;
-		this.worker_nb = Game.ROUND_NUMBER;
-	}
-
-	/**
-	 * 分配收益时调用的函数
-	 * @param profit 为玩家分配的收益，放入余额中
-	 */
-	public void receiveProfit(int profit){
-		this.account_balance += profit;
-	}
-
-	public void payPos(int amount){
-		this.account_balance -= amount;
-		this.worker_nb--;
-	}
 	public String getName() {
 		return name;
 	}
@@ -93,4 +66,31 @@ public class Player {
 	public void setHaveShares(List<Shares> haveShares) {
 		this.haveShares = haveShares;
 	}
+	/**
+	 * 玩家构造函数
+	 * @param name 玩家姓名
+	 * @param pid 玩家ID
+	 * @param c 玩家分配的颜色
+	 */
+	public Player(String name, int pid, Color c){
+		this.name = name;
+		this.pid = pid;
+		this.account_balance = 30;
+		this.c = c;
+		this.worker_nb = Game.ROUND_NUMBER;
+	}
+
+	/**
+	 * 分配收益时调用的函数
+	 * @param profit 为玩家分配的收益，放入余额中
+	 */
+	public void receiveProfit(int profit){
+		this.account_balance += profit;
+	}
+
+	public void payPos(int amount){
+		this.account_balance -= amount;
+		this.worker_nb--;
+	}
+
 }
