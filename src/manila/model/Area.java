@@ -5,15 +5,15 @@ import manila.view.PlaygroundView;
 /**
  * 区域类，被其他实际区域继承
  */
-public class Area {
+public  abstract class Area {
     /**
      * 区域上的座位
      */
     public Position[] pos_list;
     /** 区域（左上角）在图形界面上的x坐标 */
-    private int posX;
+    protected int posX;
     /**区域（左上角）在图形界面上的y坐标 */
-    private int posY;
+    protected int posY;
 
     /**
      * 获得区域当前空着的位置的编号（进入区域时自动从较低的编号开始）
@@ -29,7 +29,7 @@ public class Area {
     }
 
     /**
-     * 返回当前船上已有多少个坐了人的位置数
+     * 返回当前区域上已有多少个坐了人的位置数
      * @return 已有人的位置数
      */
     public int getFilledPosNum(){
@@ -41,8 +41,8 @@ public class Area {
     }
 
     /**
-     * 返回当前编号最小的空位对应的登船费用
-     * @return 当前编号最小的空位对应的登船费用
+     * 返回当前编号最小的空位对应的消耗费用
+     * @return 当前编号最小的空位对应的消耗费用
      */
     public int getAvailPosPrice(){
         for(int i=0; i<this.pos_list.length; i++){
@@ -72,4 +72,11 @@ public class Area {
     public void joinIn(int pid){
         this.pos_list[getAvailPosIndex()].setSailorID(pid);
     }
+
+    /**
+     * 根据各个区域的规则让players获取利润， 该方法在Game的calculateProfit调用
+     * @param players 所有的玩家
+     */
+    public abstract void playerGetProfit(Player[] players);
+
 }

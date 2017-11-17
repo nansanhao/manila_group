@@ -123,16 +123,10 @@ public class Game {
 	public void calculateProfits(){
 		// for boats that get to the harbor
 		// share the money by selling the cargo
-		int money_to_share;
+
 		for(Boat s : this.boats){
 			if(s.getPos_in_the_sea() > SEA_LENGTH){
-				System.out.println("The boat "+s.getCargo_name()+" has arrived");
-				money_to_share = s.getCargo_value()/s.getFilledPosNum();
-				System.out.println("money_to_share: "+money_to_share);
-				for(Position pos : s.getPos_list()){
-					if(pos.getSailorID() != -1)
-						this.players[pos.getSailorID()].receiveProfit(money_to_share);
-				}
+				s.playerGetProfit(this.players);
 			}
 			else
 				System.out.println("The boat "+s.getCargo_name()+" has sank!");

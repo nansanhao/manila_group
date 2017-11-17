@@ -4,6 +4,7 @@ package manila.model;
  * 玩家类，包含玩家的姓名等基本信息。
  */
 import java.awt.Color;
+import java.util.List;
 
 public class Player {
 	/** 玩家名 */
@@ -16,6 +17,8 @@ public class Player {
 	private int worker_nb;
 	/** 玩家所对应的颜色 */
 	private Color c;
+	/** 持有的股票 */
+	private List<Shares> haveShares;
 	
 	/**
 	 * 玩家构造函数
@@ -38,7 +41,11 @@ public class Player {
 	public void receiveProfit(int profit){
 		this.account_balance += profit;
 	}
-	
+
+	public void payPos(int amount){
+		this.account_balance -= amount;
+		this.worker_nb--;
+	}
 	public String getName() {
 		return name;
 	}
@@ -53,11 +60,6 @@ public class Player {
 
 	public void setPid(int pid) {
 		this.pid = pid;
-	}
-	
-	public void payPos(int amount){
-		this.account_balance -= amount;
-		this.worker_nb--;
 	}
 
 	public int getAccount_balance() {
@@ -83,5 +85,12 @@ public class Player {
 	public void setC(Color c) {
 		this.c = c;
 	}
-	
+
+	public List<Shares> getHaveShares() {
+		return haveShares;
+	}
+
+	public void setHaveShares(List<Shares> haveShares) {
+		this.haveShares = haveShares;
+	}
 }

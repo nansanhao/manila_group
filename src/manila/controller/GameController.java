@@ -26,7 +26,7 @@ public class GameController implements MouseListener {
 				if(b.getAvailPosIndex() != -1){
 					Player p = this.game.getCurrentPlayer();
 					p.payPos(b.getAvailPosPrice());
-					b.getOnboard(p.getPid());
+					b.joinIn(p.getPid());
 					
 					// modify the view
 					this.game.getGameV().getPlayground().repaint();

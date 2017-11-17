@@ -10,6 +10,8 @@ public class Shares {
     private String cargo_name;
     /**股票状态，1为持有，2为抵押*/
     private int status_pledge;
+    /**股票持有者*/
+    private Player owner;
 
     public Shares(int price, String cargo_name, int status_pledge) {
         this.price = price;
@@ -47,5 +49,13 @@ public class Shares {
 
     public void setStatus_pledge(int status_pledge) {
         this.status_pledge = status_pledge;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
     }
 }

@@ -12,6 +12,11 @@ public class Avigator extends Area{
      * @param step 移动的步数
      */
    public void moveBoat(Boat boat ,int step) {
-
+       //TODO
    }
+
+    @Override
+    public void playerGetProfit(Player[] players) {
+        //TODO
+    }
 }
