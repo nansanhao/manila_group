@@ -104,7 +104,7 @@ public class Boat {
 
 	/**
 	 * 船是否被海盗截获
-	 * @return
+	 * @return 返回布尔值
 	 */
 	public boolean isRobbed(){
 		// TODO: 2017/11/17 比较船当前位置与海的海盗位置(Game的静态变量：Game.SEA_LENGTH)
