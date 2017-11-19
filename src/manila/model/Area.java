@@ -11,9 +11,9 @@ public  abstract class Area {
      */
     public Position[] pos_list;
     /** 区域（左上角）在图形界面上的x坐标 */
-    protected int posX;
+    private int posX;
     /**区域（左上角）在图形界面上的y坐标 */
-    protected int posY;
+    private int posY;
 
     public Position[] getPos_list() {
         return pos_list;

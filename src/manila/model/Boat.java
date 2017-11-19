@@ -64,7 +64,7 @@ public class Boat extends Area{
 	 */
 	public void move(int step){
 		this.pos_in_the_sea += step;
-		this.posY -= step * PlaygroundView.SEA_INTERVAL;
+		this.setPosY(this.getPosY()-step * PlaygroundView.SEA_INTERVAL);
 	}
 
 	/**
