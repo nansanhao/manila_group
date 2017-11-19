@@ -5,4 +5,11 @@ package manila.model;
  */
 public class ShipYard extends Area{
 
+    public ShipYard(){
+        //TODO
+    }
+    @Override
+    public void playerGetProfit(Player[] players) {
+    //TODO
+    }
 }
