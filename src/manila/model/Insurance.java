@@ -1,26 +1,18 @@
 package manila.model;
 
 /**
- * 保险公司类，里面有一个位置
+ * 保险公司类，里面有一个位置，位置价钱为-10
  */
 public class Insurance extends Area{
 
     public Insurance(){
-        //TODO
+        //TODO：初始化保险类，包括位置等：何剑冲
     }
     @Override
     /**
-     * 当点入改区域就执行本函数 获得10块
+     * 航程结束，且有船沉时调用
      */
-    public void playerGetProfit(Player[] players) {
-        //TODO
-    }
-
-    /**
-     * @param player 传入的玩家
-     *  根据position上的price对对应玩家扣TM的钱
-     */
-    public void payInsurance(Player player){
-        //TODO
+    public void playerGetProfit(Game game) {
+        //TODO：计算赔钱，参照Boat类中的计算方法：何剑冲
     }
 }

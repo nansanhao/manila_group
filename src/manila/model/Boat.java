@@ -73,18 +73,19 @@ public class Boat extends Area{
 	 * @return
 	 */
 	public boolean isRobbed(){
-		// TODO: 2017/11/17 比较船当前位置与海的海盗位置(Game的静态变量：Game.SEA_LENGTH)
+		// TODO: 2017/11/17 比较船当前位置与海的海盗位置(Game的静态变量：Game.SEA_LENGTH)：
 
 		return false;
 	}
 	@Override
-	public void playerGetProfit(Player[] players) {
+	public void playerGetProfit(Game game) {
+		Player[] players=game.getPlayers();
 		int money_to_share;
 		System.out.println("The boat "+this.getCargo_name()+" has arrived");
 		money_to_share = this.getCargo_value()/this.getFilledPosNum();
 		System.out.println("money_to_share: "+money_to_share);
 		for(Position pos : this.getPos_list()){
-			if(pos.getSailorID() != -1)
+			if(pos.getSailorID() != -1)//-1是空位
 				players[pos.getSailorID()].receiveProfit(money_to_share);
 		}
 	}

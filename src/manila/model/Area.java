@@ -99,8 +99,8 @@ public  abstract class Area {
 
     /**
      * 根据各个区域的规则让players获取利润， 该方法在Game的calculateProfit调用
-     * @param players 所有的玩家
+     * @param game 游戏对象
      */
-    public abstract void playerGetProfit(Player[] players);
+    public abstract void playerGetProfit(Game game);
 
 }

@@ -16,14 +16,14 @@ public class BlackMarket {
     }
 
     public BlackMarket(){
-        //TODO
+        //TODO：范贤明
     }
     /**
      * 获得当前股市里最高股票的价钱
      * @return 最高价
      */
     public int getTopPrice(){
-        // TODO: 2017/11/17 获得当前股市里最高股票的价钱
+        // TODO: 2017/11/17 获得当前股市里最高股票的价钱：范贤明
         return -1;
     }
 
@@ -32,7 +32,7 @@ public class BlackMarket {
      * @param boats 数组里装有到了港口的船的货物名称
      */
     public void updatePrice(String[] boats){
-        // TODO: 2017/11/17  根据到了港口的船更新黑市价格
+        // TODO: 2017/11/17  根据到了港口的船更新黑市价格：范贤明
     }
 
 
