@@ -5,20 +5,20 @@ import manila.view.PlaygroundView;
 /**
  * 小船类，船上装有货物，船上有位置可以装海员。
  */
-public class Boat {
+public class Boat extends Area{
 	/** 船上的货物名 */
 	private String cargo_name;
 	/** 货物的总价值 */
 	private int cargo_value;
 	/** 船上的空位数组 */
-	private Position[] pos_list;
+	//private Position[] pos_list;
 	/** 船在海中的位置 */
 	private int pos_in_the_sea;
 	
 	/** 船（左上角）在图形界面上的x坐标 */
-	private int posX;
+	//private int posX;
 	/** 船（左上角）在图形界面上的y坐标 */
-	private int posY;
+	//private int posY;
 	/**是否被截获*/
 	boolean isRobbed;
 	
@@ -33,83 +33,6 @@ public class Boat {
 		this.cargo_value = v;
 		this.pos_list = pl;
 		this.pos_in_the_sea = 0;
-	}
-	
-	/**
-	 * 当一个玩家分配海员登上该船时，调用该函数用以更新船上位置的信息
-	 * @param pid 登船玩家的ID
-	 */
-	public void getOnboard(int pid){
-		this.pos_list[getAvailPosIndex()].setSailorID(pid);
-	}
-	
-	/**
-	 * 使船在海中前进，更新船在海中的位置和在船在图形界面上的位置
-	 * @param step 船在海中前进的步数
-	 */
-	public void move(int step){
-		this.pos_in_the_sea += step;
-		this.posY -= step * PlaygroundView.SEA_INTERVAL;
-	}
-	
-	/**
-	 * 获得该船当前空着的位置的编号（登船时自动从较低的编号开始）
-	 * @return 当前编号最小的空位所对应的编号值
-	 */
-	public int getAvailPosIndex(){
-		for(int i=0; i<this.pos_list.length; i++){
-			if(this.pos_list[i].getSailorID() == -1)
-				return i;
-		}
-		// no position left
-		return -1;
-	}
-	
-	/**
-	 * 返回当前船上已有多少个坐了人的位置数
-	 * @return 已有人的位置数
-	 */
-	public int getFilledPosNum(){
-		int pos_ind = getAvailPosIndex();
-		if(pos_ind == -1)
-			return this.pos_list.length;
-		else
-			return pos_ind;
-	}
-	
-	/**
-	 * 返回当前编号最小的空位对应的登船费用
-	 * @return 当前编号最小的空位对应的登船费用
-	 */
-	public int getAvailPosPrice(){
-		for(int i=0; i<this.pos_list.length; i++){
-			if(this.pos_list[i].getSailorID() == -1)
-				return this.pos_list[i].getPrice();
-		}
-		return -1;
-	}
-	
-	/**
-	 * 判断鼠标光标是否在该船的范围内
-	 * @param x 光标的横坐标
-	 * @param y 光标的纵坐标
-	 * @return 是否在该船的范围内
-	 */
-	public boolean isCursorInside(int x, int y){
-		if(x > this.posX && x < this.posX+PlaygroundView.BOAT_W
-				&& y > this.posY && y< this.posY+PlaygroundView.BOAT_H)
-			return true;
-		return false;
-	}
-
-	/**
-	 * 船是否被海盗截获
-	 * @return 返回布尔值
-	 */
-	public boolean isRobbed(){
-		// TODO: 2017/11/17 比较船当前位置与海的海盗位置(Game的静态变量：Game.SEA_LENGTH)
-
-		return false;
 	}
 
 	public String getCargo_name() {
@@ -136,29 +59,33 @@ public class Boat {
 		this.pos_in_the_sea = pos_in_the_sea;
 	}
 
-	public Position[] getPos_list() {
-		return pos_list;
+	/**
+	 * 使船在海中前进，更新船在海中的位置和在船在图形界面上的位置
+	 * @param step 船在海中前进的步数
+	 */
+	public void move(int step){
+		this.pos_in_the_sea += step;
+		this.setPosY(this.getPosY()-step * PlaygroundView.SEA_INTERVAL);
 	}
 
-	public void setPos_list(Position[] pos_list) {
-		this.pos_list = pos_list;
-	}
+	/**
+	 * 船是否被海盗截获
+	 * @return
+	 */
+	public boolean isRobbed(){
+		// TODO: 2017/11/17 比较船当前位置与海的海盗位置(Game的静态变量：Game.SEA_LENGTH)
 
-	public int getPosX() {
-		return posX;
+		return false;
 	}
-
-	public void setPosX(int posX) {
-		this.posX = posX;
+	@Override
+	public void playerGetProfit(Player[] players) {
+		int money_to_share;
+		System.out.println("The boat "+this.getCargo_name()+" has arrived");
+		money_to_share = this.getCargo_value()/this.getFilledPosNum();
+		System.out.println("money_to_share: "+money_to_share);
+		for(Position pos : this.getPos_list()){
+			if(pos.getSailorID() != -1)
+				players[pos.getSailorID()].receiveProfit(money_to_share);
+		}
 	}
-
-	public int getPosY() {
-		return posY;
-	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-	
-	
 }

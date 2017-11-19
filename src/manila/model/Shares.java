@@ -10,6 +10,32 @@ public class Shares {
     private String cargo_name;
     /**股票状态，1为持有，2为抵押*/
     private int status_pledge;
+    /**股票持有者*/
+    private Player owner;
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getStatus_pledge() {
+        return status_pledge;
+    }
+
+    public void setStatus_pledge(int status_pledge) {
+        this.status_pledge = status_pledge;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
 
     public Shares(int price, String cargo_name, int status_pledge) {
         this.price = price;
@@ -33,19 +59,5 @@ public class Shares {
         // TODO: 2017/11/17 改变股票状态
     }
 
-    public int getPrice() {
-        return price;
-    }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getStatus_pledge() {
-        return status_pledge;
-    }
-
-    public void setStatus_pledge(int status_pledge) {
-        this.status_pledge = status_pledge;
-    }
 }

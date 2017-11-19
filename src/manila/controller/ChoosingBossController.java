@@ -35,6 +35,7 @@ public class ChoosingBossController implements ActionListener {
 				this.bid_amount = amount;
 			}
 			else{
+				//TODO 竞选输入是否正确
 				this.bid_amount++;
 			}
 			
@@ -46,6 +47,7 @@ public class ChoosingBossController implements ActionListener {
 			
 			this.cbv.getGame().switchPlayer();
 			this.cbv.updateBidView(this.cbv.getGame().getCurrent_pid(), true);
+			this.cbv.getGame().setChoosing(true);
 		}
 		else
 			System.out.println("请输入金额");
