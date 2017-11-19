@@ -13,6 +13,14 @@ public class Game {
 	private Player[] players;
 	/** 小船数组 */
 	private Boat[] boats;
+	/**海盗区*/
+	private Pirate pirate;
+	/**领航员区*/
+	private Avigator avigator;
+	/**保险公司*/
+	private Insurance insurance;
+	/**修船厂*/
+	private ShipYard shipYard;
 	/** 随机数产生器 */
 	private Random dice_generator;
 	
@@ -146,9 +154,7 @@ public class Game {
 		this.players[0] = new Player("路飞", 0, Color.RED);
 		this.players[1] = new Player("杰克", 1, Color.GREEN);
 		this.players[2] = new Player("哥伦布", 2, Color.BLUE);
-
-		//TODO
-		//黑市没有初始化 改一下船的生成 加一艘船 哪艘下海由BOSScontroller拓展完成
+		// TODO: 2017/11/19 黑市没有初始化 改一下船的生成 加一艘船 哪艘下海由BOSScontroller拓展完成：何剑冲
 	}
 	
 	/**
@@ -194,14 +200,18 @@ public class Game {
 	}
 	
 	/**
-	 * 在所有轮结束后，根据船是否到港以及船上海员的归属，为每位玩家分配收益。
-	 * 改变各个区域获利方式
+	 * 一次航程结束之后，结算所有区域及到港的钱
 	 */
 	public void calculateProfits(){
-			//TODO
+		//结算将在其他功能逐步完善之后慢慢添加
+		// TODO: 2017/11/19 海盗结算 
+		// TODO: 2017/11/19 领航员结算 
+		// TODO: 2017/11/19 保险公司结算 
+		// TODO: 2017/11/19 修船厂结算 
+		//TODO：到岸结算
 		for(Boat s : this.boats){
 			if(s.getPos_in_the_sea() > SEA_LENGTH){
-				s.playerGetProfit(this.players);
+				s.playerGetProfit(this);
 			}
 			else
 				System.out.println("The boat "+s.getCargo_name()+" has sank!");
@@ -235,7 +245,8 @@ public class Game {
 	 * 将参数初始化 进入新航程 参考构造器，完成后在构造器中直接调用这个函数
 	 */
 	public void newVoyage() {
-		//TODO
+		// TODO: 2017/11/19  完成航程循环，重置部分游戏数据：何剑冲
+		//游戏数据包括船位置，船老大，和一些其他，将会在功能逐步完善之后逐步加入
 	}
 
 

@@ -89,29 +89,30 @@ public class Player {
 	}
 
 	/**
-	 * 加一个判断跟处理，破产后不再花钱
+	 * 上船为位置花钱
 	 * @param amount
 	 */
 	public void payPos(int amount){
-		//TODO
+		//TODO：加一个判断跟处理，破产后不再花钱：范贤明
 		this.account_balance -= amount;
 		this.worker_nb--;
 	}
 
 	/**
-	 * 判断财产是否只剩下0
-	 * @return
+	 * 判断财产是否破产，
+	 * @return 破产返回true，否则false
 	 */
 	public boolean isBankrupt(){
-		//TODO
+		// TODO: 2017/11/19  检测当前余额，返回结果：范贤明
 		return true;
 	}
 
-	/**
-	 * 抵押股票还钱的操作
-	 */
-	public void pledgeShares(){
-		//TODO
+    /**
+     * 抵押股票换钱的操作。改变股票的状态，
+     * @param shareName 要修改的股票类型
+     */
+	public void pledgeShares(String shareName){
+		//TODO：将指定类型的股票的状态修改，然后获得钱：范贤明
 
 	}
 

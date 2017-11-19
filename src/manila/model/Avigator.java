@@ -9,7 +9,7 @@ public class Avigator extends Area{
 
 
     public Avigator(){
-        //TODO
+        //TODO：需要为领航员初始化属性，如位置等，参照其父类：郑抗
     }
     /**
      * 领航员可以移动船
@@ -17,11 +17,12 @@ public class Avigator extends Area{
      * @param step 移动的步数
      */
    public void moveBoat(Boat boat ,int step) {
-       //TODO
+       // TODO: 2017/11/19 郑抗 
    }
 
     @Override
-    public void playerGetProfit(Player[] players) {
-        //TODO
+    public void playerGetProfit(Game game) {
+        //TODO：参照boat的获利：郑抗
+
     }
 }

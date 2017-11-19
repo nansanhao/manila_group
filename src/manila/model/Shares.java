@@ -48,7 +48,7 @@ public class Shares {
      * @return 被抵押返回true，未被抵押返回false
      */
     public boolean isPledged(){
-        // TODO: 2017/11/17 根据 status_pledge返回布尔值
+        // TODO: 2017/11/17 根据 status_pledge返回布尔值：何剑冲
         return false;
     }
 
@@ -56,7 +56,7 @@ public class Shares {
      * 改变股票状态，如果是1改为2，是2则改为1
      */
     public void changeStatus_pledge(){
-        // TODO: 2017/11/17 改变股票状态
+        // TODO: 2017/11/17 改变股票状态：何剑冲
     }
 
 
