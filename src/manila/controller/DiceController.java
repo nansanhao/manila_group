@@ -37,8 +37,12 @@ public class DiceController implements ActionListener {
 				this.game.setChoosing(false);
 				this.game.calculateProfits();
 				this.game.showWinner();
-				this.game.newVoyage();
 			}
+
+		}
+		 if(this.game.isGameIsOver()){
+			this.game.newVoyage();
+			this.game.getGameV().getPlayersView().repaint();
 		}
 		
 	}
