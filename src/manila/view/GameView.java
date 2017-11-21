@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 
 import manila.controller.DiceController;
 import manila.model.Game;
+import manila.model.Pirate;
 import manila.model.Player;
 
 /**
@@ -21,9 +22,9 @@ import manila.model.Player;
  */
 public class GameView extends JPanel {
 	/** 信息窗口的宽度 */
-	private static final int INFO_W = 300;
+	private static final int INFO_W = 400;
 	/** 信息窗口的高度 */
-	private static final int INFO_H = 1000;
+	private static final int INFO_H = 800;
     
 	private Game game;
 	
@@ -35,6 +36,11 @@ public class GameView extends JPanel {
 	private JPanel playersView;
 	/** 摇骰子的窗口 */
 	private JPanel diceView;
+	/**船老大窗口*/
+	private ChoosingBossView choosingBossView;
+
+	/**区域窗口*/
+	private JPanel areaView;
 	
 	/** 存放玩家信息视图的数组 */
 	private PlayerView[] playersV;
@@ -43,33 +49,48 @@ public class GameView extends JPanel {
 	
 	public GameView(){
 		this.game = new Game(this);
-		
+
+		this.choosingBossView=new ChoosingBossView(this.game);
 		this.playground = new PlaygroundView(this.game);
         this.infoView = new JPanel();
         
         this.makePlayerView();
         this.makeDiceView();
+        this.makeAreaView();
         
         this.infoView.setPreferredSize(new Dimension(INFO_W, INFO_H));
         this.infoView.setBackground(Color.GREEN);
         this.infoView.setLayout(new BorderLayout());
         this.infoView.add(playersView, BorderLayout.CENTER);
         this.infoView.add(diceView, BorderLayout.SOUTH);
-        
+        this.infoView.add(choosingBossView,BorderLayout.NORTH);
+
+
         this.add(this.playground);
         this.add(this.infoView);
+        this.add(this.areaView);
+
         
         //this.setBackground(Color.RED);
         
 	}
-	
+
+    /**
+     * 对区域视图进行初始化
+     */
+    public void makeAreaView(){
+        PirateAreaView pirateAreaView=new PirateAreaView(this.game);
+        this.areaView=new JPanel();
+        this.playersView.setPreferredSize(new Dimension(INFO_W, 200));
+        this.areaView.add(pirateAreaView);
+    }
 	/**
 	 * 对玩家信息视图进行初始化
 	 */
 	public void makePlayerView(){
 		this.playersView = new JPanel();
 		this.playersView.setLayout(new GridLayout(4,1));
-		this.playersView.setPreferredSize(new Dimension(INFO_W, 300));
+		this.playersView.setPreferredSize(new Dimension(INFO_W, 200));
 		
 		JLabel text = new JLabel("玩家信息");
 		text.setHorizontalTextPosition(SwingConstants.LEFT);
@@ -92,7 +113,7 @@ public class GameView extends JPanel {
 	 */
 	public void makeDiceView(){
 		this.diceView = new JPanel();
-		this.diceView.setPreferredSize(new Dimension(INFO_W, 500));
+		this.diceView.setPreferredSize(new Dimension(INFO_W, 50));
 		this.diceView.setBackground(Color.GRAY);
 		this.diceButton = new JButton("前进");
 		this.diceButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
