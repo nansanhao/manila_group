@@ -40,10 +40,7 @@ public class DiceController implements ActionListener {
 			}
 
 		}
-		 if(this.game.isGameIsOver()){
-			this.game.newVoyage();
-			this.game.getGameV().getPlayersView().repaint();
-		}
+
 		
 	}
 
