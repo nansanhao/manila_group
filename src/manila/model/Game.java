@@ -263,6 +263,21 @@ public class Game {
 	public void newVoyage() {
 		// TODO: 2017/11/19  完成航程循环，重置部分游戏数据：何剑冲
 		//游戏数据包括船位置，船老大，和一些其他，将会在功能逐步完善之后逐步加入
+		this.current_pid = 0;
+		this.boss_pid = 0;
+		this.current_round = 0;
+		this.choosing = true;
+		this.gameIsOver = false;
+		for (Boat b:this.boats){
+			b.setPos_in_the_sea(0);
+			b.setPosY(this.gameV.getPlayground().getBoatStartY());
+			for(Position p:b.getPos_list()){
+				p.setSailorID(-1);
+			}
+		}
+		for(Player p:this.players){
+			p.setWorker_nb(3);
+		}
 	}
 
 

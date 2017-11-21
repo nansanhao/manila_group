@@ -6,7 +6,13 @@ package manila.model;
 public class Pirate extends Area{
 
     public Pirate( ) {
-        // TODO: 2017/11/19 初始化海盗：何剑冲
+        // TODO: 2017/11/19 初始化海盗：何剑冲 11.20 未知位置 POSX POSY待定
+        int[] prices = {5,5};
+        Position[] aPos_list = new Position[prices.length];
+        for(int i=0;i<prices.length;i++){
+            aPos_list[i] = new Position(prices[i]);
+        }
+        this.pos_list=aPos_list;
     }
     @Override
     /**
@@ -14,7 +20,9 @@ public class Pirate extends Area{
      * 船长决定船去哪
      */
     public void playerGetProfit(Game game) {
-        //TODO：结算劫船之后：何剑冲
+        //TODO：结算劫船之后：何剑冲 需在Game中加一个获取哪艘船被劫的方法
+//        Boat theRobbedBoat=game.getRobbedBoat();
+//        game.getPlayerByID(this.pos_list[0].getSailorID()).receiveProfit(theRobbedBoat.getCargo_value());
     }
 
 
