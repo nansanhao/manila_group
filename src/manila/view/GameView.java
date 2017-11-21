@@ -82,9 +82,6 @@ public class GameView extends JPanel {
 		this.playersV = new PlayerView[players.length];
 		for(int i=0; i<players.length; i++){
 			PlayerView pv = new PlayerView(players[i],true);
-			if(this.game.getCurrent_pid() == players[i].getPid()){
-				pv.setActive(true);
-			}
 			this.playersV[i] = pv;
 			this.playersView.add(pv);
 		}

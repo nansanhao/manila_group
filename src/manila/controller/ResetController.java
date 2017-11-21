@@ -17,5 +17,9 @@ public class ResetController implements ActionListener {
             this.game.newVoyage();
             this.game.getGameV().getPlayground().repaint();
         }
+        for(int i=0;i<this.game.getPlayers().length;i++){
+            this.game.getGameV().updatePlayersView(i,false);
+        }
+        this.game.getGameV().updatePlayersView(this.game.getBoss_pid(),true);
     }
 }
