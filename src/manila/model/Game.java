@@ -43,6 +43,22 @@ public class Game {
 	
 	private GameView gameV;
 
+	public Pirate getPirate() {
+		return pirate;
+	}
+
+	public Avigator getAvigator() {
+		return avigator;
+	}
+
+	public Insurance getInsurance() {
+		return insurance;
+	}
+
+	public ShipYard getShipYard() {
+		return shipYard;
+	}
+
 	public Player[] getPlayers() {
 		return players;
 	}
