@@ -1,5 +1,6 @@
 package manila.model;
 
+import manila.view.PlayerView;
 import manila.view.PlaygroundView;
 
 /**
@@ -65,7 +66,7 @@ public class Boat extends Area{
 	 */
 	public void move(int step){
 		this.pos_in_the_sea += step;
-		this.setPosY(this.getPosY()-step * PlaygroundView.SEA_INTERVAL);
+		this.setPosX(this.getPosX()+step * (PlaygroundView.SEA_INTERVAL+ PlaygroundView.SEA_W));
 	}
 
 	/**

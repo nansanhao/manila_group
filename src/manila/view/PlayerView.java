@@ -27,6 +27,8 @@ public class PlayerView extends JPanel {
 	private JLabel worker_nbV;
 	/** 该界面对应的玩家对象引用 */
 	private Player player;
+	/** 拥有股票的量*/
+	private JLabel sharesV;
 	
 	/** 当前面板是否显示边框 */
 	private boolean active;
@@ -47,12 +49,14 @@ public class PlayerView extends JPanel {
 		this.colorV = new JPanel();
 		this.colorV.setBackground(this.player.getC());
 		this.worker_nbV = new JLabel(this.player.getWorker_nb()+"");
+		this.sharesV = new JLabel("jsdkjaskljdlkasjdlkasjdlkasj");
 		
-		this.scoreV.setFont(new Font("SansSerif", Font.PLAIN, 32));
-		this.nameV.setFont(new Font("SansSerif", Font.PLAIN, 32));
-		this.worker_nbV.setFont(new Font("SansSerif", Font.PLAIN, 32));
+		this.scoreV.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		this.nameV.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		this.worker_nbV.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		this.sharesV.setFont(new Font("SansSerif", Font.PLAIN, 16));
 		this.colorV.setPreferredSize(new Dimension(colorV_size, colorV_size));
-		
+
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
 		
 		this.add(this.nameV);
@@ -61,6 +65,7 @@ public class PlayerView extends JPanel {
 			this.add(this.scoreV);
 			this.add(this.colorV);
 			this.add(this.worker_nbV);
+			this.add(this.sharesV);
 		}
 		
 		this.setBackground(Color.WHITE);

@@ -24,7 +24,7 @@ public class GameView extends JPanel {
 	/** 信息窗口的宽度 */
 	private static final int INFO_W = 300;
 	/** 信息窗口的高度 */
-	private static final int INFO_H = 1000;
+	private static final int INFO_H = 900;
     
 	private Game game;
 	
@@ -56,8 +56,8 @@ public class GameView extends JPanel {
         this.infoView.setPreferredSize(new Dimension(INFO_W, INFO_H));
         this.infoView.setBackground(Color.GREEN);
         this.infoView.setLayout(new BorderLayout());
-        this.infoView.add(playersView, BorderLayout.CENTER);
-        this.infoView.add(diceView, BorderLayout.SOUTH);
+        this.infoView.add(playersView, BorderLayout.NORTH);
+        this.infoView.add(diceView, BorderLayout.CENTER);
         
         this.add(this.playground);
         this.add(this.infoView);
@@ -72,12 +72,12 @@ public class GameView extends JPanel {
 	public void makePlayerView(){
 		this.playersView = new JPanel();
 		this.playersView.setLayout(new GridLayout(4,1));
-		this.playersView.setPreferredSize(new Dimension(INFO_W, 300));
+		this.playersView.setPreferredSize(new Dimension(INFO_W, 240));
 		
 		JLabel text = new JLabel("玩家信息");
 		text.setHorizontalTextPosition(SwingConstants.LEFT);
-		text.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
-		this.playersView.add(text);
+		text.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 25));
+		this.playersView.add(text,BorderLayout.CENTER);
 		Player[] players = this.game.getPlayers();
 		this.playersV = new PlayerView[players.length];
 		for(int i=0; i<players.length; i++){

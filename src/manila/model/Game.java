@@ -254,7 +254,7 @@ public class Game {
 		this.gameIsOver = false;
 		for (Boat b:this.boats){
 			b.setPos_in_the_sea(0);
-			b.setPosY(this.gameV.getPlayground().getBoatStartY());
+			b.setPosX(this.gameV.getPlayground().BOAT_START_X);
 			for(Position p:b.getPos_list()){
 				p.setSailorID(-1);
 			}
