@@ -48,15 +48,22 @@ public class Shares {
      * @return 被抵押返回true，未被抵押返回false
      */
     public boolean isPledged(){
-        // TODO: 2017/11/17 根据 status_pledge返回布尔值：何剑冲
-        return false;
+        // TODO: 2017/11/17 根据 status_pledge返回布尔值：何剑冲 11.20完成
+        if(this.status_pledge==1)
+            return false;
+        else
+            return true;
     }
 
     /**
      * 改变股票状态，如果是1改为2，是2则改为1
      */
     public void changeStatus_pledge(){
-        // TODO: 2017/11/17 改变股票状态：何剑冲
+        // TODO: 2017/11/17 改变股票状态：何剑冲 11.20完成
+        if(this.status_pledge==1)
+            this.status_pledge=2;
+        else if(this.status_pledge==2)
+            this.status_pledge=1;
     }
 
 

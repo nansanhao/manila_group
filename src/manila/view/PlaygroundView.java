@@ -56,7 +56,11 @@ public class PlaygroundView extends JPanel {
 	private static final int POS_INTERVAL = 10;
 	
 	private Game game;
-	
+
+	public static int getBoatStartY() {
+		return BOAT_START_Y;
+	}
+
 	public PlaygroundView(Game g){
 		this.game = g;
 		this.setPreferredSize(new Dimension(GROUND_W, GROUND_H));

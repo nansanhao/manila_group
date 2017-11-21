@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import manila.controller.DiceController;
+import manila.controller.ResetController;
 import manila.model.Game;
 import manila.model.Player;
 
@@ -40,6 +41,8 @@ public class GameView extends JPanel {
 	private PlayerView[] playersV;
 	/** 控制摇骰子的按钮 */
 	private JButton diceButton;
+	/** 重置船的按钮*/
+	private JButton resetButton;
 	
 	public GameView(){
 		this.game = new Game(this);
@@ -79,9 +82,6 @@ public class GameView extends JPanel {
 		this.playersV = new PlayerView[players.length];
 		for(int i=0; i<players.length; i++){
 			PlayerView pv = new PlayerView(players[i],true);
-			if(this.game.getCurrent_pid() == players[i].getPid()){
-				pv.setActive(true);
-			}
 			this.playersV[i] = pv;
 			this.playersView.add(pv);
 		}
@@ -98,6 +98,10 @@ public class GameView extends JPanel {
 		this.diceButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
 		this.diceButton.addActionListener(new DiceController(this.game));
 		this.diceView.add(this.diceButton);
+		this.resetButton = new JButton("重置");
+		this.resetButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
+		this.resetButton.addActionListener(new ResetController(this.game));
+		this.diceView.add(this.resetButton);
 	}
 	
 	/**
