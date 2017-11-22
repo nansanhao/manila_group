@@ -40,6 +40,14 @@
 >
 > 将项目内的一些TODO分工，规定一些规范。
 
-> 11.20 22:00 何剑冲
+> 11.20	22:00	何剑冲
 >
 > 已完成部分todo 望添加部分方法
+
+> 11.22	23:22	蔡寒均
+>
+> 将海盗和保险公司的View画了。可以开始写他们的Controller。写Controller时可以参照PlayGroundView中的添加监听事件的位置和方法。
+>
+> 新加入类解释：AreaView类是区域的抽象类，PirateAreaView和InsuranceAreaView继承至AreaView，方便画位置。
+>
+> 出现的问题：重置小船的按钮失去了作用，希望何剑冲看一下。

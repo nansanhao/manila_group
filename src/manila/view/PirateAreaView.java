@@ -8,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * 海盗区域View
+ */
 public class PirateAreaView extends AreaView {
 
     public PirateAreaView(Game game) {
@@ -16,6 +19,7 @@ public class PirateAreaView extends AreaView {
         this.game.getPirate().setPosY(AREA_START_Y);
 
     }
+
     public void drawArea(Graphics2D g2){
         g2.setColor(Color.GRAY);
         g2.fill(new Rectangle2D.Double(AREA_START_X, AREA_START_Y, AREA_W, AREA_H/4));

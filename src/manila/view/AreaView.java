@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * 区域View类
+ */
 public abstract class AreaView extends JPanel{
     /** 区域宽度 */
     protected static final int AREA_W = 400;
@@ -38,6 +41,11 @@ public abstract class AreaView extends JPanel{
         this.game = game;
 
     }
+
+    /**
+     * 画出该区域，每个子类要画的东西不同，所以是个抽象方法。
+     * @param g2
+     */
     public abstract void drawArea(Graphics2D g2);
 
     /**
