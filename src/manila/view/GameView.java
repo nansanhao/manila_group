@@ -6,11 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 import manila.controller.DiceController;
 import manila.controller.ResetController;
@@ -60,6 +56,8 @@ public class GameView extends JPanel {
         this.makePlayerView();
         this.makeDiceView();
         this.makeAreaView();
+
+
         
         this.infoView.setPreferredSize(new Dimension(INFO_W, INFO_H));
         this.infoView.setBackground(Color.GREEN);
@@ -83,9 +81,14 @@ public class GameView extends JPanel {
      */
     public void makeAreaView(){
         PirateAreaView pirateAreaView=new PirateAreaView(this.game);
+        InsuranceAreaView insuranceAreaView=new InsuranceAreaView(this.game);
+
         this.areaView=new JPanel();
-        this.playersView.setPreferredSize(new Dimension(INFO_W, 200));
+        this.areaView.setPreferredSize(new Dimension(INFO_W, INFO_H));
+        this.areaView.setLayout(new BoxLayout(this.areaView, BoxLayout.Y_AXIS));
+
         this.areaView.add(pirateAreaView);
+        this.areaView.add(insuranceAreaView);
     }
 	/**
 	 * 对玩家信息视图进行初始化
@@ -179,7 +182,7 @@ public class GameView extends JPanel {
 		mw.pack();
 		mw.setVisible(true);
 		
-		ChoosingBossView cbv = new ChoosingBossView(gv.game);
+		//ChoosingBossView cbv = new ChoosingBossView(gv.game);
 	}
 	
 }
