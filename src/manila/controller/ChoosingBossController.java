@@ -74,7 +74,7 @@ public class ChoosingBossController implements ActionListener {
 	 */
 	public void confirm(){
 		Player p = this.cbv.getGame().getPlayerByID(boss_pid);
-		p.setAccount_balance(p.getAccount_balance()-this.bid_amount);
+		p.payPos(this.bid_amount);
 		
 		// 设置当前玩家
 		this.cbv.getGame().setCurrent_pid(boss_pid);
