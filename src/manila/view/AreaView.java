@@ -22,9 +22,9 @@ public abstract class AreaView extends JPanel{
     /**区域的开始位置的y坐标*/
     protected static final int AREA_START_Y=0;
     /** 区域上位置的宽度 */
-    protected static final int POS_W = 40;
+    protected static final int POS_W = 50;
     /** 区域上位置的高度 */
-    protected static final int POS_H = 20;
+    protected static final int POS_H = 25;
 
 
     /** 区域最上面位置左上角的x坐标 */
@@ -33,7 +33,7 @@ public abstract class AreaView extends JPanel{
     protected static final int POS_START_Y = 60;
 
     /** 区域位置间在x方向上的间隔 */
-    protected static final int POS_INTERVAL = 80;
+    protected static final int POS_INTERVAL = 50;
 
     protected Game game;
 

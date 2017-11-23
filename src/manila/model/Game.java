@@ -236,6 +236,7 @@ public class Game {
 			else
 				System.out.println("The boat "+s.getCargo_name()+" has sank!");
 		}
+
 		
 		for(Player p : this.players)
 			this.gameV.updatePlayersView(p.getPid(), false);
@@ -272,6 +273,10 @@ public class Game {
 		this.current_round = 0;
 		this.choosing = true;
 		this.gameIsOver = false;
+		for(Position p:this.pirate.pos_list){
+			p.setSailorID(-1);
+		}
+		this.insurance.pos_list[0].setSailorID(-1);
 		for (Boat b:this.boats){
 			b.setPos_in_the_sea(0);
 			b.setPosX(this.gameV.getPlayground().BOAT_START_X);
