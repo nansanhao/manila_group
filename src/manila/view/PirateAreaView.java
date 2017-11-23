@@ -13,6 +13,13 @@ import java.awt.geom.Rectangle2D;
  */
 public class PirateAreaView extends AreaView {
 
+    protected static final int ABSOLUTE_X=12*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.BOAT_W;
+    protected static final int ABSOLUTE_Y=20;
+    protected static final int ABSOLUTE_W=200;
+    protected static final int ABSOLUTE_H=100;
+
+
+
     public PirateAreaView(Game game) {
         super(game);
         this.game.getPirate().setPosX(AREA_START_X);

@@ -19,6 +19,9 @@ import manila.model.Position;
  * 游戏场景界面类
  */
 public class PlaygroundView extends JPanel {
+
+	private PirateAreaView pirateAreaView;
+	private InsuranceAreaView insuranceAreaView;
 	/** 游戏场景宽度 */
 	private static final int GROUND_W = 1300;
 	/** 游戏场景高度 */
@@ -67,6 +70,14 @@ public class PlaygroundView extends JPanel {
 		this.addMouseListener(new GameController(this.game));
 		
 		this.initBoats();
+
+		this.pirateAreaView=new PirateAreaView(this.game);
+		this.insuranceAreaView=new InsuranceAreaView(this.game);
+		this.insuranceAreaView.setBounds(insuranceAreaView.ABSOLUTE_X,insuranceAreaView.ABSOLUTE_Y,insuranceAreaView.ABSOLUTE_W,insuranceAreaView.ABSOLUTE_H);
+		this.pirateAreaView.setBounds(PirateAreaView.ABSOLUTE_X,PirateAreaView.ABSOLUTE_Y,PirateAreaView.ABSOLUTE_W,PirateAreaView.ABSOLUTE_H);
+		this.add(pirateAreaView);
+		this.add(insuranceAreaView);
+
 	}
 	
 	/**
