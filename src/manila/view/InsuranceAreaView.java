@@ -21,8 +21,8 @@ public class InsuranceAreaView extends AreaView {
 
     public InsuranceAreaView(Game game) {
         super(game);
-        this.game.getInsurance().setPosX(AREA_START_X);
-        this.game.getInsurance().setPosY(AREA_START_Y);
+        this.game.getInsurance().setPosX(ABSOLUTE_X);
+        this.game.getInsurance().setPosY(ABSOLUTE_Y);
     }
 
     @Override
