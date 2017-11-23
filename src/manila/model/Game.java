@@ -43,6 +43,22 @@ public class Game {
 	
 	private GameView gameV;
 
+	public Pirate getPirate() {
+		return pirate;
+	}
+
+	public Avigator getAvigator() {
+		return avigator;
+	}
+
+	public Insurance getInsurance() {
+		return insurance;
+	}
+
+	public ShipYard getShipYard() {
+		return shipYard;
+	}
+
 	public Player[] getPlayers() {
 		return players;
 	}
@@ -155,6 +171,10 @@ public class Game {
 		this.players[1] = new Player("杰克", 1, Color.GREEN);
 		this.players[2] = new Player("哥伦布", 2, Color.BLUE);
 		// TODO: 2017/11/19 黑市没有初始化 改一下船的生成 加一艘船 哪艘下海由BOSScontroller拓展完成：何剑冲
+		/**海盗区域初始化*/
+		this.pirate=new Pirate();
+		/**保险公司初始化*/
+		this.insurance=new Insurance();
 	}
 	
 	/**
@@ -247,6 +267,21 @@ public class Game {
 	public void newVoyage() {
 		// TODO: 2017/11/19  完成航程循环，重置部分游戏数据：何剑冲
 		//游戏数据包括船位置，船老大，和一些其他，将会在功能逐步完善之后逐步加入
+		this.current_pid = 0;
+		this.boss_pid = 0;
+		this.current_round = 0;
+		this.choosing = true;
+		this.gameIsOver = false;
+		for (Boat b:this.boats){
+			b.setPos_in_the_sea(0);
+			b.setPosX(this.gameV.getPlayground().BOAT_START_X);
+			for(Position p:b.getPos_list()){
+				p.setSailorID(-1);
+			}
+		}
+		for(Player p:this.players){
+			p.setWorker_nb(3);
+		}
 	}
 
 
