@@ -22,8 +22,8 @@ public class PirateAreaView extends AreaView {
 
     public PirateAreaView(Game game) {
         super(game);
-        this.game.getPirate().setPosX(AREA_START_X);
-        this.game.getPirate().setPosY(AREA_START_Y);
+        this.game.getPirate().setPosX(ABSOLUTE_X);
+        this.game.getPirate().setPosY(ABSOLUTE_Y);
 
     }
 
