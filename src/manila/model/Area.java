@@ -1,6 +1,11 @@
 package manila.model;
 
+import manila.view.AreaView;
+import manila.view.InsuranceAreaView;
+import manila.view.PirateAreaView;
 import manila.view.PlaygroundView;
+
+import java.awt.*;
 
 /**
  * 区域类，被其他实际区域继承
@@ -83,10 +88,29 @@ public  abstract class Area {
      * @return 是否在该船的范围内
      */
     public boolean isCursorInside(int x, int y){
-        if(x > this.posX && x < this.posX+ PlaygroundView.BOAT_W
-                && y > this.posY && y< this.posY+PlaygroundView.BOAT_H)
-            return true;
+
+        if(this instanceof Boat){
+            if(x > this.posX && x < this.posX+ PlaygroundView.BOAT_W
+                    && y > this.posY && y< this.posY+PlaygroundView.BOAT_H)
+                return true;
+            return false;
+        }
+        else if(this instanceof Pirate)
+        {
+            if(x > this.posX && x < this.posX+ PirateAreaView.ABSOLUTE_W
+                    && y > this.posY && y< this.posY+PirateAreaView.ABSOLUTE_H)
+                return true;
+            return false;
+        }
+        else if(this instanceof Insurance)
+        {
+            if(x > this.posX && x < this.posX+ InsuranceAreaView.ABSOLUTE_W
+                    && y > this.posY && y< this.posY+InsuranceAreaView.ABSOLUTE_H)
+                return true;
+            return false;
+        }
         return false;
+
     }
 
     /**

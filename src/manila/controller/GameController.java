@@ -45,13 +45,59 @@ public class GameController implements MouseListener {
 		}
 	}
 
+	public void clickedOnPirate(int x, int y) {
+		if(this.game.getPirate().isCursorInside(x,y)){
+			Player p = this.game.getCurrentPlayer();
+			p.payPos(this.game.getPirate().getAvailPosPrice());
+			this.game.getPirate().joinIn(p.getPid());
+
+			// modify the view
+			this.game.getGameV().getPlayground().repaint();
+			this.game.getGameV().updatePlayersView(p.getPid(), false);
+
+
+			if(this.game.getCurrent_pid() == this.game.getBoss_pid()-1
+					|| this.game.getCurrent_pid() == this.game.getPlayers().length+this.game.getBoss_pid()-1){
+				this.game.setChoosing(false);
+			}
+
+			this.game.switchPlayer();
+			this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(), true);
+		}
+	}
+
+	public void clickedOnInsurance(int x, int y) {
+		if(this.game.getInsurance().isCursorInside(x,y)){
+			Player p = this.game.getCurrentPlayer();
+			p.payPos(this.game.getInsurance().getAvailPosPrice());
+			this.game.getInsurance().joinIn(p.getPid());
+
+			// modify the view
+			this.game.getGameV().getPlayground().repaint();
+			this.game.getGameV().updatePlayersView(p.getPid(), false);
+
+
+			if(this.game.getCurrent_pid() == this.game.getBoss_pid()-1
+					|| this.game.getCurrent_pid() == this.game.getPlayers().length+this.game.getBoss_pid()-1){
+				this.game.setChoosing(false);
+			}
+
+			this.game.switchPlayer();
+			this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(), true);
+		}
+	}
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(!this.game.isGameIsOver() && this.game.isChoosing()){
+		if(!this.game.isGameIsOver() && this.game.isChoosing()) {
 			this.clickedOnBoat(arg0.getX(), arg0.getY());
+			this.clickedOnPirate(arg0.getX(), arg0.getY());
+			this.clickedOnInsurance(arg0.getX(), arg0.getY());
 		}
+
 	}
+
+
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
