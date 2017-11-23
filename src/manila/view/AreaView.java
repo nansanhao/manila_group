@@ -11,16 +11,16 @@ import java.awt.geom.Rectangle2D;
  * 区域View类
  */
 public abstract class AreaView extends JPanel{
+
+
     /** 区域宽度 */
     protected static final int AREA_W = 400;
     /** 区域高度 */
     protected static final int AREA_H = 800;
-
     /**区域的开始位置的x坐标*/
     protected static final int AREA_START_X=0;
     /**区域的开始位置的y坐标*/
     protected static final int AREA_START_Y=0;
-
     /** 区域上位置的宽度 */
     protected static final int POS_W = 40;
     /** 区域上位置的高度 */

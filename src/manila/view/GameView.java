@@ -19,9 +19,10 @@ import manila.model.Player;
  */
 public class GameView extends JPanel {
 	/** 信息窗口的宽度 */
-	private static final int INFO_W = 400;
+	private static final int INFO_W = 300;
 	/** 信息窗口的高度 */
-	private static final int INFO_H = 800;
+	private static final int INFO_H = 900;
+
     
 	private Game game;
 	
@@ -55,25 +56,21 @@ public class GameView extends JPanel {
         
         this.makePlayerView();
         this.makeDiceView();
-        this.makeAreaView();
+        //this.makeAreaView();
 
 
         
         this.infoView.setPreferredSize(new Dimension(INFO_W, INFO_H));
         this.infoView.setBackground(Color.GREEN);
         this.infoView.setLayout(new BorderLayout());
-        this.infoView.add(playersView, BorderLayout.CENTER);
-        this.infoView.add(diceView, BorderLayout.SOUTH);
-        this.infoView.add(choosingBossView,BorderLayout.NORTH);
-
+        this.infoView.add(playersView, BorderLayout.NORTH);
+        this.infoView.add(diceView, BorderLayout.CENTER);
+        this.infoView.add(choosingBossView,BorderLayout.SOUTH);
 
         this.add(this.playground);
         this.add(this.infoView);
-        this.add(this.areaView);
+        //this.add(this.areaView);
 
-        
-        //this.setBackground(Color.RED);
-        
 	}
 
     /**
@@ -84,7 +81,7 @@ public class GameView extends JPanel {
         InsuranceAreaView insuranceAreaView=new InsuranceAreaView(this.game);
 
         this.areaView=new JPanel();
-        this.areaView.setPreferredSize(new Dimension(INFO_W, INFO_H));
+        this.areaView.setPreferredSize(new Dimension(INFO_W, 200));
         this.areaView.setLayout(new BoxLayout(this.areaView, BoxLayout.Y_AXIS));
 
         this.areaView.add(pirateAreaView);
@@ -96,12 +93,13 @@ public class GameView extends JPanel {
 	public void makePlayerView(){
 		this.playersView = new JPanel();
 		this.playersView.setLayout(new GridLayout(4,1));
-		this.playersView.setPreferredSize(new Dimension(INFO_W, 200));
+		this.playersView.setPreferredSize(new Dimension(INFO_W, 240));
+
 		
 		JLabel text = new JLabel("玩家信息");
 		text.setHorizontalTextPosition(SwingConstants.LEFT);
-		text.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
-		this.playersView.add(text);
+		text.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 25));
+		this.playersView.add(text,BorderLayout.CENTER);
 		Player[] players = this.game.getPlayers();
 		this.playersV = new PlayerView[players.length];
 		for(int i=0; i<players.length; i++){
@@ -181,8 +179,6 @@ public class GameView extends JPanel {
 		mw.setContentPane(gv);
 		mw.pack();
 		mw.setVisible(true);
-		
-		//ChoosingBossView cbv = new ChoosingBossView(gv.game);
 	}
 	
 }
