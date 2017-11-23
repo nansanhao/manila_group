@@ -7,10 +7,10 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 public class ShipYardView extends AreaView {
-    protected static final int ABSOLUTE_X=12*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.BOAT_W;
-    protected static final int ABSOLUTE_Y=20;
-    protected static final int ABSOLUTE_W=200;
-    protected static final int ABSOLUTE_H=100;
+    protected static final int ABSOLUTE_X=15*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.BOAT_W+10;
+    protected static final int ABSOLUTE_Y=PlaygroundView.SEA_START_Y+PlaygroundView.SEA_L/2;
+    protected static final int ABSOLUTE_W=22;
+    protected static final int ABSOLUTE_H=PlaygroundView.SEA_L/2;
 
 
 

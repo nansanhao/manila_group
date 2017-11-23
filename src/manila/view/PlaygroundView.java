@@ -32,11 +32,11 @@ public class PlaygroundView extends JPanel {
 	/** 第一条大海线段的起点x坐标*/
 	public static final int SEA_START_X = 200;
 	/** 第一条大海线段的起点y坐标 */
-	private static final int SEA_START_Y = 200;
+	public static final int SEA_START_Y = 200;
 	/** 每一格海的宽 */
 	public static final int SEA_W = 20;
 	/**  每一格海的长*/
-	private static final int SEA_L =600;
+	public static final int SEA_L =600;
 	
 	/** 一条小船的宽度 */
 	public static final int BOAT_W = 180;
