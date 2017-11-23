@@ -57,8 +57,8 @@ public abstract class AreaView extends JPanel{
         for(int i=0; i<pos_list.length; i++){
             if(pos_list[i].getSailorID() == -1){
                 g2.setColor(Color.WHITE);
-                Rectangle2D r_pos = new Rectangle2D.Double(this.game.getPirate().getPosX()+POS_START_X+i*(POS_W+POS_INTERVAL),
-                        this.game.getPirate().getPosY()+POS_START_Y,
+                Rectangle2D r_pos = new Rectangle2D.Double(POS_START_X+i*(POS_W+POS_INTERVAL),
+                        POS_START_Y,
                         POS_W, POS_H);
                 g2.fill(r_pos);
                 g2.setColor(Color.BLACK);
@@ -67,8 +67,8 @@ public abstract class AreaView extends JPanel{
             }
             else{
                 g2.setColor(this.game.getPlayerByID(pos_list[i].getSailorID()).getC());
-                g2.fill(new Rectangle2D.Double(this.game.getPirate().getPosX()+POS_START_X+i*(POS_W+POS_INTERVAL),
-                        this.game.getPirate().getPosY()+POS_START_Y,
+                g2.fill(new Rectangle2D.Double(+POS_START_X+i*(POS_W+POS_INTERVAL),
+                        POS_START_Y,
                         POS_W, POS_H));
             }
         }
