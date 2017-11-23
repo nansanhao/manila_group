@@ -3,10 +3,12 @@ package manila.model;
 /**
  * 修船厂类，里面有三个位置
  */
+
 public class ShipYard extends Area{
     private boolean[] isShipPositionOccupied;
     private int[] numOfProfit;
     public ShipYard(Position[] pos_list){
+
         // TODO: 2017/11/20 初始化修船厂：郑抗
         this.pos_list = pos_list;
         for (int i = 0; i < 3; i++) {
@@ -16,6 +18,7 @@ public class ShipYard extends Area{
         numOfProfit[1] = 8;
         numOfProfit[2] = 15;
     }
+
     @Override
     public void playerGetProfit(Game game) {
         // TODO: 2017/11/20 修船场结算 ：郑抗

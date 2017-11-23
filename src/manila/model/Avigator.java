@@ -10,6 +10,7 @@ public class Avigator extends Area{
 
     public Avigator(){
         //TODO：需要为领航员初始化属性，如位置等，参照其父类：郑抗
+
     }
     /**
      * 领航员可以移动船
