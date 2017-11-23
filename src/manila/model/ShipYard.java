@@ -7,6 +7,7 @@ public class ShipYard extends Area{
 
     public ShipYard(){
         // TODO: 2017/11/20 初始化修船厂：郑抗
+
     }
     @Override
     public void playerGetProfit(Game game) {
