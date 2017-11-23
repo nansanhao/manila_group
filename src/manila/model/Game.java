@@ -43,6 +43,22 @@ public class Game {
 	
 	private GameView gameV;
 
+	public Pirate getPirate() {
+		return pirate;
+	}
+
+	public Avigator getAvigator() {
+		return avigator;
+	}
+
+	public Insurance getInsurance() {
+		return insurance;
+	}
+
+	public ShipYard getShipYard() {
+		return shipYard;
+	}
+
 	public Player[] getPlayers() {
 		return players;
 	}
@@ -155,6 +171,10 @@ public class Game {
 		this.players[1] = new Player("杰克", 1, Color.GREEN);
 		this.players[2] = new Player("哥伦布", 2, Color.BLUE);
 		// TODO: 2017/11/19 黑市没有初始化 改一下船的生成 加一艘船 哪艘下海由BOSScontroller拓展完成：何剑冲
+		/**海盗区域初始化*/
+		this.pirate=new Pirate();
+		/**保险公司初始化*/
+		this.insurance=new Insurance();
 	}
 	
 	/**

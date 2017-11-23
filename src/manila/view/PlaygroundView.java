@@ -25,7 +25,7 @@ public class PlaygroundView extends JPanel {
 	private static final int GROUND_H = 900;
 	
 	/** 一段航程在界面上的长度（直线的间隔） */
-	public static final int SEA_INTERVAL = 60;
+	public static final int SEA_INTERVAL = 40;
 	/** 第一条大海线段的起点x坐标*/
 	public static final int SEA_START_X = 200;
 	/** 第一条大海线段的起点y坐标 */
@@ -63,6 +63,7 @@ public class PlaygroundView extends JPanel {
 	public PlaygroundView(Game g){
 		this.game = g;
 		this.setPreferredSize(new Dimension(GROUND_W, GROUND_H));
+		this.setLayout(null);
 		this.addMouseListener(new GameController(this.game));
 		
 		this.initBoats();
@@ -101,9 +102,9 @@ public class PlaygroundView extends JPanel {
 		for(int i=0;i<=Game.SEA_LENGTH;i++){
 
 			g2.setColor(Color.CYAN);
-			g2.fill(new Rectangle2D.Double(SEA_START_X+i*SEA_INTERVAL, SEA_START_Y, SEA_W, SEA_L));
+			g2.fill(new Rectangle2D.Double(SEA_START_X+i*(SEA_INTERVAL+SEA_W), SEA_START_Y, SEA_W, SEA_L));
 			g2.setColor(Color.BLACK);
-	    	g2.drawString(i+"", SEA_START_X+i*SEA_INTERVAL, SEA_START_Y);
+	    	g2.drawString(i+"", SEA_START_X+i*(SEA_INTERVAL+SEA_W), SEA_START_Y);
 		}
 	}
 	
