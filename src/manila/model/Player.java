@@ -19,6 +19,7 @@ public class Player {
 	private Color c;
 	/** 持有的股票 */
 	private List<Shares> haveShares;
+
 	public String getName() {
 		return name;
 	}
@@ -93,57 +94,55 @@ public class Player {
 	 * @param amount
 	 */
 	public void payPos(int amount){
-		//TODO：加一个判断跟处理，破产后不再花钱：范贤明
-
-		boolean judge=this.isBankrupt(this.account_balance);
-		List<Shares> share=this.haveShares;
-		if(!judge) {   //如果没有破产
-			if(this.account_balance>=amount) {
-				this.account_balance -= amount;
-				this.worker_nb--;
-			}
-			else {
-				int num=this.pledgeShares(true);
-				if(num!=-1){
-					this.account_balance+=12;
-					this.account_balance-=amount;
-					this.worker_nb--;
-				}
-			}
+		//TODO：加一个判断跟处理，破产后不再花钱：范贤明 11.23完成
+		if(this.account_balance>=amount) {
+			this.account_balance -= amount;
 		}
-		this.account_balance=0;
-		this.worker_nb--;
-	}
-
-	/**
-	 * 判断财产是否破产，
-	 * @return 破产返回true，否则false
-	 */
-	public boolean isBankrupt(int balance){
-		// TODO: 2017/11/19  检测当前余额，返回结果：范贤明
-		boolean isUp=false;
-		if(balance<0||balance==0){
-			isUp=true;
-		}
-		return isUp;
+		else {
+			int num=getNumOfShares();
+			int i=0;
+			while(i<num){
+				pledgeShares();
+				this.account_balance+=12;
+				if(this.account_balance>=amount)
+					break;
+				i++;
+			}
+			this.account_balance-=amount;
+			if(this.account_balance<0)
+				this.account_balance=0;
+			}
 	}
 
 	/**
 	 * 抵押股票换钱的操作。改变股票的状态，
 	 *  要修改的股票类型
+	 *  返回卖的第几张股票，没卖就返回-1
 	 */
-	public int pledgeShares(boolean isBankrupt){
-		//TODO：将指定类型的股票的状态修改，然后获得钱：范贤明
-		List<Shares> list=this.haveShares;
-		if(isBankrupt==true){
-			for(int i = 0 ; i < list.size() ; i++) {
-				if(list.get(i).getStatus_pledge()==1){
-					list.get(i).setStatus_pledge(2);
-					return i;
-				}
+	public int pledgeShares() {
+		//TODO：将指定类型的股票的状态修改，然后获得钱：范贤明 11.23完成
+		List<Shares> list = this.haveShares;
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getStatus_pledge() == 1) {
+				list.get(i).setStatus_pledge(2);
+				return i;
 			}
 		}
 		return -1;
+	}
+
+	/**
+	 * 返回还有多少张没被抵押的股票
+	 * @return
+	 */
+	public int getNumOfShares(){
+		int i=0;
+		for(int j=0;j<haveShares.size();j++){
+			if(haveShares.get(j).getStatus_pledge()==1)
+				i++;
+
+		}
+		return i;
 	}
 
 }

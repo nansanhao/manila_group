@@ -34,6 +34,9 @@ public class GameView extends JPanel {
 	private JPanel playersView;
 	/** 摇骰子的窗口 */
 	private JPanel diceView;
+
+
+
 	/**船老大窗口*/
 	private ChoosingBossView choosingBossView;
 
@@ -46,7 +49,14 @@ public class GameView extends JPanel {
 	private JButton diceButton;
 	/** 重置船的按钮*/
 	private JButton resetButton;
-	
+
+	public ChoosingBossView getChoosingBossView() {
+		return choosingBossView;
+	}
+
+	public void setChoosingBossView(ChoosingBossView choosingBossView) {
+		this.choosingBossView = choosingBossView;
+	}
 	public GameView(){
 		this.game = new Game(this);
 
@@ -56,10 +66,7 @@ public class GameView extends JPanel {
         
         this.makePlayerView();
         this.makeDiceView();
-        //this.makeAreaView();
 
-
-        
         this.infoView.setPreferredSize(new Dimension(INFO_W, INFO_H));
         this.infoView.setBackground(Color.GREEN);
         this.infoView.setLayout(new BorderLayout());
@@ -69,24 +76,8 @@ public class GameView extends JPanel {
 
         this.add(this.playground);
         this.add(this.infoView);
-        //this.add(this.areaView);
 
 	}
-
-    /**
-     * 对区域视图进行初始化
-     */
-    public void makeAreaView(){
-        PirateAreaView pirateAreaView=new PirateAreaView(this.game);
-        InsuranceAreaView insuranceAreaView=new InsuranceAreaView(this.game);
-
-        this.areaView=new JPanel();
-        this.areaView.setPreferredSize(new Dimension(INFO_W, 200));
-        this.areaView.setLayout(new BoxLayout(this.areaView, BoxLayout.Y_AXIS));
-
-        this.areaView.add(pirateAreaView);
-        this.areaView.add(insuranceAreaView);
-    }
 	/**
 	 * 对玩家信息视图进行初始化
 	 */

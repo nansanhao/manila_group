@@ -6,7 +6,7 @@ package manila.model;
 public class Insurance extends Area{
 
     public Insurance(){
-        //TODO：初始化保险类，包括位置等：何剑冲 不知道在界面何处未定POSX POXY
+        //TODO：初始化保险类，包括位置等：何剑冲完成
         Position[] p=new Position[1];
         p[0]=new Position(-10);//默认价格为-10 即进入获得10块
         this.pos_list=p;
