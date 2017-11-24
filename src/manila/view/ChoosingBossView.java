@@ -97,7 +97,7 @@ public class ChoosingBossView extends JPanel {
         }
         this.add(this.playerView,BorderLayout.NORTH);
 
-        JLabel label = new JLabel("船老大:       ");
+        JLabel label = new JLabel("船老大:                 ");
         label.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
         label.setHorizontalTextPosition(SwingConstants.LEFT);
         this.bossView.add(label);

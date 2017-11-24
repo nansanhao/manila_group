@@ -19,7 +19,7 @@ import manila.model.Player;
  */
 public class GameView extends JPanel {
 	/** 信息窗口的宽度 */
-	private static final int INFO_W = 300;
+	private static final int INFO_W = 350;
 	/** 信息窗口的高度 */
 	private static final int INFO_H = 900;
 
@@ -84,7 +84,7 @@ public class GameView extends JPanel {
 	public void makePlayerView(){
 		this.playersView = new JPanel();
 		this.playersView.setLayout(new GridLayout(4,1));
-		this.playersView.setPreferredSize(new Dimension(INFO_W, 240));
+		this.playersView.setPreferredSize(new Dimension(INFO_W, 300));
 
 		
 		JLabel text = new JLabel("玩家信息");
@@ -129,6 +129,9 @@ public class GameView extends JPanel {
 				if(!active){
 					pv.getScoreV().setText(p.getAccount_balance()+"$");
 					pv.getWorker_nbV().setText(p.getWorker_nb()+"");
+					int[] numOfShares=p.getNumOfShares();
+					pv.getSharesV().setText("玉器："+numOfShares[0]+"  丝绸："+numOfShares[1]+"  可可："+numOfShares[2]+
+							"  人参："+numOfShares[3]+"  抵押股票数:"+p.getNumOfPledgeShares());
 				}
 				pv.setActive(active);
 			}
