@@ -21,6 +21,8 @@ public class Game {
 	private Insurance insurance;
 	/**修船厂*/
 	private ShipYard shipYard;
+	/**港口*/
+	private Harbour harbour;
 	/** 随机数产生器 */
 	private Random dice_generator;
 
@@ -46,6 +48,14 @@ public class Game {
 	public static final int SEA_LENGTH = 13;
 	
 	private GameView gameV;
+
+	public Harbour getHarbour() {
+		return harbour;
+	}
+
+	public void setHarbour(Harbour harbour) {
+		this.harbour = harbour;
+	}
 
 	public Pirate getPirate() {
 		return pirate;

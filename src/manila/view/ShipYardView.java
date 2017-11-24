@@ -12,7 +12,13 @@ public class ShipYardView extends AreaView {
     public static final int ABSOLUTE_W=220;
     public static final int ABSOLUTE_H=PlaygroundView.SEA_L/2;
 
-    public static final int POS_INTERVAL_Y=70;
+
+    private static final int SHIP_POS_START_X=POS_START_X+120;
+    private static final int SHIP_POS_START_Y=POS_START_Y;
+
+
+    private static final int SHIP_POS_INTERVAL_Y =70;
+
 
 
 
@@ -42,8 +48,8 @@ public class ShipYardView extends AreaView {
         for(int i=0; i<pos_list.length; i++){
             if(pos_list[i].getSailorID() == -1){
                 g2.setColor(Color.WHITE);
-                Rectangle2D r_pos = new Rectangle2D.Double(POS_START_X+120,
-                        POS_START_Y+i*(POS_H+POS_INTERVAL_Y),
+                Rectangle2D r_pos = new Rectangle2D.Double(SHIP_POS_START_X,
+                        SHIP_POS_START_Y+i*(POS_H+ SHIP_POS_INTERVAL_Y),
                         POS_W, POS_H);
                 g2.fill(r_pos);
                 g2.setColor(Color.BLACK);
@@ -52,8 +58,8 @@ public class ShipYardView extends AreaView {
             }
             else{
                 g2.setColor(this.game.getPlayerByID(pos_list[i].getSailorID()).getC());
-                g2.fill(new Rectangle2D.Double(+POS_START_X+120,
-                        POS_START_Y+i*(POS_H+POS_INTERVAL_Y),
+                g2.fill(new Rectangle2D.Double(+SHIP_POS_START_X,
+                        SHIP_POS_START_Y+i*(POS_H+ SHIP_POS_INTERVAL_Y),
                         POS_W, POS_H));
             }
         }

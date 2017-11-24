@@ -13,6 +13,8 @@ public class Shares {
 
     /**股票状态，1为持有，2为抵押*/
     private int status_pledge;
+
+
     /**股票持有者*/
     private Player owner;
     /**持有者ID*/
