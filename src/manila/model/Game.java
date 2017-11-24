@@ -23,6 +23,8 @@ public class Game {
 	private ShipYard shipYard;
 	/**港口*/
 	private Harbour harbour;
+
+
 	/** 随机数产生器 */
 	private Random dice_generator;
 
@@ -41,13 +43,17 @@ public class Game {
 	/** 被选为船老大的玩家ID */
 	private int boss_pid;
 	/** 当前游戏的黑市*/
-	private BlackMarket aBlackMarket;
+	private BlackMarket blackMarket;
 	/** 游戏的总轮数 */
 	public static final int ROUND_NUMBER = 3;
 	/** 海路的总长度 */
 	public static final int SEA_LENGTH = 13;
 	
 	private GameView gameV;
+
+	public void setAvigator(Avigator avigator) {
+		this.avigator = avigator;
+	}
 
 	public Harbour getHarbour() {
 		return harbour;
@@ -145,12 +151,12 @@ public class Game {
 		this.boss_pid = boss_pid;
 	}
 
-	public BlackMarket getaBlackMarket() {
-		return aBlackMarket;
+	public BlackMarket getBlackMarket() {
+		return blackMarket;
 	}
 
-	public void setaBlackMarket(BlackMarket aBlackMarket) {
-		this.aBlackMarket = aBlackMarket;
+	public void setBlackMarket(BlackMarket blackMarket) {
+		this.blackMarket = blackMarket;
 	}
 
 	public Game(GameView gv){
@@ -200,6 +206,12 @@ public class Game {
 		this.insurance=new Insurance();
 		/**修船厂初始化*/
 		this.shipYard=new ShipYard();
+		/**领航员初始化*/
+		this.avigator=new Avigator();
+		/**港口初始化*/
+		this.harbour=new Harbour();
+		/**黑市初始化*/
+		this.blackMarket=new BlackMarket();
 	}
 	
 	/**

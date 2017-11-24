@@ -16,7 +16,7 @@ public abstract class AreaView extends JPanel{
     /** 区域宽度 */
     protected static final int AREA_W = 400;
     /** 区域高度 */
-    protected static final int AREA_H = 800;
+    protected static final int AREA_H = 200;
     /**区域的开始位置的x坐标*/
     protected static final int AREA_START_X=0;
     /**区域的开始位置的y坐标*/

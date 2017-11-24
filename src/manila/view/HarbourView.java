@@ -28,7 +28,7 @@ public class HarbourView extends AreaView {
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.PLAIN, 18));
-        g2.drawString("修船厂", AREA_START_X+20, AREA_START_Y+20);
+        g2.drawString("港口", AREA_START_X+20, AREA_START_Y+20);
 
 
         Position[] positions = this.game.getShipYard().getPos_list();
