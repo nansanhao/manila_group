@@ -24,6 +24,42 @@ public class ShipYard extends Area{
         this.boatPosition=boatPosition;
 
     }
+    /**
+     * 获得区域当前空着的位置的编号（进入区域时自动从较低的编号开始）
+     * @return 当前编号最小的空位所对应的编号值
+     */
+    public int getAvailBoatPosIndex(){
+        for(int i=0; i<this.boatPosition.length; i++){
+            if(this.boatPosition[i].getBoatCargo_name() == null)
+                return i;
+        }
+        // no position left
+        return -1;
+    }
+
+    /**
+     * 返回当前区域上已有多少个停了船的位置数
+     * @return 已有船的位置数
+     */
+    public int getFilledBoatPosNum(){
+        int pos_ind = getAvailBoatPosIndex();
+        if(pos_ind == -1)
+            return this.boatPosition.length;
+        else
+            return pos_ind;
+    }
+
+    /**
+     * 返回当前编号最小的空位对应的消耗费用
+     * @return 当前编号最小的空位对应的消耗费用
+     */
+    public int getAvailBoatPosPrice(){
+        for(int i=0; i<this.boatPosition.length; i++){
+            if(this.boatPosition[i].getBoatCargo_name() == null)
+                return this.boatPosition[i].getBoatPrice();
+        }
+        return -1;
+    }
 
     @Override
     public void playerGetProfit(Game game) {
