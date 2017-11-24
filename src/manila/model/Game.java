@@ -23,7 +23,11 @@ public class Game {
 	private ShipYard shipYard;
 	/** 随机数产生器 */
 	private Random dice_generator;
-	
+
+
+
+	/**判断游戏是否开始 用于修复船长*/
+	private boolean gameIsStart;
 	/** 当前是否处于玩家选位置的阶段 */
 	private boolean choosing;
 	/** 游戏是否已结束 */
@@ -77,6 +81,14 @@ public class Game {
 
 	public boolean isChoosing() {
 		return choosing;
+	}
+
+	public boolean isGameIsStart() {
+		return gameIsStart;
+	}
+
+	public void setGameIsStart(boolean gameIsStart) {
+		this.gameIsStart = gameIsStart;
 	}
 
 	public void setChoosing(boolean choosing) {
@@ -165,6 +177,7 @@ public class Game {
 		this.current_round = 0;
 		this.choosing = false;
 		this.gameIsOver = false;
+		this.gameIsStart =false;
 		
 		this.players = new Player[3];
 		this.players[0] = new Player("路飞", 0, Color.RED);
@@ -175,6 +188,8 @@ public class Game {
 		this.pirate=new Pirate();
 		/**保险公司初始化*/
 		this.insurance=new Insurance();
+		/**修船厂初始化*/
+		this.shipYard=new ShipYard();
 	}
 	
 	/**
@@ -268,11 +283,10 @@ public class Game {
 	public void newVoyage() {
 		// TODO: 2017/11/19  完成航程循环，重置部分游戏数据：何剑冲
 		//游戏数据包括船位置，船老大，和一些其他，将会在功能逐步完善之后逐步加入
-		this.current_pid = 0;
-		this.boss_pid = 0;
 		this.current_round = 0;
-		this.choosing = true;
+		this.choosing = false;
 		this.gameIsOver = false;
+		this.gameIsStart=false;
 		for(Position p:this.pirate.pos_list){
 			p.setSailorID(-1);
 		}

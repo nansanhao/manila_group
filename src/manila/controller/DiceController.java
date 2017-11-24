@@ -21,7 +21,7 @@ public class DiceController implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		// roll the dice to move the boats
-		if(!this.game.isGameIsOver() && !this.game.isChoosing()){
+		if(!this.game.isGameIsOver() && !this.game.isChoosing()&&this.game.isGameIsStart()){
 			for(Boat b : this.game.getBoats()){
 				b.move(this.game.rollDice());
 			}

@@ -17,6 +17,13 @@ public class BlackMarket {
 
     public BlackMarket(){
         //TODO：范贤明
+        cargo_shares=new Shares[4][5];
+        for(int i=0;i<5;i++){
+            cargo_shares[0][i]=new Shares(0,"玉器",1);
+            cargo_shares[1][i]=new Shares(0,"丝绸",1);
+            cargo_shares[2][i]=new Shares(0,"可可",1);
+            cargo_shares[3][i]=new Shares(0,"人参",1);
+        }
     }
     /**
      * 获得当前股市里最高股票的价钱

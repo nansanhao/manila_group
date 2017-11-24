@@ -7,17 +7,21 @@ package manila.model;
 public class ShipYard extends Area{
     private boolean[] isShipPositionOccupied;
     private int[] numOfProfit;
-    public ShipYard(Position[] pos_list){
 
-        // TODO: 2017/11/20 初始化修船厂：郑抗 11.23完成
+    public ShipYard() {
+        // TODO: 2017/11/20 初始化修船厂：郑抗
+        Position[] pos_list=new Position[3];
+        pos_list[0]=new Position(4);
+        pos_list[1]=new Position(3);
+        pos_list[2]=new Position(2);
 
         this.pos_list = pos_list;
         for (int i = 0; i < 3; i++) {
-            isShipPositionOccupied[i] = false;
+           // isShipPositionOccupied[i] = false;
         }
-        numOfProfit[0] = 6;
-        numOfProfit[1] = 8;
-        numOfProfit[2] = 15;
+//        numOfProfit[0] = 6;
+//        numOfProfit[1] = 8;
+//        numOfProfit[2] = 15;
     }
 
     @Override
