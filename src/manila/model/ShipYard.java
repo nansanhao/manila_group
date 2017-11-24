@@ -9,10 +9,12 @@ public class ShipYard extends Area{
     public ShipYard(){
 
         // TODO: 2017/11/20 初始化修船厂：郑抗 11.23完成
+
         Position[] pos_list=new Position[3];
         pos_list[0]=new Position(4);
         pos_list[1]=new Position(3);
         pos_list[2]=new Position(2);
+
         this.pos_list = pos_list;
 
         BoatPosition[] boatPosition=new BoatPosition[3];
@@ -20,6 +22,7 @@ public class ShipYard extends Area{
         boatPosition[1]=new BoatPosition(8);
         boatPosition[2]=new BoatPosition(15);
         this.boatPosition=boatPosition;
+
     }
 
     @Override
