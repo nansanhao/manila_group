@@ -47,11 +47,11 @@ public class GameController implements MouseListener {
 
 	public void clickedOnPos(Area a, int x, int y){
 		int numOfPos=a.clickOnWhichPos(x,y);
-			if(numOfPos!=-1&&a.pos_list[numOfPos].getSailorID()!=-1){
+			if(numOfPos!=-1&&a.pos_list[numOfPos].getSailorID()==-1){
 			Player p = this.game.getCurrentPlayer();
 			p.payPos(a.getAvailPosPrice());
 			p.setWorker_nb(p.getWorker_nb()-1);
-			a.joinIn(p.getPid());
+			a.joinInPos(numOfPos,p.getPid());
 
 			// modify the view
 			this.game.getGameV().getPlayground().repaint();
@@ -77,7 +77,7 @@ public class GameController implements MouseListener {
 				this.clickedOnArea(b,arg0.getX(), arg0.getY());
 			this.clickedOnArea(this.game.getInsurance(),arg0.getX(),arg0.getY());
 			this.clickedOnArea(this.game.getPirate(),arg0.getX(),arg0.getY());
-
+			this.clickedOnPos(this.game.getShipYard(),arg0.getX(),arg0.getY());
 		}
 
 	}

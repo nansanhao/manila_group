@@ -13,19 +13,19 @@ public class ShipYardView extends AreaView {
     public static final int ABSOLUTE_H=PlaygroundView.SEA_L/2;
 
 
-    private static final int SHIP_POS_START_X=POS_START_X+120;
-    private static final int SHIP_POS_START_Y=POS_START_Y;
+    public static final int SHIP_POS_START_X=POS_START_X+120;
+    public static final int SHIP_POS_START_Y=POS_START_Y;
 
 
-    private static final int SHIP_POS_INTERVAL_Y =70;
+    public static final int SHIP_POS_INTERVAL_Y =70;
 
 
 
 
     public ShipYardView(Game game) {
         super(game);
-        this.game.getInsurance().setPosX(ABSOLUTE_X);
-        this.game.getInsurance().setPosY(ABSOLUTE_Y);
+        this.game.getShipYard().setPosX(ABSOLUTE_X);
+        this.game.getShipYard().setPosY(ABSOLUTE_Y);
 
     }
 
