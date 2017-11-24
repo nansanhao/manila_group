@@ -16,8 +16,8 @@ public class ShipYardView extends AreaView {
 
     public ShipYardView(Game game) {
         super(game);
-        this.game.getPirate().setPosX(AREA_START_X);
-        this.game.getPirate().setPosY(AREA_START_Y);
+        this.game.getInsurance().setPosX(ABSOLUTE_X);
+        this.game.getInsurance().setPosY(ABSOLUTE_Y);
 
     }
 
@@ -29,10 +29,9 @@ public class ShipYardView extends AreaView {
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.PLAIN, 18));
         g2.drawString("修船厂", AREA_START_X+20, AREA_START_Y+20);
-        g2.drawString("", AREA_START_X+20, AREA_START_Y+40);
 
 
-        Position[] positions = this.game.getPirate().getPos_list();
+        Position[] positions = this.game.getInsurance().getPos_list();
         this.drawPosition(g2,positions);
     }
 }
