@@ -10,6 +10,15 @@ public class Shares {
     private String cargo_name;
     /**股票状态，1为持有，2为抵押*/
     private int status_pledge;
+
+    public String getCargo_name() {
+        return cargo_name;
+    }
+
+    public void setCargo_name(String cargo_name) {
+        this.cargo_name = cargo_name;
+    }
+
     /**股票持有者*/
     private Player owner;
 
