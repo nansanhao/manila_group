@@ -91,4 +91,9 @@ public class Boat extends Area{
 				players[pos.getSailorID()].receiveProfit(money_to_share);
 		}
 	}
+
+	@Override
+	public int clickOnWhichPos(int x, int y) {
+		return 0;
+	}
 }

@@ -41,6 +41,31 @@ public class GameController implements MouseListener {
 			this.game.switchPlayer();
 			this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(), true);
 		}
+	}
+
+
+
+	public void clickedOnPos(Area a, int x, int y){
+		int numOfPos=a.clickOnWhichPos(x,y);
+			if(numOfPos!=-1&&a.pos_list[numOfPos].getSailorID()!=-1){
+			Player p = this.game.getCurrentPlayer();
+			p.payPos(a.getAvailPosPrice());
+			p.setWorker_nb(p.getWorker_nb()-1);
+			a.joinIn(p.getPid());
+
+			// modify the view
+			this.game.getGameV().getPlayground().repaint();
+			this.game.getGameV().updatePlayersView(p.getPid(), false);
+
+
+			if(this.game.getCurrent_pid() == this.game.getBoss_pid()-1
+					|| this.game.getCurrent_pid() == this.game.getPlayers().length+this.game.getBoss_pid()-1){
+				this.game.setChoosing(false);
+			}
+
+			this.game.switchPlayer();
+			this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(), true);
+		}
 
 	}
 	@Override

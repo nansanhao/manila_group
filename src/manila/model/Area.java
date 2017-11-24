@@ -48,7 +48,7 @@ public  abstract class Area {
      * 获得区域当前空着的位置的编号（进入区域时自动从较低的编号开始）
      * @return 当前编号最小的空位所对应的编号值
      */
-    public int getAvailPosIndex(){
+    public int  getAvailPosIndex(){
         for(int i=0; i<this.pos_list.length; i++){
             if(this.pos_list[i].getSailorID() == -1)
                 return i;
@@ -109,7 +109,10 @@ public  abstract class Area {
                 return true;
             return false;
         }
-        return false;
+        else
+        {
+            return false;
+        }
 
     }
 
@@ -127,4 +130,7 @@ public  abstract class Area {
      */
     public abstract void playerGetProfit(Game game);
 
+
+
+    public abstract int clickOnWhichPos(int x,int y);
 }

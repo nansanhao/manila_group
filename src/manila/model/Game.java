@@ -173,10 +173,6 @@ public class Game {
 		boats[1] = s2;
 		boats[2] = s3;
 
-		/**海盗区域初始化*/
-		this.pirate=new Pirate();
-		/**保险公司初始化*/
-		this.insurance=new Insurance();
 
 		/**游戏参数初始化*/
 		this.dice_generator = new Random();
@@ -193,9 +189,17 @@ public class Game {
 		this.players[1] = new Player("杰克", 1, Color.GREEN);
 		this.players[2] = new Player("哥伦布", 2, Color.BLUE);
 		// TODO: 2017/11/19 黑市没有初始化 改一下船的生成 加一艘船 哪艘下海由BOSScontroller拓展完成：何剑冲
+
 		this.aBlackMarket=new BlackMarket();
 		this.aBlackMarket.distributeShares(this.players);
 
+
+		/**海盗区域初始化*/
+		this.pirate=new Pirate();
+		/**保险公司初始化*/
+		this.insurance=new Insurance();
+		/**修船厂初始化*/
+		this.shipYard=new ShipYard();
 	}
 	
 	/**
