@@ -2,6 +2,8 @@ package manila.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import manila.model.Player;
 import manila.view.ChoosingBossView;
@@ -12,9 +14,36 @@ import manila.view.ChoosingBossView;
 public class ChoosingBossController implements ActionListener {
 
 	private ChoosingBossView cbv;
+
+
+
 	private int bid_amount;
 	private int boss_pid;
-	
+
+	public ChoosingBossView getCbv() {
+		return cbv;
+	}
+
+	public void setCbv(ChoosingBossView cbv) {
+		this.cbv = cbv;
+	}
+
+	public int getBid_amount() {
+		return bid_amount;
+	}
+
+	public void setBid_amount(int bid_amount) {
+		this.bid_amount = bid_amount;
+	}
+
+	public int getBoss_pid() {
+		return boss_pid;
+	}
+
+	public void setBoss_pid(int boss_pid) {
+		this.boss_pid = boss_pid;
+	}
+
 	public ChoosingBossController(ChoosingBossView cbv){
 		this.cbv = cbv;
 		this.bid_amount = 0;
@@ -29,25 +58,25 @@ public class ChoosingBossController implements ActionListener {
 	public void bid(){
 		// 读取玩家输入的金额
 		String amountText = this.cbv.getAmountT().getText();
-		if(!amountText.equals("")){
+		if(isNumeric(amountText)){
 			int amount = Integer.parseInt(amountText);
 			if(amount > this.bid_amount){
 				this.bid_amount = amount;
+				this.boss_pid = this.cbv.getGame().getCurrent_pid();
+				this.cbv.getBossLabel().setText(this.cbv.getGame().getCurrentPlayer().getName()
+						+ " " + this.bid_amount+"$");
+				this.cbv.getAmountT().setText("");
+				this.cbv.updateBidView(this.boss_pid, false);
+
+				this.cbv.getGame().switchPlayer();
+				this.cbv.updateBidView(this.cbv.getGame().getCurrent_pid(), true);
+
 			}
 			else{
-				//TODO 竞选输入是否正确
-				this.bid_amount++;
+				pass();
 			}
 			
-			this.boss_pid = this.cbv.getGame().getCurrent_pid();
-			this.cbv.getBossLabel().setText(this.cbv.getGame().getCurrentPlayer().getName()
-					+ " " + this.bid_amount+"$");
-			this.cbv.getAmountT().setText("");
-			this.cbv.updateBidView(this.boss_pid, false);
-			
-			this.cbv.getGame().switchPlayer();
-			this.cbv.updateBidView(this.cbv.getGame().getCurrent_pid(), true);
-			this.cbv.getGame().setChoosing(true);
+
 		}
 		else
 			System.out.println("请输入金额");
@@ -72,7 +101,7 @@ public class ChoosingBossController implements ActionListener {
 	 */
 	public void confirm(){
 		Player p = this.cbv.getGame().getPlayerByID(boss_pid);
-		p.setAccount_balance(p.getAccount_balance()-this.bid_amount);
+		p.payPos(this.bid_amount);
 		
 		// 设置当前玩家
 		this.cbv.getGame().setCurrent_pid(boss_pid);
@@ -85,6 +114,9 @@ public class ChoosingBossController implements ActionListener {
 		// 显示边框
 		this.cbv.getGame().getGameV().updatePlayersView(boss_pid, true);
 		this.cbv.setVisible(!this.cbv.isShowing());
+		//设置游戏开关
+		this.cbv.getGame().setChoosing(true);
+		this.cbv.getGame().setGameIsStart(true);
 	}
 	
 	@Override
@@ -99,6 +131,15 @@ public class ChoosingBossController implements ActionListener {
 		else if(arg0.getActionCommand().equals("confirm")){
 			this.confirm();
 		}
+	}
+
+	public static boolean isNumeric(String str){
+		Pattern pattern = Pattern.compile("[0-9]*$");
+		Matcher isNum = pattern.matcher(str);
+		if( !isNum.matches() ){
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -75,12 +75,14 @@ public class PlaygroundView extends JPanel {
 		this.pirateAreaView=new PirateAreaView(this.game);
 		this.insuranceAreaView=new InsuranceAreaView(this.game);
 		this.shipYardView=new ShipYardView(this.game);
-		this.insuranceAreaView.setBounds(insuranceAreaView.ABSOLUTE_X,insuranceAreaView.ABSOLUTE_Y,insuranceAreaView.ABSOLUTE_W,insuranceAreaView.ABSOLUTE_H);
+
+		this.insuranceAreaView.setBounds(InsuranceAreaView.ABSOLUTE_X,InsuranceAreaView.ABSOLUTE_Y,InsuranceAreaView.ABSOLUTE_W,InsuranceAreaView.ABSOLUTE_H);
 		this.pirateAreaView.setBounds(PirateAreaView.ABSOLUTE_X,PirateAreaView.ABSOLUTE_Y,PirateAreaView.ABSOLUTE_W,PirateAreaView.ABSOLUTE_H);
-		this.shipYardView.setBounds(insuranceAreaView.ABSOLUTE_X,insuranceAreaView.ABSOLUTE_Y,insuranceAreaView.ABSOLUTE_W,insuranceAreaView.ABSOLUTE_H);
+		this.shipYardView.setBounds(ShipYardView.ABSOLUTE_X,ShipYardView.ABSOLUTE_Y,ShipYardView.ABSOLUTE_W,ShipYardView.ABSOLUTE_H);
+
 		this.add(pirateAreaView);
 		this.add(insuranceAreaView);
-		this.add(insuranceAreaView);
+		this.add(shipYardView);
 
 	}
 	

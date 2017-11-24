@@ -44,6 +44,37 @@ public class ChoosingBossView extends JPanel {
     /** 简略版PlayerView的数组 */
     private PlayerView[] pvList;
 
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public JTextField getAmountT() {
+        return amountT;
+    }
+
+    public void setAmountT(JTextField amountT) {
+        this.amountT = amountT;
+    }
+
+    public PlayerView[] getPvList() {
+        return pvList;
+    }
+
+    public void setPvList(PlayerView[] pvList) {
+        this.pvList = pvList;
+    }
+
+    public JLabel getBossLabel() {
+        return bossLabel;
+    }
+
+    public void setBossLabel(JLabel bossLabel) {
+        this.bossLabel = bossLabel;
+    }
     public ChoosingBossView(Game g){
         this.game = g;
         this.cbc = new ChoosingBossController(this);
@@ -111,38 +142,13 @@ public class ChoosingBossView extends JPanel {
         }
     }
 
-    public Game getGame() {
-        return game;
+
+
+
+    public void reset() {
+        this.bossLabel.setText("xxxx");
+        this.cbc.setBid_amount(0);
+        this.amountT.setText("");
     }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public JTextField getAmountT() {
-        return amountT;
-    }
-
-    public void setAmountT(JTextField amountT) {
-        this.amountT = amountT;
-    }
-
-    public PlayerView[] getPvList() {
-        return pvList;
-    }
-
-    public void setPvList(PlayerView[] pvList) {
-        this.pvList = pvList;
-    }
-
-    public JLabel getBossLabel() {
-        return bossLabel;
-    }
-
-    public void setBossLabel(JLabel bossLabel) {
-        this.bossLabel = bossLabel;
-    }
-
-
 }
 

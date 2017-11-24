@@ -6,7 +6,6 @@ package manila.model;
 public class Pirate extends Area{
 
     public Pirate( ) {
-        // TODO: 2017/11/19 初始化海盗：何剑冲 11.20 未知位置 POSX POSY待定
         int[] prices = {5,5};
         Position[] aPos_list = new Position[prices.length];
         for(int i=0;i<prices.length;i++){
