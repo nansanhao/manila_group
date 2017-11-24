@@ -22,6 +22,7 @@ public class PlaygroundView extends JPanel {
 
 	private PirateAreaView pirateAreaView;
 	private InsuranceAreaView insuranceAreaView;
+	private ShipYardView shipYardView;
 	/** 游戏场景宽度 */
 	private static final int GROUND_W = 1300;
 	/** 游戏场景高度 */
@@ -32,11 +33,11 @@ public class PlaygroundView extends JPanel {
 	/** 第一条大海线段的起点x坐标*/
 	public static final int SEA_START_X = 200;
 	/** 第一条大海线段的起点y坐标 */
-	private static final int SEA_START_Y = 200;
+	public static final int SEA_START_Y = 200;
 	/** 每一格海的宽 */
 	public static final int SEA_W = 20;
 	/**  每一格海的长*/
-	private static final int SEA_L =600;
+	public static final int SEA_L =600;
 	
 	/** 一条小船的宽度 */
 	public static final int BOAT_W = 180;
@@ -73,12 +74,15 @@ public class PlaygroundView extends JPanel {
 
 		this.pirateAreaView=new PirateAreaView(this.game);
 		this.insuranceAreaView=new InsuranceAreaView(this.game);
-		this.insuranceAreaView.setBounds(insuranceAreaView.ABSOLUTE_X,insuranceAreaView.ABSOLUTE_Y,
-				insuranceAreaView.ABSOLUTE_W,insuranceAreaView.ABSOLUTE_H);
-		this.pirateAreaView.setBounds(PirateAreaView.ABSOLUTE_X,PirateAreaView.ABSOLUTE_Y,
-				PirateAreaView.ABSOLUTE_W,PirateAreaView.ABSOLUTE_H);
+		this.shipYardView=new ShipYardView(this.game);
+
+		this.insuranceAreaView.setBounds(InsuranceAreaView.ABSOLUTE_X,InsuranceAreaView.ABSOLUTE_Y,InsuranceAreaView.ABSOLUTE_W,InsuranceAreaView.ABSOLUTE_H);
+		this.pirateAreaView.setBounds(PirateAreaView.ABSOLUTE_X,PirateAreaView.ABSOLUTE_Y,PirateAreaView.ABSOLUTE_W,PirateAreaView.ABSOLUTE_H);
+		this.shipYardView.setBounds(ShipYardView.ABSOLUTE_X,ShipYardView.ABSOLUTE_Y,ShipYardView.ABSOLUTE_W,ShipYardView.ABSOLUTE_H);
+
 		this.add(pirateAreaView);
 		this.add(insuranceAreaView);
+		this.add(shipYardView);
 
 	}
 	
