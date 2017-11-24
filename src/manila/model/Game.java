@@ -188,6 +188,8 @@ public class Game {
 		this.pirate=new Pirate();
 		/**保险公司初始化*/
 		this.insurance=new Insurance();
+		/**修船厂初始化*/
+		this.shipYard=new ShipYard();
 	}
 	
 	/**
