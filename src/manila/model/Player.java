@@ -99,11 +99,14 @@ public class Player {
 			this.account_balance -= amount;
 		}
 		else {
-			for(int i=0;i<this.haveShares.size();i++){
+			int num=getNumOfShares();
+			int i=0;
+			while(i<num){
 				pledgeShares();
 				this.account_balance+=12;
 				if(this.account_balance>=amount)
 					break;
+				i++;
 			}
 			this.account_balance-=amount;
 			if(this.account_balance<0)
@@ -112,30 +115,34 @@ public class Player {
 	}
 
 	/**
-	 * 判断财产是否破产，
-	 * @return 破产返回true，否则false
-	 */
-	public boolean isBankrupt(int balance){
-		// TODO: 2017/11/19  检测当前余额，返回结果：范贤明 11.23完成
-		boolean isUp=false;
-		if(balance<0||balance==0){
-			isUp=true;
-		}
-		return isUp;
-	}
-
-	/**
 	 * 抵押股票换钱的操作。改变股票的状态，
 	 *  要修改的股票类型
+	 *  返回卖的第几张股票，没卖就返回-1
 	 */
-	public void pledgeShares() {
+	public int pledgeShares() {
 		//TODO：将指定类型的股票的状态修改，然后获得钱：范贤明 11.23完成
 		List<Shares> list = this.haveShares;
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getStatus_pledge() == 1) {
 				list.get(i).setStatus_pledge(2);
+				return i;
 			}
 		}
+		return -1;
+	}
+
+	/**
+	 * 返回还有多少张没被抵押的股票
+	 * @return
+	 */
+	public int getNumOfShares(){
+		int i=0;
+		for(int j=0;j<haveShares.size();j++){
+			if(haveShares.get(j).getStatus_pledge()==1)
+				i++;
+
+		}
+		return i;
 	}
 
 }

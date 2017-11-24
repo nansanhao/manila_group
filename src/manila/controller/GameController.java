@@ -21,8 +21,8 @@ public class GameController implements MouseListener {
 	
 
 
-	public void clickedOnSomething(Area a, int x, int y){
-		if(a.isCursorInside(x,y)){
+	public void clickedOnArea(Area a, int x, int y){
+		if(a.isCursorInside(x,y)&&a.getAvailPosIndex()!=-1){
 			Player p = this.game.getCurrentPlayer();
 			p.payPos(a.getAvailPosPrice());
 			p.setWorker_nb(p.getWorker_nb()-1);
@@ -49,9 +49,9 @@ public class GameController implements MouseListener {
 		if(!this.game.isGameIsOver() && this.game.isChoosing()) {
 
 			for(Boat b:this.game.getBoats())
-				this.clickedOnSomething(b,arg0.getX(), arg0.getY());
-			this.clickedOnSomething(this.game.getInsurance(),arg0.getX(),arg0.getY());
-			this.clickedOnSomething(this.game.getPirate(),arg0.getX(),arg0.getY());
+				this.clickedOnArea(b,arg0.getX(), arg0.getY());
+			this.clickedOnArea(this.game.getInsurance(),arg0.getX(),arg0.getY());
+			this.clickedOnArea(this.game.getPirate(),arg0.getX(),arg0.getY());
 
 		}
 

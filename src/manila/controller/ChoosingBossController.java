@@ -14,9 +14,36 @@ import manila.view.ChoosingBossView;
 public class ChoosingBossController implements ActionListener {
 
 	private ChoosingBossView cbv;
+
+
+
 	private int bid_amount;
 	private int boss_pid;
-	
+
+	public ChoosingBossView getCbv() {
+		return cbv;
+	}
+
+	public void setCbv(ChoosingBossView cbv) {
+		this.cbv = cbv;
+	}
+
+	public int getBid_amount() {
+		return bid_amount;
+	}
+
+	public void setBid_amount(int bid_amount) {
+		this.bid_amount = bid_amount;
+	}
+
+	public int getBoss_pid() {
+		return boss_pid;
+	}
+
+	public void setBoss_pid(int boss_pid) {
+		this.boss_pid = boss_pid;
+	}
+
 	public ChoosingBossController(ChoosingBossView cbv){
 		this.cbv = cbv;
 		this.bid_amount = 0;
@@ -43,7 +70,7 @@ public class ChoosingBossController implements ActionListener {
 
 				this.cbv.getGame().switchPlayer();
 				this.cbv.updateBidView(this.cbv.getGame().getCurrent_pid(), true);
-				this.cbv.getGame().setChoosing(true);
+
 			}
 			else{
 				pass();
@@ -87,6 +114,9 @@ public class ChoosingBossController implements ActionListener {
 		// 显示边框
 		this.cbv.getGame().getGameV().updatePlayersView(boss_pid, true);
 		this.cbv.setVisible(!this.cbv.isShowing());
+		//设置游戏开关
+		this.cbv.getGame().setChoosing(true);
+		this.cbv.getGame().setGameIsStart(true);
 	}
 	
 	@Override
