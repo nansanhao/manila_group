@@ -4,6 +4,7 @@ package manila.model;
  * 玩家类，包含玩家的姓名等基本信息。
  */
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -79,6 +80,7 @@ public class Player {
 		this.account_balance = 30;
 		this.c = c;
 		this.worker_nb = Game.ROUND_NUMBER;
+		this.haveShares= new ArrayList<Shares>();
 	}
 
 	/**
@@ -145,4 +147,7 @@ public class Player {
 		return i;
 	}
 
+	public void addShares(Shares shares) {
+		this.haveShares.add(shares);
+	}
 }

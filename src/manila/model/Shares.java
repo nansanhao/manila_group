@@ -8,10 +8,31 @@ public class Shares {
     private int price;
     /**货物名字*/
     private String cargo_name;
+
+
+
     /**股票状态，1为持有，2为抵押*/
     private int status_pledge;
     /**股票持有者*/
     private Player owner;
+    /**持有者ID*/
+    private  int onwer_id;
+
+    public int getOnwer_id() {
+        return onwer_id;
+    }
+
+    public void setOnwer_id(int onwer_id) {
+        this.onwer_id = onwer_id;
+    }
+
+    public String getCargo_name() {
+        return cargo_name;
+    }
+
+    public void setCargo_name(String cargo_name) {
+        this.cargo_name = cargo_name;
+    }
 
     public int getPrice() {
         return price;
@@ -33,16 +54,21 @@ public class Shares {
         return owner;
     }
 
-    public void setOwner(Player owner) {
-        this.owner = owner;
-    }
+
 
     public Shares(int price, String cargo_name, int status_pledge) {
         this.price = price;
         this.cargo_name = cargo_name;
         this.status_pledge = status_pledge;
+        this.onwer_id=-1;
     }
 
+    public void setOwner(Player owner) {
+        this.owner = owner;
+        owner.addShares(this);
+        this.onwer_id=owner.getPid();
+
+    }
     /**
      * 股票是否被抵押
      * @return 被抵押返回true，未被抵押返回false
