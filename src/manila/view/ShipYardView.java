@@ -7,23 +7,25 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 public class ShipYardView extends AreaView {
-    protected static final int ABSOLUTE_X=15*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.BOAT_W+10;
-    protected static final int ABSOLUTE_Y=PlaygroundView.SEA_START_Y+PlaygroundView.SEA_L/2;
-    protected static final int ABSOLUTE_W=220;
-    protected static final int ABSOLUTE_H=PlaygroundView.SEA_L/2;
-
-    private static final int SHIP_POS_START_X=POS_START_X+120;
-    private static final int SHIP_POS_START_Y=POS_START_Y;
+    public static final int ABSOLUTE_X=15*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.BOAT_W+10;
+    public static final int ABSOLUTE_Y=PlaygroundView.SEA_START_Y+PlaygroundView.SEA_L/2;
+    public static final int ABSOLUTE_W=220;
+    public static final int ABSOLUTE_H=PlaygroundView.SEA_L/2;
 
 
-    private static final int SHIP_POS_INTERVAL_Y =70;
+    public static final int SHIP_POS_START_X=POS_START_X+120;
+    public static final int SHIP_POS_START_Y=POS_START_Y;
+
+
+    public static final int SHIP_POS_INTERVAL_Y =70;
+
 
 
 
     public ShipYardView(Game game) {
         super(game);
-        this.game.getInsurance().setPosX(ABSOLUTE_X);
-        this.game.getInsurance().setPosY(ABSOLUTE_Y);
+        this.game.getShipYard().setPosX(ABSOLUTE_X);
+        this.game.getShipYard().setPosY(ABSOLUTE_Y);
 
     }
 

@@ -1,5 +1,9 @@
 package manila.model;
 
+import manila.view.AreaView;
+import manila.view.InsuranceAreaView;
+import manila.view.ShipYardView;
+
 /**
  * 修船厂类，里面有三个位置
  */
@@ -70,5 +74,18 @@ public class ShipYard extends Area{
                 game.getPlayerByID(this.pos_list[i].getSailorID()).receiveProfit(boatPosition[i].getBoatPrice());
             }
         }
+    }
+
+    @Override
+    public int clickOnWhichPos(int x, int y) {
+        for(int i=0;i<pos_list.length;i++){
+            if(x > ShipYardView.ABSOLUTE_X+ShipYardView.SHIP_POS_START_X
+                    && x < ShipYardView.ABSOLUTE_X+ShipYardView.SHIP_POS_START_X+ AreaView.POS_W
+                    && y > ShipYardView.ABSOLUTE_Y+ShipYardView.SHIP_POS_START_Y+i*(AreaView.POS_H+ShipYardView.SHIP_POS_INTERVAL_Y)
+                    && y< ShipYardView.ABSOLUTE_Y+ShipYardView.SHIP_POS_START_Y+i*(AreaView.POS_H+ShipYardView.SHIP_POS_INTERVAL_Y)+AreaView.POS_H)
+                return i;
+
+        }
+        return -1;
     }
 }

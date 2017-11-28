@@ -33,4 +33,9 @@ public class Avigator extends Area{
         //TODO：参照boat的获利：郑抗
 
     }
+
+    @Override
+    public int clickOnWhichPos(int x, int y) {
+        return 0;
+    }
 }

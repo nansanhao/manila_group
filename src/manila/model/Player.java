@@ -4,6 +4,7 @@ package manila.model;
  * 玩家类，包含玩家的姓名等基本信息。
  */
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -79,6 +80,7 @@ public class Player {
 		this.account_balance = 30;
 		this.c = c;
 		this.worker_nb = Game.ROUND_NUMBER;
+		this.haveShares= new ArrayList<Shares>();
 	}
 
 	/**
@@ -99,7 +101,7 @@ public class Player {
 			this.account_balance -= amount;
 		}
 		else {
-			int num=getNumOfShares();
+			int num=getNumOfUnPledgeShares();
 			int i=0;
 			while(i<num){
 				pledgeShares();
@@ -135,7 +137,7 @@ public class Player {
 	 * 返回还有多少张没被抵押的股票
 	 * @return
 	 */
-	public int getNumOfShares(){
+	public int getNumOfUnPledgeShares(){
 		int i=0;
 		for(int j=0;j<haveShares.size();j++){
 			if(haveShares.get(j).getStatus_pledge()==1)
@@ -144,5 +146,45 @@ public class Player {
 		}
 		return i;
 	}
+
+	public void addShares(Shares shares) {
+		this.haveShares.add(shares);
+	}
+
+	/**
+	 * 获得被抵押的股票数量
+	 */
+	public int getNumOfPledgeShares(){
+		int i=0;
+		for(Shares s:this.haveShares)
+		{
+			if(s.isPledged())
+				i++;
+		}
+		return i;
+	}
+
+	/**
+	 * 用量获得各股票种类的数量
+	 * @return 0是玉器 1是丝绸 2可可 3人参
+	 */
+	public int[] getNumOfShares(){
+		int num[] = {0,0,0,0};
+		String name=new String();
+		for(int i=0;i<haveShares.size();i++){
+			name=haveShares.get(i).getCargo_name();
+			if(name.equals("玉器"))
+				num[0]++;
+			else if(name.equals("丝绸"))
+				num[1]++;
+			else if(name.equals("可可"))
+				num[2]++;
+			else if(name.equals("人参"))
+				num[3]++;
+			}
+		return num;
+	}
+
+
 
 }

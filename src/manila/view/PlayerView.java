@@ -34,41 +34,13 @@ public class PlayerView extends JPanel {
 	private boolean active;
 	/** 是否显示所有组件 */
 	private boolean showComplete;
-	
-	/**
-	 * 玩家视图构造函数
-	 * @param p 玩家对象的引用
-	 */
-	public PlayerView(Player p, boolean showComplete){
-		this.active = false;
-		this.showComplete = showComplete;
-		
-		this.player = p;
-		this.scoreV = new JLabel(this.player.getAccount_balance()+"$");
-		this.nameV = new JLabel(this.player.getName());
-		this.colorV = new JPanel();
-		this.colorV.setBackground(this.player.getC());
-		this.worker_nbV = new JLabel(this.player.getWorker_nb()+"");
-		this.sharesV = new JLabel("jsdkjaskljdlkasjdlkasjdlkasj");
-		
-		this.scoreV.setFont(new Font("SansSerif", Font.PLAIN, 16));
-		this.nameV.setFont(new Font("SansSerif", Font.PLAIN, 16));
-		this.worker_nbV.setFont(new Font("SansSerif", Font.PLAIN, 16));
-		this.sharesV.setFont(new Font("SansSerif", Font.PLAIN, 16));
-		this.colorV.setPreferredSize(new Dimension(colorV_size, colorV_size));
 
-		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
-		
-		this.add(this.nameV);
-		
-		if(this.showComplete){
-			this.add(this.scoreV);
-			this.add(this.colorV);
-			this.add(this.worker_nbV);
-			this.add(this.sharesV);
-		}
-		
-		this.setBackground(Color.WHITE);
+	public JLabel getSharesV() {
+		return sharesV;
+	}
+
+	public void setSharesV(JLabel sharesV) {
+		this.sharesV = sharesV;
 	}
 
 	public JLabel getScoreV() {
@@ -98,6 +70,46 @@ public class PlayerView extends JPanel {
 	public boolean isActive() {
 		return active;
 	}
+	/**
+	 * 玩家视图构造函数
+	 * @param p 玩家对象的引用
+	 */
+	public PlayerView(Player p, boolean showComplete){
+		this.active = false;
+		this.showComplete = showComplete;
+		
+		this.player = p;
+		this.scoreV = new JLabel(this.player.getAccount_balance()+"$");
+		this.nameV = new JLabel(this.player.getName());
+		this.colorV = new JPanel();
+		this.colorV.setBackground(this.player.getC());
+		this.worker_nbV = new JLabel(this.player.getWorker_nb()+"");
+		int[] numOfShares =p.getNumOfShares();
+
+		this.sharesV = new JLabel("玉器："+numOfShares[0]+"  丝绸："+numOfShares[1]+"  可可："+numOfShares[2]+
+				"  人参："+numOfShares[3]+"  抵押股票数:"+p.getNumOfPledgeShares());
+		
+		this.scoreV.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		this.nameV.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		this.worker_nbV.setFont(new Font("SansSerif", Font.PLAIN, 16));
+		this.sharesV.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		this.colorV.setPreferredSize(new Dimension(colorV_size, colorV_size));
+
+		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
+		
+		this.add(this.nameV);
+		
+		if(this.showComplete){
+			this.add(this.scoreV);
+			this.add(this.colorV);
+			this.add(this.worker_nbV);
+			this.add(this.sharesV);
+		}
+		
+		this.setBackground(Color.WHITE);
+	}
+
+
 
 	public void setActive(boolean active) {
 		this.active = active;

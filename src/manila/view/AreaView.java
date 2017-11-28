@@ -22,9 +22,9 @@ public abstract class AreaView extends JPanel{
     /**区域的开始位置的y坐标*/
     protected static final int AREA_START_Y=0;
     /** 区域上位置的宽度 */
-    protected static final int POS_W = 50;
+    public static final int POS_W = 50;
     /** 区域上位置的高度 */
-    protected static final int POS_H = 25;
+    public static final int POS_H = 25;
 
 
     /** 区域最上面位置左上角的x坐标 */

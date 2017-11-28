@@ -155,7 +155,9 @@ public class Game {
 
 	public Game(GameView gv){
 		this.gameV = gv;
-		
+
+
+		/**船初始化*/
 		int[] prices1 = {3,4,5,5};
 		int[] prices2 = {2,3,3};
 		int[] prices3 = {3,4,5};
@@ -172,7 +174,7 @@ public class Game {
 		for(int i=0;i<prices3.length;i++){
 			pos3[i] = new Position(prices3[i]);
 		}
-		
+
 		Boat s1 = new Boat("丝绸", 36, pos1);
 		Boat s2 = new Boat("可可",18, pos2);
 		Boat s3 = new Boat("玉器", 30, pos3);
@@ -180,7 +182,9 @@ public class Game {
 		boats[0] = s1;
 		boats[1] = s2;
 		boats[2] = s3;
-		
+
+
+		/**游戏参数初始化*/
 		this.dice_generator = new Random();
 		this.current_pid = 0;
 		this.boss_pid = -1;
@@ -188,12 +192,18 @@ public class Game {
 		this.choosing = false;
 		this.gameIsOver = false;
 		this.gameIsStart =false;
-		
+
+		/**玩家初始化*/
 		this.players = new Player[3];
 		this.players[0] = new Player("路飞", 0, Color.RED);
 		this.players[1] = new Player("杰克", 1, Color.GREEN);
 		this.players[2] = new Player("哥伦布", 2, Color.BLUE);
 		// TODO: 2017/11/19 黑市没有初始化 改一下船的生成 加一艘船 哪艘下海由BOSScontroller拓展完成：何剑冲
+
+		this.aBlackMarket=new BlackMarket();
+		this.aBlackMarket.distributeShares(this.players);
+
+
 		/**海盗区域初始化*/
 		this.pirate=new Pirate();
 		/**保险公司初始化*/
@@ -298,6 +308,9 @@ public class Game {
 		this.gameIsOver = false;
 		this.gameIsStart=false;
 		for(Position p:this.pirate.pos_list){
+			p.setSailorID(-1);
+		}
+		for(Position p:this.shipYard.pos_list){
 			p.setSailorID(-1);
 		}
 		this.insurance.pos_list[0].setSailorID(-1);

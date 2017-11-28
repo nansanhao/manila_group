@@ -19,9 +19,9 @@ public class ResetController implements ActionListener {
             this.game.switchPlayer(); //找到第一局船长左边的玩家开始竞选
             this.game.newVoyage();
             this.game.getGameV().getPlayground().repaint();
-        }
-        for(int i=0;i<this.game.getPlayers().length;i++){
-            this.game.getGameV().updatePlayersView(i,false);
+            for(int i=0;i<this.game.getPlayers().length;i++){
+                this.game.getGameV().updatePlayersView(i,false);
+            }
         }
 
     }
