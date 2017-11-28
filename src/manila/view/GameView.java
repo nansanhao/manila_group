@@ -77,6 +77,7 @@ public class GameView extends JPanel {
         this.add(this.playground);
         this.add(this.infoView);
 
+
 	}
 	/**
 	 * 对玩家信息视图进行初始化
@@ -115,6 +116,7 @@ public class GameView extends JPanel {
 		this.resetButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
 		this.resetButton.addActionListener(new ResetController(this.game));
 		this.diceView.add(this.resetButton);
+		this.diceView.add(new BlackMarketView(this.game));
 	}
 	
 	/**

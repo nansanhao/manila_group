@@ -77,7 +77,7 @@ public class ChoosingBossView extends JPanel {
         this.chooseView = new JPanel();
 
 
-        this.setPreferredSize(new Dimension(300, 200));
+        this.setPreferredSize(new Dimension(350, 200));
 
         this.setLayout(new BorderLayout());
         this.pvList = new PlayerView[this.game.getPlayers().length];
