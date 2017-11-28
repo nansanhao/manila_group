@@ -68,7 +68,7 @@ public class ShipYard extends Area{
     @Override
     public void playerGetProfit(Game game) {
         // TODO: 2017/11/20 修船场结算 ：郑抗 11.23完成
-        Player[] players = game.getPlayers();
+
         for(int i=0;i<this.boatPosition.length;i++){
             if(boatPosition[i].getBoatCargo_name()!=null){
                 game.getPlayerByID(this.pos_list[i].getSailorID()).receiveProfit(boatPosition[i].getBoatPrice());
