@@ -131,7 +131,7 @@ public class GameView extends JPanel {
 					pv.getWorker_nbV().setText(p.getWorker_nb()+"");
 					int[] numOfShares=p.getNumOfShares();
 					pv.getSharesV().setText("玉器："+numOfShares[0]+"  丝绸："+numOfShares[1]+"  可可："+numOfShares[2]+
-							"  人参："+numOfShares[3]+"  抵押股票数:"+p.getNumOfPledgeShares());
+							"  人参："+numOfShares[3]+"  抵押股票:"+p.getNumOfPledgeShares());
 				}
 				pv.setActive(active);
 			}
@@ -165,7 +165,7 @@ public class GameView extends JPanel {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method st ub
 		JFrame mw = new JFrame();
 		mw.setTitle("Manila");
 		GameView gv = new GameView();
