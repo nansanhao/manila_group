@@ -17,8 +17,7 @@ public class HarbourView extends AreaView {
 
     public HarbourView(Game game) {
         super(game);
-        //this.game.getHarbour().setPosX(ABSOLUTE_X);
-        //this.game.getHarbour().setPosY(ABSOLUTE_Y);
+
     }
 
     @Override

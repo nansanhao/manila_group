@@ -26,7 +26,7 @@ public class Avigator extends Area {
     public void moveBoat(Boat boat, int step) {
         // TODO: 2017/11/19 郑抗:11.24完成
         boat.setPos_in_the_sea(boat.getPos_in_the_sea() + step);
-        //boat.setPosX(boat.getPosX()+step * (PlaygroundView.SEA_INTERVAL+ PlaygroundView.SEA_W));
+
     }
 
     @Override

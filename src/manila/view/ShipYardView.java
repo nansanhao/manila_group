@@ -24,9 +24,6 @@ public class ShipYardView extends AreaView {
 
     public ShipYardView(Game game) {
         super(game);
-       // this.game.getShipYard().setPosX(ABSOLUTE_X);
-        //this.game.getShipYard().setPosY(ABSOLUTE_Y);
-
     }
 
     @Override

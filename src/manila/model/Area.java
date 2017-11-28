@@ -105,8 +105,6 @@ public  abstract class Area {
 
 
 
-//    public abstract int clickOnWhichPos(int x,int y);
-
     public  void joinInPos(int numOfPos, int pid){
         this.pos_list[numOfPos].setSailorID(pid);
     }
