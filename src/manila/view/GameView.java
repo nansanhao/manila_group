@@ -116,7 +116,7 @@ public class GameView extends JPanel {
 		this.resetButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
 		this.resetButton.addActionListener(new ResetController(this.game));
 		this.diceView.add(this.resetButton);
-		this.diceView.add(new BlackMarketView(this.game));
+		this.diceView.add(new BlackMarketView(this.game)); //TODO 暂时添加在DICEVIEW中
 	}
 	
 	/**
