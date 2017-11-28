@@ -40,16 +40,5 @@ public class ShipYard extends Area{
         }
     }
 
-    @Override
-    public int clickOnWhichPos(int x, int y) {
-        for(int i=0;i<pos_list.length;i++){
-            if(x > ShipYardView.ABSOLUTE_X+ShipYardView.SHIP_POS_START_X
-                    && x < ShipYardView.ABSOLUTE_X+ShipYardView.SHIP_POS_START_X+ AreaView.POS_W
-                    && y > ShipYardView.ABSOLUTE_Y+ShipYardView.SHIP_POS_START_Y+i*(AreaView.POS_H+ShipYardView.SHIP_POS_INTERVAL_Y)
-                    && y< ShipYardView.ABSOLUTE_Y+ShipYardView.SHIP_POS_START_Y+i*(AreaView.POS_H+ShipYardView.SHIP_POS_INTERVAL_Y)+AreaView.POS_H)
-                return i;
 
-        }
-        return -1;
-    }
 }

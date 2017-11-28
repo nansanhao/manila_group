@@ -79,4 +79,6 @@ public abstract class AreaView extends JPanel{
         Graphics2D g2 = (Graphics2D) g;
         this.drawArea(g2);
     }
+
+
 }

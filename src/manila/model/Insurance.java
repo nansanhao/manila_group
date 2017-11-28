@@ -26,8 +26,5 @@ public class Insurance extends Area{
 //        game.getPlayerByID(this.pos_list[0].getSailorID()).payPos(cost);
     }
 
-    @Override
-    public int clickOnWhichPos(int x, int y) {
-        return 0;
-    }
+
 }

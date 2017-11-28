@@ -11,10 +11,13 @@ public class Boat extends Area{
 	private String cargo_name;
 	/** 货物的总价值 */
 	private int cargo_value;
-	/** 船上的空位数组 */
-	//private Position[] pos_list;
 	/** 船在海中的位置 */
 	private int pos_in_the_sea;
+
+
+
+	/**船的号码第几艘船*/
+	private int boatId;
 	
 	/** 船（左上角）在图形界面上的x坐标 */
 	//private int posX;
@@ -34,6 +37,14 @@ public class Boat extends Area{
 		this.cargo_value = v;
 		this.pos_list = pl;
 		this.pos_in_the_sea = 0;
+	}
+
+	public int getBoatId() {
+		return boatId;
+	}
+
+	public void setBoatId(int boatId) {
+		this.boatId = boatId;
 	}
 
 	public String getCargo_name() {
@@ -66,7 +77,7 @@ public class Boat extends Area{
 	 */
 	public void move(int step){
 		this.pos_in_the_sea += step;
-		this.setPosX(this.getPosX()+step * (PlaygroundView.SEA_INTERVAL+ PlaygroundView.SEA_W));
+		//this.setPosX(this.getPosX()+step * (PlaygroundView.SEA_INTERVAL+ PlaygroundView.SEA_W));
 
 	}
 
@@ -92,8 +103,5 @@ public class Boat extends Area{
 		}
 	}
 
-	@Override
-	public int clickOnWhichPos(int x, int y) {
-		return 0;
-	}
+
 }

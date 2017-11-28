@@ -6,8 +6,4 @@ public class Harbour extends Area {
 
     }
 
-    @Override
-    public int clickOnWhichPos(int x, int y) {
-        return 0;
-    }
 }

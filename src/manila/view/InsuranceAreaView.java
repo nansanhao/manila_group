@@ -11,8 +11,8 @@ import java.awt.geom.Rectangle2D;
  */
 public class InsuranceAreaView extends AreaView {
 
-    protected static final int ABSOLUTE_X=3*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL);
-    protected static final int ABSOLUTE_Y=20;
+    public static final int ABSOLUTE_X=3*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL);
+    public static final int ABSOLUTE_Y=20;
     public static final int ABSOLUTE_W=AreaView.POS_W+2*AreaView.POS_INTERVAL;
     public static final int ABSOLUTE_H=100;
 
@@ -21,8 +21,8 @@ public class InsuranceAreaView extends AreaView {
 
     public InsuranceAreaView(Game game) {
         super(game);
-        this.game.getInsurance().setPosX(ABSOLUTE_X);
-        this.game.getInsurance().setPosY(ABSOLUTE_Y);
+       // this.game.getInsurance().setPosX(ABSOLUTE_X);
+        //this.game.getInsurance().setPosY(ABSOLUTE_Y);
     }
 
     @Override

@@ -44,11 +44,11 @@ public class PlaygroundView extends JPanel {
 	/** 一条小船的高度 */
 	public static final int BOAT_H = 100;
 	/** 船之间的竖向间隔 */
-	private static final int BOAT_DISTANCE =(SEA_L-3*BOAT_H)/4;
+	public static final int BOAT_DISTANCE =(SEA_L-3*BOAT_H)/4;
 	/** 最上边小船左上角x坐标 */
 	public static final int BOAT_START_X = SEA_START_X-BOAT_W+SEA_W/2;
 	/** 最上边小船左上角y坐标 */
-	private static final int BOAT_START_Y = SEA_START_Y+BOAT_DISTANCE;
+	public static final int BOAT_START_Y = SEA_START_Y+BOAT_DISTANCE;
 	
 	/** 小船上位置的宽度 */
 	private static final int POS_W = 25;
@@ -70,7 +70,7 @@ public class PlaygroundView extends JPanel {
 		this.setLayout(null);
 		this.addMouseListener(new GameController(this.game));
 		
-		this.initBoats();
+	//	this.initBoats();
 
 		this.pirateAreaView=new PirateAreaView(this.game);
 		this.insuranceAreaView=new InsuranceAreaView(this.game);
@@ -89,13 +89,13 @@ public class PlaygroundView extends JPanel {
 	/**
 	 * 对小船们的位置进行初始化
 	 */
-	private void initBoats() {
-		Boat[] boats = this.game.getBoats();
-		for(int i=0;i<boats.length;i++){
-			boats[i].setPosX(BOAT_START_X);
-			boats[i].setPosY(BOAT_START_Y+i*(BOAT_H+BOAT_DISTANCE));
-		}
-	}
+//	private void initBoats() {
+//		Boat[] boats = this.game.getBoats();
+//		for(int i=0;i<boats.length;i++){
+//			boats[i].setPosX(BOAT_START_X);
+//			boats[i].setPosY(BOAT_START_Y+i*(BOAT_H+BOAT_DISTANCE));
+//		}
+//	}
 
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);       
@@ -130,20 +130,21 @@ public class PlaygroundView extends JPanel {
 	 * @param g2 图形类
 	 * @param b 一个小船对象
 	 */
-	public void drawBoat(Graphics2D g2, Boat b){
+	public void drawBoat(Graphics2D g2, Boat b,int boat_pos_X,int boat_pos_Y){
+
 		g2.setColor(Color.GRAY);
-		g2.fill(new Rectangle2D.Double(b.getPosX(), b.getPosY(), BOAT_W, BOAT_H));
+		g2.fill(new Rectangle2D.Double(boat_pos_X, boat_pos_Y, BOAT_W, BOAT_H));
 		
 		g2.setColor(Color.BLACK);
 		g2.setFont(new Font("SansSerif", Font.PLAIN, 18));
-		g2.drawString(b.getCargo_value()+"", b.getPosX()+BOAT_W-30, b.getPosY()+BOAT_H/2+4);
+		g2.drawString(b.getCargo_value()+"", boat_pos_X+BOAT_W-30, boat_pos_Y+BOAT_H/2+4);
 		
 		Position[] pos_list = b.getPos_list();
 		for(int i=0; i<pos_list.length; i++){
 			if(pos_list[i].getSailorID() == -1){
 				g2.setColor(Color.WHITE);
-				Rectangle2D r_pos = new Rectangle2D.Double(b.getPosX()+POS_START_X-i*(POS_W+POS_INTERVAL),
-						b.getPosY()+POS_START_Y,
+				Rectangle2D r_pos = new Rectangle2D.Double(boat_pos_X+POS_START_X-i*(POS_W+POS_INTERVAL),
+						boat_pos_Y+POS_START_Y,
 						POS_W, POS_H);
 				g2.fill(r_pos);
 				g2.setColor(Color.BLACK);
@@ -152,8 +153,8 @@ public class PlaygroundView extends JPanel {
 			}
 			else{
 				g2.setColor(this.game.getPlayerByID(pos_list[i].getSailorID()).getC());
-				g2.fill(new Rectangle2D.Double(b.getPosX()+POS_START_X-i*(POS_W+POS_INTERVAL),
-						b.getPosY()+POS_START_Y,
+				g2.fill(new Rectangle2D.Double(boat_pos_X+POS_START_X-i*(POS_W+POS_INTERVAL),
+						boat_pos_Y+POS_START_Y,
 						POS_W, POS_H));
 			}
 		}
@@ -166,7 +167,9 @@ public class PlaygroundView extends JPanel {
 	public void drawBoats(Graphics2D g2){
 		Boat[] boats = this.game.getBoats();
 		for(int i=0;i<boats.length;i++){
-			this.drawBoat(g2, boats[i]);
+			this.drawBoat(g2, boats[i],
+					BOAT_START_X+boats[i].getPos_in_the_sea()*(SEA_W+SEA_INTERVAL),
+					BOAT_START_Y+i*(BOAT_DISTANCE+BOAT_H));
 		}
 	}
 }

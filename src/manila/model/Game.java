@@ -178,10 +178,16 @@ public class Game {
 		Boat s1 = new Boat("丝绸", 36, pos1);
 		Boat s2 = new Boat("可可",18, pos2);
 		Boat s3 = new Boat("玉器", 30, pos3);
+
 		this.boats = new Boat[3];
 		boats[0] = s1;
 		boats[1] = s2;
 		boats[2] = s3;
+		int i=0;
+		for(Boat b:this.boats){
+			b.setBoatId(i);
+			i++;
+		}
 
 
 		/**游戏参数初始化*/
@@ -316,7 +322,7 @@ public class Game {
 		this.insurance.pos_list[0].setSailorID(-1);
 		for (Boat b:this.boats){
 			b.setPos_in_the_sea(0);
-			b.setPosX(this.gameV.getPlayground().BOAT_START_X);
+	//		b.setPosX(this.gameV.getPlayground().BOAT_START_X);
 			for(Position p:b.getPos_list()){
 				p.setSailorID(-1);
 			}
