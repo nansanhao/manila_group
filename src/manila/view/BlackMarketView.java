@@ -26,7 +26,7 @@ public class BlackMarketView extends JPanel {
 
     public BlackMarketView(Game game){
         this.game=game;
-        this.setBackground(Color.GREEN);
+        this.setBackground(Color.GRAY);
         this.setPreferredSize(new Dimension(350,View_H));
     }
 
@@ -43,19 +43,26 @@ public class BlackMarketView extends JPanel {
         Shares[][] shares=this.game.getaBlackMarket().getCargo_shares();
         for(int i=0;i<shares.length;i++){
             for(int j=0;j<6;j++){  //6为6种价格
-                if(0<j&&j<=3)
-                    price=String.valueOf((j-1)*5);
-                else if(j>3)
-                    price=String.valueOf(20+(j-4)*10);
-                else
-                    price=shares[i][0].getCargo_name();
                 block_y=BLOCK_START_Y+i*(BLOCK_INTERVAL+BLOCK_LENGTH);
                 block_x=BLOCK_START_X+j*(BLOCK_INTERVAL+BLOCK_LENGTH);
-                g2.setColor(Color.WHITE);
+                g2.setColor(Color.BLACK);
                 Rectangle2D r_pos = new Rectangle2D.Double(block_x,block_y,BLOCK_LENGTH,BLOCK_LENGTH);
                 g2.fill(r_pos);
-                g2.setColor(Color.BLACK);
+                g2.setColor(Color.WHITE);
                 g2.setFont(new Font("SansSerif", Font.PLAIN, 14));
+                if(0<j&&j<=3) {
+                    price = String.valueOf((j - 1) * 5);
+                    if ((j - 1) * 5 == shares[i][0].getPrice())
+                        g2.setFont(new Font("SansSerif", Font.PLAIN, 25));
+                }
+                else if(j>3) {
+                    price = String.valueOf(20 + (j - 4) * 10);
+                    if (20 + (j - 4) * 10 == shares[i][0].getPrice())
+                        g2.setFont(new Font("SansSerif", Font.PLAIN, 25));
+                }
+                else
+                    price=shares[i][0].getCargo_name();
+
                 g2.drawString(price+"", (int)r_pos.getX()+BLOCK_LENGTH/2-10, (int)r_pos.getY()+BLOCK_LENGTH/2+5);
             }
         }
