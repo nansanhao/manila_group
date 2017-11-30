@@ -9,7 +9,16 @@ import manila.view.ShipYardView;
  */
 
 public class ShipYard extends Area{
-    public BoatPosition[] boatPosition;
+    public BoatPosition[] boatPositions;
+
+    public BoatPosition[] getBoatPositions() {
+        return boatPositions;
+    }
+
+    public void setBoatPositions(BoatPosition[] boatPositions) {
+        this.boatPositions = boatPositions;
+    }
+
     public ShipYard(){
 
         // TODO: 2017/11/20 初始化修船厂：郑抗 11.23完成
@@ -25,7 +34,7 @@ public class ShipYard extends Area{
         boatPosition[0]= new BoatPosition(6);
         boatPosition[1]=new BoatPosition(8);
         boatPosition[2]=new BoatPosition(15);
-        this.boatPosition=boatPosition;
+        this.boatPositions=boatPosition;
 
     }
     /**
@@ -33,45 +42,22 @@ public class ShipYard extends Area{
      * @return 当前编号最小的空位所对应的编号值
      */
     public int getAvailBoatPosIndex(){
-        for(int i=0; i<this.boatPosition.length; i++){
-            if(this.boatPosition[i].getBoatCargo_name() == null)
+        for(int i=0; i<this.boatPositions.length; i++){
+            if(!this.boatPositions[i].isHaveBoat())
                 return i;
         }
         // no position left
         return -1;
     }
 
-    /**
-     * 返回当前区域上已有多少个停了船的位置数
-     * @return 已有船的位置数
-     */
-    public int getFilledBoatPosNum(){
-        int pos_ind = getAvailBoatPosIndex();
-        if(pos_ind == -1)
-            return this.boatPosition.length;
-        else
-            return pos_ind;
-    }
-
-    /**
-     * 返回当前编号最小的空位对应的消耗费用
-     * @return 当前编号最小的空位对应的消耗费用
-     */
-    public int getAvailBoatPosPrice(){
-        for(int i=0; i<this.boatPosition.length; i++){
-            if(this.boatPosition[i].getBoatCargo_name() == null)
-                return this.boatPosition[i].getBoatPrice();
-        }
-        return -1;
-    }
 
     @Override
     public void playerGetProfit(Game game) {
         // TODO: 2017/11/20 修船场结算 ：郑抗 11.23完成
 
-        for(int i=0;i<this.boatPosition.length;i++){
-            if(boatPosition[i].getBoatCargo_name()!=null){
-                game.getPlayerByID(this.pos_list[i].getSailorID()).receiveProfit(boatPosition[i].getBoatPrice());
+        for(int i=0;i<this.boatPositions.length;i++){
+            if(boatPositions[i].isHaveBoat()&&this.pos_list[i].getSailorID()!=-1){
+                game.getPlayerByID(this.pos_list[i].getSailorID()).receiveProfit(boatPositions[i].getProfit());
             }
         }
     }

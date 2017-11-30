@@ -23,10 +23,11 @@ public class PlaygroundView extends JPanel {
 	private PirateAreaView pirateAreaView;
 	private InsuranceAreaView insuranceAreaView;
 	private ShipYardView shipYardView;
+	private HarbourView harbourView;
 	/** 游戏场景宽度 */
-	private static final int GROUND_W = 1300;
+	public static final int GROUND_W = 1300;
 	/** 游戏场景高度 */
-	private static final int GROUND_H = 900;
+	public static final int GROUND_H = 900;
 	
 	/** 一段航程在界面上的长度（直线的间隔） */
 	public static final int SEA_INTERVAL = 40;
@@ -37,7 +38,7 @@ public class PlaygroundView extends JPanel {
 	/** 每一格海的宽 */
 	public static final int SEA_W = 20;
 	/**  每一格海的长*/
-	public static final int SEA_L =600;
+	public static final int SEA_L =680;
 	
 	/** 一条小船的宽度 */
 	public static final int BOAT_W = 180;
@@ -75,27 +76,20 @@ public class PlaygroundView extends JPanel {
 		this.pirateAreaView=new PirateAreaView(this.game);
 		this.insuranceAreaView=new InsuranceAreaView(this.game);
 		this.shipYardView=new ShipYardView(this.game);
+		this.harbourView=new HarbourView(this.game);
 
 		this.insuranceAreaView.setBounds(InsuranceAreaView.ABSOLUTE_X,InsuranceAreaView.ABSOLUTE_Y,InsuranceAreaView.ABSOLUTE_W,InsuranceAreaView.ABSOLUTE_H);
 		this.pirateAreaView.setBounds(PirateAreaView.ABSOLUTE_X,PirateAreaView.ABSOLUTE_Y,PirateAreaView.ABSOLUTE_W,PirateAreaView.ABSOLUTE_H);
 		this.shipYardView.setBounds(ShipYardView.ABSOLUTE_X,ShipYardView.ABSOLUTE_Y,ShipYardView.ABSOLUTE_W,ShipYardView.ABSOLUTE_H);
+		this.harbourView.setBounds(HarbourView.ABSOLUTE_X,HarbourView.ABSOLUTE_Y,HarbourView.ABSOLUTE_W,HarbourView.ABSOLUTE_H);
 
 		this.add(pirateAreaView);
 		this.add(insuranceAreaView);
 		this.add(shipYardView);
+		this.add(harbourView);
 
 	}
-	
-	/**
-	 * 对小船们的位置进行初始化
-	 */
-//	private void initBoats() {
-//		Boat[] boats = this.game.getBoats();
-//		for(int i=0;i<boats.length;i++){
-//			boats[i].setPosX(BOAT_START_X);
-//			boats[i].setPosY(BOAT_START_Y+i*(BOAT_H+BOAT_DISTANCE));
-//		}
-//	}
+
 
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);       
@@ -132,7 +126,7 @@ public class PlaygroundView extends JPanel {
 	 */
 	public void drawBoat(Graphics2D g2, Boat b,int boat_pos_X,int boat_pos_Y){
 
-		g2.setColor(Color.GRAY);
+		g2.setColor(Color.lightGray);
 		g2.fill(new Rectangle2D.Double(boat_pos_X, boat_pos_Y, BOAT_W, BOAT_H));
 		
 		g2.setColor(Color.BLACK);
@@ -167,9 +161,21 @@ public class PlaygroundView extends JPanel {
 	public void drawBoats(Graphics2D g2){
 		Boat[] boats = this.game.getBoats();
 		for(int i=0;i<boats.length;i++){
-			this.drawBoat(g2, boats[i],
-					BOAT_START_X+boats[i].getPos_in_the_sea()*(SEA_W+SEA_INTERVAL),
-					BOAT_START_Y+i*(BOAT_DISTANCE+BOAT_H));
+			if(boats[i].getHarbourID()==-1&&boats[i].getShipYardID()==-1) {
+				drawBoat(g2, boats[i],
+						BOAT_START_X + boats[i].getPos_in_the_sea() * (SEA_W + SEA_INTERVAL),
+						BOAT_START_Y + i * (BOAT_DISTANCE + BOAT_H));
+			}
+			else if (boats[i].getShipYardID()!=-1){
+				drawBoat(g2,boats[i],
+						ShipYardView.SHIP_POS_START_X,
+						ShipYardView.SHIP_POS_START_Y+boats[i].getShipYardID()*(ShipYardView.INTERVAL+BOAT_H));
+			}
+			else if (boats[i].getHarbourID()!=-1){
+				drawBoat(g2,boats[i],
+						HarbourView.SHIP_POS_START_X,
+						HarbourView.SHIP_POS_START_Y+boats[i].getHarbourID()*(HarbourView.INTERVAL+BOAT_H));
+			}
 		}
 	}
 }

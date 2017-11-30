@@ -34,6 +34,11 @@ public class Game {
 	private boolean choosing;
 	/** 游戏是否已结束 */
 	private boolean gameIsOver;
+	/** 航程是否已结束 */
+	private boolean voyageIsOver;
+
+
+
 	/** 当前游戏处于第几轮 */
 	private int current_round;
 	/** 当前正在选位置的玩家ID */
@@ -48,6 +53,14 @@ public class Game {
 	public static final int SEA_LENGTH = 13;
 	
 	private GameView gameV;
+
+	public boolean isVoyageIsOver() {
+		return voyageIsOver;
+	}
+
+	public void setVoyageIsOver(boolean voyageIsOver) {
+		this.voyageIsOver = voyageIsOver;
+	}
 
 	public Harbour getHarbour() {
 		return harbour;
@@ -153,6 +166,10 @@ public class Game {
 		this.aBlackMarket = aBlackMarket;
 	}
 
+	public void setShipYard(ShipYard shipYard) {
+		this.shipYard = shipYard;
+	}
+
 	public Game(GameView gv){
 		this.gameV = gv;
 
@@ -198,6 +215,7 @@ public class Game {
 		this.choosing = false;
 		this.gameIsOver = false;
 		this.gameIsStart =false;
+		this.voyageIsOver=true;
 
 		/**玩家初始化*/
 		this.players = new Player[3];
@@ -210,12 +228,15 @@ public class Game {
 		this.aBlackMarket.distributeShares(this.players);
 
 
+
 		/**海盗区域初始化*/
 		this.pirate=new Pirate();
 		/**保险公司初始化*/
 		this.insurance=new Insurance();
 		/**修船厂初始化*/
 		this.shipYard=new ShipYard();
+		/**港口初始化*/
+		this.harbour=new Harbour();
 	}
 	
 	/**
@@ -267,16 +288,21 @@ public class Game {
 		//结算将在其他功能逐步完善之后慢慢添加
 		// TODO: 2017/11/19 海盗结算 
 		// TODO: 2017/11/19 领航员结算 
-		// TODO: 2017/11/19 保险公司结算 
-		// TODO: 2017/11/19 修船厂结算 
+		// TODO: 2017/11/19 保险公司结算 完成
+		// TODO: 2017/11/19 修船厂/港口结算 12.1完成
+
 		//TODO：到岸结算
 		for(Boat s : this.boats){
 			if(s.getPos_in_the_sea() > SEA_LENGTH){
 				s.playerGetProfit(this);
+				this.getaBlackMarket().updatePrice(s.getCargo_name());
 			}
 			else
 				System.out.println("The boat "+s.getCargo_name()+" has sank!");
 		}
+		this.shipYard.playerGetProfit(this);
+		this.harbour.playerGetProfit(this);
+		this.insurance.playerGetProfit(this);
 
 		
 		for(Player p : this.players)
@@ -311,7 +337,7 @@ public class Game {
 		//游戏数据包括船位置，船老大，和一些其他，将会在功能逐步完善之后逐步加入
 		this.current_round = 0;
 		this.choosing = false;
-		this.gameIsOver = false;
+		this.voyageIsOver = false;
 		this.gameIsStart=false;
 		for(Position p:this.pirate.pos_list){
 			p.setSailorID(-1);
@@ -319,10 +345,17 @@ public class Game {
 		for(Position p:this.shipYard.pos_list){
 			p.setSailorID(-1);
 		}
+		for(BoatPosition p:this.shipYard.boatPositions){
+			p.setHaveBoat(false);
+		}
+		for(BoatPosition p:this.harbour.boatPositions){
+			p.setHaveBoat(false);
+		}
 		this.insurance.pos_list[0].setSailorID(-1);
 		for (Boat b:this.boats){
 			b.setPos_in_the_sea(0);
-	//		b.setPosX(this.gameV.getPlayground().BOAT_START_X);
+			b.setHarbourID(-1);
+			b.setShipYardID(-1);
 			for(Position p:b.getPos_list()){
 				p.setSailorID(-1);
 			}
@@ -333,4 +366,18 @@ public class Game {
 	}
 
 
+	public void boatLand() {
+		for(Boat b:this.boats){
+			if(b.getPos_in_the_sea()>SEA_LENGTH){
+				int i=this.harbour.getAvailBoatPosIndex();
+				b.setHarbourID(i);
+				this.harbour.boatPositions[i].setHaveBoat(true);
+			}
+			else if(b.getPos_in_the_sea()<SEA_LENGTH){
+				int i=this.shipYard.getAvailBoatPosIndex();
+				b.setShipYardID(i);
+				this.shipYard.boatPositions[i].setHaveBoat(true);
+			}
+		}
+	}
 }

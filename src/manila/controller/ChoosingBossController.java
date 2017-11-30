@@ -117,6 +117,7 @@ public class ChoosingBossController implements ActionListener {
 		//设置游戏开关
 		this.cbv.getGame().setChoosing(true);
 		this.cbv.getGame().setGameIsStart(true);
+		this.cbv.getGame().setVoyageIsOver(false);
 	}
 	
 	@Override
@@ -128,7 +129,7 @@ public class ChoosingBossController implements ActionListener {
 		else if(arg0.getActionCommand().equals("pass")){
 			this.pass();
 		}
-		else if(arg0.getActionCommand().equals("confirm")){
+		else if(arg0.getActionCommand().equals("confirm")&&this.bid_amount!=0){
 			this.confirm();
 		}
 	}

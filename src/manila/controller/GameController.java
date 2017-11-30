@@ -70,11 +70,22 @@ public class GameController implements MouseListener {
 	private int clickOnWhichPos(Area a, int x, int y) {
 		if(a instanceof ShipYard) {
 			for (int i = 0; i < a.pos_list.length; i++) {
-				if (x > ShipYardView.ABSOLUTE_X + ShipYardView.SHIP_POS_START_X
-						&& x < ShipYardView.ABSOLUTE_X + ShipYardView.SHIP_POS_START_X + AreaView.POS_W
-						&& y > ShipYardView.ABSOLUTE_Y + ShipYardView.SHIP_POS_START_Y + i * (AreaView.POS_H + ShipYardView.SHIP_POS_INTERVAL_Y)
-						&& y < ShipYardView.ABSOLUTE_Y + ShipYardView.SHIP_POS_START_Y + i * (AreaView.POS_H + ShipYardView.SHIP_POS_INTERVAL_Y) + AreaView.POS_H)
+				if (x > ShipYardView.ABSOLUTE_X + ShipYardView.POS_START_X
+						&& x < ShipYardView.ABSOLUTE_X + ShipYardView.POS_START_X + ShipYardView.POS_W
+						&& y > ShipYardView.ABSOLUTE_Y + ShipYardView.POS_START_Y + i * (ShipYardView.POS_H + ShipYardView.INTERVAL)
+						&& y < ShipYardView.ABSOLUTE_Y + ShipYardView.POS_START_Y + i * (ShipYardView.POS_H + ShipYardView.INTERVAL) + ShipYardView.POS_H
+						)
 					return i;
+			}
+		}
+		else if(a instanceof Harbour){
+			for (int i=0;i<a.pos_list.length;i++){
+				if(x > HarbourView.ABSOLUTE_X+HarbourView.POS_START_X
+						&& x < HarbourView.ABSOLUTE_X+HarbourView.POS_START_X+HarbourView.POS_W
+						&& y > HarbourView.ABSOLUTE_Y+HarbourView.POS_START_Y+i*(HarbourView.POS_H+HarbourView.INTERVAL)
+						&& y < HarbourView.ABSOLUTE_Y+HarbourView.POS_START_Y+i*(HarbourView.POS_H+HarbourView.INTERVAL)+HarbourView.POS_H
+						)
+					return  i;
 			}
 		}
 		return -1;
@@ -115,13 +126,16 @@ public class GameController implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(!this.game.isGameIsOver() && this.game.isChoosing()) {
+		int x=arg0.getX();
+		int y=arg0.getY();
+		if(!this.game.isVoyageIsOver() && this.game.isChoosing()) {
 
 			for(Boat b:this.game.getBoats())
-				this.clickedOnArea(b,arg0.getX(), arg0.getY());
-			this.clickedOnArea(this.game.getInsurance(),arg0.getX(),arg0.getY());
-			this.clickedOnArea(this.game.getPirate(),arg0.getX(),arg0.getY());
-			this.clickedOnPos(this.game.getShipYard(),arg0.getX(),arg0.getY());
+				this.clickedOnArea(b,x, y);
+			this.clickedOnArea(this.game.getInsurance(),x,y);
+			this.clickedOnArea(this.game.getPirate(),x,y);
+			this.clickedOnPos(this.game.getShipYard(),x,y);
+			this.clickedOnPos(this.game.getHarbour(),x,y);
 		}
 
 	}

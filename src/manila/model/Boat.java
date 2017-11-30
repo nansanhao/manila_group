@@ -13,7 +13,10 @@ public class Boat extends Area{
 	private int cargo_value;
 	/** 船在海中的位置 */
 	private int pos_in_the_sea;
-
+	/**船处在哪个港口*/
+	private int harbourID;
+	/**船再哪个修船厂*/
+	private int shipYardID;
 
 
 	/**船的号码第几艘船*/
@@ -25,7 +28,8 @@ public class Boat extends Area{
 	//private int posY;
 	/**是否被截获*/
 	boolean isRobbed;
-	
+
+
 	/**
 	 * 小船构造函数
 	 * @param n 货物名
@@ -36,7 +40,26 @@ public class Boat extends Area{
 		this.cargo_name = n;
 		this.cargo_value = v;
 		this.pos_list = pl;
-		this.pos_in_the_sea = 0;
+		this.pos_in_the_sea = 5;
+		this.shipYardID=-1;
+		this.harbourID=-1;
+
+	}
+
+	public int getHarbourID() {
+		return harbourID;
+	}
+
+	public void setHarbourID(int harbourID) {
+		this.harbourID = harbourID;
+	}
+
+	public int getShipYardID() {
+		return shipYardID;
+	}
+
+	public void setShipYardID(int shipYardID) {
+		this.shipYardID = shipYardID;
 	}
 
 	public int getBoatId() {
