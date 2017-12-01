@@ -176,8 +176,9 @@ public class Game {
 
 		/**船初始化*/
 		int[] prices1 = {3,4,5,5};
-		int[] prices2 = {2,3,3};
+		int[] prices2 = {2,3,4};
 		int[] prices3 = {3,4,5};
+
 		Position[] pos1 = new Position[prices1.length];
 		Position[] pos2 = new Position[prices2.length];
 		Position[] pos3 = new Position[prices3.length];
@@ -192,9 +193,9 @@ public class Game {
 			pos3[i] = new Position(prices3[i]);
 		}
 
-		Boat s1 = new Boat("丝绸", 36, pos1);
-		Boat s2 = new Boat("可可",18, pos2);
-		Boat s3 = new Boat("玉器", 30, pos3);
+		Boat s1 = new Boat("玉器", 36, pos1);
+		Boat s2 = new Boat("可可",24, pos2);
+		Boat s3 = new Boat("丝绸", 30, pos3);
 
 		this.boats = new Boat[3];
 		boats[0] = s1;
