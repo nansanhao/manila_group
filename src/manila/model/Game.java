@@ -296,8 +296,6 @@ public class Game {
 			if(s.getPos_in_the_sea() > SEA_LENGTH){
 				s.playerGetProfit(this);
 			}
-			else
-				System.out.println("The boat "+s.getCargo_name()+" has sank!");
 			if(s.getHarbourID()!=-1)//即进港了
 				this.getaBlackMarket().updatePrice(s.getCargo_name());
 		}
