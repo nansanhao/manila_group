@@ -57,6 +57,7 @@ public class GameView extends JPanel {
 	public void setChoosingBossView(ChoosingBossView choosingBossView) {
 		this.choosingBossView = choosingBossView;
 	}
+
 	public GameView(){
 		this.game = new Game(this);
 
@@ -128,13 +129,11 @@ public class GameView extends JPanel {
 		for(PlayerView pv : this.playersV){
 			Player p = pv.getPlayer();
 			if(p.getPid() == pid){
-				if(!active){
-					pv.getScoreV().setText(p.getAccount_balance()+"$");
-					pv.getWorker_nbV().setText(p.getWorker_nb()+"");
-					int[] numOfShares=p.getNumOfShares();
-					pv.getSharesV().setText("玉器："+numOfShares[0]+"  丝绸："+numOfShares[1]+"  可可："+numOfShares[2]+
-							"  人参："+numOfShares[3]+"  抵押股票:"+p.getNumOfPledgeShares());
-				}
+				pv.getScoreV().setText(p.getAccount_balance()+"$");
+				pv.getWorker_nbV().setText(p.getWorker_nb()+"");
+				int[] numOfShares=p.getNumOfShares();
+				pv.getSharesV().setText("玉器："+numOfShares[0]+"  丝绸："+numOfShares[1]+"  可可："+numOfShares[2]+
+						"  人参："+numOfShares[3]+"  抵押股票:"+p.getNumOfPledgeShares());
 				pv.setActive(active);
 			}
 			

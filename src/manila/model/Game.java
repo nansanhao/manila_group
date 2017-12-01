@@ -264,23 +264,6 @@ public class Game {
 		return this.players[id];
 	}
 	
-	public void showCurrentState(){
-		for(Boat s : this.boats){
-			String res;
-			res = "The "+s.getCargo_name()+" boat ("+s.getCargo_value()+"): [ ";
-			for(Position pos: s.getPos_list()){
-				if(pos.getSailorID() == -1)
-					res += pos.getPrice()+"$ ";
-				else
-					res += this.players[pos.getSailorID()].getName()+" ";
-			}
-			
-			res += "].";
-			res += "The boat is at: "+s.getPos_in_the_sea(); 
-			System.out.println(res);
-		}
-	}
-	
 	/**
 	 * 一次航程结束之后，结算所有区域及到港的钱
 	 */

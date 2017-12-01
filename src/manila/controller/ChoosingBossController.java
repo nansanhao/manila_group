@@ -5,7 +5,10 @@ import java.awt.event.ActionListener;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import manila.model.BlackMarket;
+import manila.model.Game;
 import manila.model.Player;
+import manila.model.Shares;
 import manila.view.ChoosingBossView;
 
 /**
@@ -58,7 +61,7 @@ public class ChoosingBossController implements ActionListener {
 	public void bid(){
 		// 读取玩家输入的金额
 		String amountText = this.cbv.getAmountT().getText();
-		if(isNumeric(amountText)){
+		if(isNumeric(amountText)&&!amountText.equals("")){
 			int amount = Integer.parseInt(amountText);
 			if(amount > this.bid_amount){
 				this.bid_amount = amount;
@@ -101,37 +104,74 @@ public class ChoosingBossController implements ActionListener {
 	 */
 	public void confirm(){
 		Player p = this.cbv.getGame().getPlayerByID(boss_pid);
+		Game g=this.cbv.getGame();
 		p.payPos(this.bid_amount);
 		
 		// 设置当前玩家
-		this.cbv.getGame().setCurrent_pid(boss_pid);
-		this.cbv.getGame().setBoss_pid(boss_pid);
+		g.setCurrent_pid(boss_pid);
+		g.setBoss_pid(boss_pid);
 		
-		this.cbv.getGame().getGameV().updatePlayersView(0, false);
+
 		
 		// 修改余额的显示
-		this.cbv.getGame().getGameV().updatePlayersView(boss_pid, false);
+		g.getGameV().updatePlayersView(boss_pid, false);
 		// 显示边框
-		this.cbv.getGame().getGameV().updatePlayersView(boss_pid, true);
-		this.cbv.setVisible(!this.cbv.isShowing());
-		//设置游戏开关
-		this.cbv.getGame().setChoosing(true);
-		this.cbv.getGame().setGameIsStart(true);
-		this.cbv.getGame().setVoyageIsOver(false);
+		g.getGameV().updatePlayersView(boss_pid, true);
+
+		//窗口改变
+		this.cbv.getCardLayout().next(this.cbv);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		if(arg0.getActionCommand().equals("bid")){
+		String command = arg0.getActionCommand();
+		if(command.equals("bid")){
 			this.bid();
 		}
-		else if(arg0.getActionCommand().equals("pass")){
+		else if(command.equals("pass")){
 			this.pass();
 		}
-		else if(arg0.getActionCommand().equals("confirm")&&this.bid_amount!=0){
+		else if(command.equals("confirm")&&this.bid_amount!=0){
 			this.confirm();
 		}
+		else if(command.equals("coco")||command.equals("jade")||command.equals("silk")||command.equals("ginseng")){
+			this.buyshares(command);
+		}
+	}
+
+	private void buyshares(String command) {
+		int cargo_id =-1;
+		Game g=this.cbv.getGame();
+		BlackMarket blackMarket=g.getaBlackMarket();
+		Player p =g.getPlayerByID(g.getCurrent_pid());
+		if(command.equals("jade")){
+			cargo_id=0;
+		}
+		else if(command.equals("silk")){
+			cargo_id=1;
+		}
+		else if(command.equals("coco")){
+			cargo_id=2;
+		}
+		else {
+			cargo_id=3;
+		}
+
+		int sharesIndex =blackMarket.getUnOwnedSharesIndex(cargo_id);
+		if(sharesIndex!=-1){
+			Shares s=blackMarket.getCargo_shares()[cargo_id][sharesIndex];
+			s.setOwner(p);
+			p.payPos(s.getPrice());
+			g.getGameV().updatePlayersView(boss_pid,true);
+			this.cbv.getCardLayout().next(this.cbv);
+
+			//设置游戏开关
+			g.setChoosing(true);
+			g.setGameIsStart(true);
+			g.setVoyageIsOver(false);
+		}
+
 	}
 
 	public static boolean isNumeric(String str){
