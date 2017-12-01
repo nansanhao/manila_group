@@ -117,11 +117,13 @@ public class Boat extends Area{
 		Player[] players=game.getPlayers();
 		int money_to_share;
 		System.out.println("The boat "+this.getCargo_name()+" has arrived");
-		money_to_share = this.getCargo_value()/this.getFilledPosNum();
-		System.out.println("money_to_share: "+money_to_share);
-		for(Position pos : this.getPos_list()){
-			if(pos.getSailorID() != -1)//-1是空位
-				players[pos.getSailorID()].receiveProfit(money_to_share);
+		if(getAvailPosIndex()!=0){ //如果船不为空才能算钱
+			money_to_share = this.getCargo_value()/this.getFilledPosNum();
+			System.out.println("money_to_share: "+money_to_share);
+			for(Position pos : this.getPos_list()){
+				if(pos.getSailorID() != -1)//-1是空位
+					players[pos.getSailorID()].receiveProfit(money_to_share);
+			}
 		}
 	}
 

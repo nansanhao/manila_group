@@ -29,7 +29,7 @@ public class YardView extends AreaView {
 
 
     public static final int SHIP_POS_START_X=ABSOLUTE_X+PROFIT_BLOCK_START_X-INTERVAL-PlaygroundView.BOAT_W;
-    public static final int SHIP_POS_START_Y=ABSOLUTE_Y+POS_START_Y;
+
 
 
     public YardView(Game game) {

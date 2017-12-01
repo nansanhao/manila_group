@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
 
 public class HarbourView extends YardView{
     public static final int ABSOLUTE_Y=PlaygroundView.SEA_START_Y;
+    public static final int SHIP_POS_START_Y=ABSOLUTE_Y+POS_START_Y;
 
     public HarbourView(Game game) {
         super(game);

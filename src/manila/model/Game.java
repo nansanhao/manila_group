@@ -295,10 +295,11 @@ public class Game {
 		for(Boat s : this.boats){
 			if(s.getPos_in_the_sea() > SEA_LENGTH){
 				s.playerGetProfit(this);
-				this.getaBlackMarket().updatePrice(s.getCargo_name());
 			}
 			else
 				System.out.println("The boat "+s.getCargo_name()+" has sank!");
+			if(s.getHarbourID()!=-1)//即进港了
+				this.getaBlackMarket().updatePrice(s.getCargo_name());
 		}
 		this.shipYard.playerGetProfit(this);
 		this.harbour.playerGetProfit(this);
@@ -339,19 +340,29 @@ public class Game {
 		this.choosing = false;
 		this.voyageIsOver = false;
 		this.gameIsStart=false;
+
+		//位置全部清空
 		for(Position p:this.pirate.pos_list){
 			p.setSailorID(-1);
 		}
 		for(Position p:this.shipYard.pos_list){
 			p.setSailorID(-1);
 		}
+		for(Position p:this.harbour.pos_list){
+			p.setSailorID(-1);
+		}
+		this.insurance.pos_list[0].setSailorID(-1);
+
+
+		//船全部清空
 		for(BoatPosition p:this.shipYard.boatPositions){
 			p.setHaveBoat(false);
 		}
 		for(BoatPosition p:this.harbour.boatPositions){
 			p.setHaveBoat(false);
 		}
-		this.insurance.pos_list[0].setSailorID(-1);
+
+		//船重置
 		for (Boat b:this.boats){
 			b.setPos_in_the_sea(0);
 			b.setHarbourID(-1);

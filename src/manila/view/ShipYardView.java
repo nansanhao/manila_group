@@ -9,6 +9,8 @@ import java.awt.geom.Rectangle2D;
 
 public class ShipYardView extends YardView {
 
+    public static final int SHIP_POS_START_Y=ABSOLUTE_Y+POS_START_Y;
+
 
     public ShipYardView(Game game) {
         super(game);

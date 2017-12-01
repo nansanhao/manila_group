@@ -164,7 +164,7 @@ public class PlaygroundView extends JPanel {
 			if(boats[i].getHarbourID()==-1&&boats[i].getShipYardID()==-1) {
 				drawBoat(g2, boats[i],
 						BOAT_START_X + boats[i].getPos_in_the_sea() * (SEA_W + SEA_INTERVAL),
-						BOAT_START_Y + i * (BOAT_DISTANCE + BOAT_H));
+						BOAT_START_Y + boats[i].getBoatId()* (BOAT_DISTANCE + BOAT_H));
 			}
 			else if (boats[i].getShipYardID()!=-1){
 				drawBoat(g2,boats[i],
