@@ -58,6 +58,10 @@ public class Game {
 	public static final int SEA_LENGTH = 13;
 	/**下海船的数量 */
 	public static final int MAX_BOATS_NUM=3;
+	/**单次最大步数*/
+	public static final int ONCE_MAX_STEP=5;
+	/**总共最大步数*/
+	public static final int SUM_MAX_STEP=9;
 	
 	private GameView gameV;
 

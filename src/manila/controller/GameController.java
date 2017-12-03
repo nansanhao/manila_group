@@ -13,11 +13,16 @@ public class GameController implements MouseListener {
 	
 	private Game game;
 
+	private int steps;
+
 	public GameController(Game g){
 		this.game = g;
+		this.steps=0;
 	}
-	
 
+	public void setSteps(int steps) {
+		this.steps = steps;
+	}
 
 	public void clickedOnArea(Area a, int x, int y){
 		if(isCursorInside(a,x,y)&&a.getAvailPosIndex()!=-1){
@@ -126,7 +131,8 @@ public class GameController implements MouseListener {
 	private void setBoatIntoSea(int x, int y) {
 		ChoosingBossView cbv=this.game.getGameV().getChoosingBossView();
 		int sea = cilckOnWhichSea(x,y);
-		if (sea != -1) {
+		if (sea != -1&&setPositionIsRight(sea)) {
+			steps+=sea;
 			int num=cbv.getCbc().getNumOfHasChoosenBoats();
 			Boat b=this.game.getBoats()[this.game.getChoosingBoatId()];
 			b.setPos_in_the_sea(sea);
@@ -136,10 +142,6 @@ public class GameController implements MouseListener {
 
 			//界面更新
 			this.game.getGameV().getPlayground().repaint();
-
-
-
-
 			if(cbv.getCbc().getNumOfHasChoosenBoats()==this.game.MAX_BOATS_NUM){
 				cbv.getCardLayout().next(cbv);
 
@@ -147,9 +149,26 @@ public class GameController implements MouseListener {
 				this.game.setChoosing(true);
 				this.game.setGameIsStart(true);
 				this.game.setVoyageIsOver(false);
+				this.game.setChoosingBoat(false);
+				this.game.setChoosingBoatId(-1);
+				this.steps=0;
 			}
 		}
 
+	}
+
+	private boolean setPositionIsRight(int sea) {
+		int max;
+		if(Game.SUM_MAX_STEP-steps<Game.ONCE_MAX_STEP){
+			max=Game.SUM_MAX_STEP-steps;
+		}
+		else {
+			max=Game.ONCE_MAX_STEP;
+		}
+		if(sea<=max)
+			return true;
+		else
+			return false;
 	}
 
 	private int cilckOnWhichSea(int x, int y) {

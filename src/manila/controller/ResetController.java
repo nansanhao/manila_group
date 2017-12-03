@@ -13,7 +13,7 @@ public class ResetController implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(this.game.isVoyageIsOver()){
+        if(this.game.isVoyageIsOver()&&this.game.isGameIsStart()){
             this.game.getGameV().getChoosingBossView().getCardLayout().next(this.game.getGameV().getChoosingBossView());
             this.game.getGameV().getChoosingBossView().reset();
             this.game.switchPlayer(); //找到第一局船长左边的玩家开始竞选
