@@ -369,6 +369,9 @@ public class Game {
 		for(Position p:this.harbour.pos_list){
 			p.setSailorID(-1);
 		}
+		for(Position p:this.avigator.pos_list) {
+			p.setSailorID(-1);
+		}
 		this.insurance.pos_list[0].setSailorID(-1);
 
 
