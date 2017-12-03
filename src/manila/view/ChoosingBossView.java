@@ -27,7 +27,7 @@ public class ChoosingBossView extends JPanel {
     private JPanel consolePanel;
 
     /**第三个面板中的每一格*/
-    private JPanel[] thirdPanel_panels;
+    private ChoiceBlock[] thirdPanel_panels;
     /**第三面板*/
     private JPanel thirdPanel;
     /**第二个面板*/
@@ -111,9 +111,17 @@ public class ChoosingBossView extends JPanel {
         this.consolePanel = consolePanel;
     }
 
+    public ChoosingBossController getCbc() {
+        return cbc;
+    }
+
+    public ChoiceBlock[] getThirdPanel_panels() {
+        return thirdPanel_panels;
+    }
+
     public ChoosingBossView(Game g){
         this.game = g;
-        this.thirdPanel_panels =new JPanel[game.getBoats().length];
+        this.thirdPanel_panels =new ChoiceBlock[game.getBoats().length];
         this.cbc = new ChoosingBossController(this);
         this.setPreferredSize(new Dimension(CHOOSING_VIEW_W, CHOOSING_VIEW_H));
         this.cardLayout=new CardLayout();
@@ -127,6 +135,7 @@ public class ChoosingBossView extends JPanel {
         this.add(this.firstPanel);
         this.add(this.secondPnael);
         this.add(this.thirdPanel);
+        this.add(this.consolePanel);
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.setVisible(true);
@@ -234,31 +243,7 @@ public class ChoosingBossView extends JPanel {
         thirdPanel.setLayout(new GridLayout(1,boats.length));
 
         for(int i=0;i<boats.length;i++){
-            JPanel panel=new JPanel();
-            panel.setLayout(null);
-
-            //设置按钮
-            JButton b=new JButton("选择");
-            b.setBounds(4,CHOOSING_VIEW_H/2,CHOOSING_VIEW_W/boats.length-2*4,50);
-            panel.add(b);
-            b.setActionCommand(i+"");
-            b.addActionListener(this.cbc);
-
-            //设置中间文字
-            JLabel cargoNameLabel =new JLabel(boats[i].getCargo_name());
-            cargoNameLabel.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
-            JLabel cargoPriceLabel=new JLabel(boats[i].getCargo_value()+"$");
-            cargoPriceLabel.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 20));
-
-            panel.add(cargoNameLabel);
-            panel.add(cargoPriceLabel);
-            cargoNameLabel.setBounds(b.getBounds().width/2-24,b.getBounds().y-50,b.getBounds().width,25);
-            cargoPriceLabel.setBounds(b.getBounds().width/2-15,b.getBounds().y-20,b.getBounds().width,20);
-            panel.add(cargoNameLabel);
-            panel.add(cargoPriceLabel);
-
-
-
+            ChoiceBlock panel=new ChoiceBlock(i,this,boats[i]);
             //加到主panel中
             thirdPanel_panels[i]=panel;
              thirdPanel.add(panel);
@@ -291,6 +276,12 @@ public class ChoosingBossView extends JPanel {
         this.bossLabel.setText("xxxx");
         this.cbc.setBid_amount(0);
         this.amountT.setText("");
+        this.cbc.setCurrentBoatId(-1);
+        this.cbc.setNumOfHasChoosenBoats(0);
+        for(int i=0;i<this.thirdPanel_panels.length;i++){
+            thirdPanel_panels[i].getButton().setVisible(true);
+            setThirdPanelActive(i,false);
+        }
     }
 
 

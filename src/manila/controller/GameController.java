@@ -123,6 +123,47 @@ public class GameController implements MouseListener {
 
 	}
 
+	private void setBoatIntoSea(int x, int y) {
+		ChoosingBossView cbv=this.game.getGameV().getChoosingBossView();
+		int sea = cilckOnWhichSea(x,y);
+		if (sea != -1) {
+			int num=cbv.getCbc().getNumOfHasChoosenBoats();
+			Boat b=this.game.getBoats()[this.game.getChoosingBoatId()];
+			b.setPos_in_the_sea(sea);
+			b.setBoatId(num);
+			cbv.getCbc().setNumOfHasChoosenBoats(num+1);
+			cbv.getThirdPanel_panels()[this.game.getChoosingBoatId()].getButton().setVisible(false);
+
+			//界面更新
+			this.game.getGameV().getPlayground().repaint();
+
+
+
+
+			if(cbv.getCbc().getNumOfHasChoosenBoats()==this.game.MAX_BOATS_NUM){
+				cbv.getCardLayout().next(cbv);
+
+				//设置游戏开关
+				this.game.setChoosing(true);
+				this.game.setGameIsStart(true);
+				this.game.setVoyageIsOver(false);
+			}
+		}
+
+	}
+
+	private int cilckOnWhichSea(int x, int y) {
+
+		for(int i=0;i<=this.game.SEA_LENGTH;i++){
+			if(       x>PlaygroundView.SEA_START_X+i*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)
+					&& x<PlaygroundView.SEA_START_X+i*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.SEA_W
+					&& y>PlaygroundView.SEA_START_Y && y<PlaygroundView.SEA_START_Y+PlaygroundView.SEA_L
+					)
+				return i;
+		}
+		return -1;
+	}
+
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -138,8 +179,12 @@ public class GameController implements MouseListener {
 			clickedOnPos(this.game.getShipYard(),x,y);
 			clickedOnPos(this.game.getHarbour(),x,y);
 		}
+		else if(this.game.isChoosingBoat()){
+			setBoatIntoSea(x,y);
+		}
 
 	}
+
 
 
 

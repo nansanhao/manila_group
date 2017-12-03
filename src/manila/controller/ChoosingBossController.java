@@ -23,6 +23,9 @@ public class ChoosingBossController implements ActionListener {
 	private int bid_amount;
 	private int boss_pid;
 
+	private int currentBoatId;
+	private int numOfHasChoosenBoats;
+
 	public ChoosingBossView getCbv() {
 		return cbv;
 	}
@@ -47,9 +50,23 @@ public class ChoosingBossController implements ActionListener {
 		this.boss_pid = boss_pid;
 	}
 
+	public void setCurrentBoatId(int currentBoatId) {
+		this.currentBoatId = currentBoatId;
+	}
+
+	public void setNumOfHasChoosenBoats(int numOfHasChoosenBoats) {
+		this.numOfHasChoosenBoats = numOfHasChoosenBoats;
+	}
+
+	public int getNumOfHasChoosenBoats() {
+		return numOfHasChoosenBoats;
+	}
+
 	public ChoosingBossController(ChoosingBossView cbv){
 		this.cbv = cbv;
 		this.bid_amount = 0;
+		this.numOfHasChoosenBoats=0;
+		this.currentBoatId=-1;
 	}
 	
 	/**
@@ -144,7 +161,16 @@ public class ChoosingBossController implements ActionListener {
 	}
 
 	private void setBoatPosition(int i) {
-		this.cbv.setThirdPanelActive(i,true);
+
+		if(numOfHasChoosenBoats<Game.MAX_BOATS_NUM){ //判断够三艘没有
+			if(this.currentBoatId!=-1&&this.cbv.getGame().getBoats()[currentBoatId].getBoatId()==-1){ //上一艘没下海 就把那一格熄了
+				this.cbv.setThirdPanelActive(currentBoatId,false);
+			}
+			currentBoatId=i;
+			this.cbv.setThirdPanelActive(currentBoatId,true);
+			this.cbv.getGame().setChoosingBoat(true);
+			this.cbv.getGame().setChoosingBoatId(currentBoatId);
+		}
 	}
 
 	private void buyshares(String command) {
@@ -173,10 +199,6 @@ public class ChoosingBossController implements ActionListener {
 			g.getGameV().updatePlayersView(boss_pid,true);
 			this.cbv.getCardLayout().next(this.cbv);
 
-			//设置游戏开关
-			g.setChoosing(true);
-			g.setGameIsStart(true);
-			g.setVoyageIsOver(false);
 		}
 
 	}

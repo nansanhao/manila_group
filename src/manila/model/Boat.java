@@ -40,7 +40,7 @@ public class Boat extends Area{
 		this.cargo_name = n;
 		this.cargo_value = v;
 		this.pos_list = pl;
-		this.pos_in_the_sea = 5;
+		this.pos_in_the_sea = 0;
 		this.shipYardID=-1;
 		this.harbourID=-1;
 		this.boatId=-1;

@@ -28,6 +28,7 @@ public class Game {
 
 
 
+
 	/**判断游戏是否开始 用于修复船长*/
 	private boolean gameIsStart;
 	/** 当前是否处于玩家选位置的阶段 */
@@ -36,6 +37,10 @@ public class Game {
 	private boolean gameIsOver;
 	/** 航程是否已结束 */
 	private boolean voyageIsOver;
+	/** 是否在选船下海 */
+	private boolean isChoosingBoat;
+	/** 哪艘船在被选 */
+	private int choosingBoatId ;
 
 
 
@@ -94,6 +99,22 @@ public class Game {
 
 	public void setPlayers(Player[] players) {
 		this.players = players;
+	}
+
+	public boolean isChoosingBoat() {
+		return isChoosingBoat;
+	}
+
+	public void setChoosingBoat(boolean choosingBoat) {
+		isChoosingBoat = choosingBoat;
+	}
+
+	public int getChoosingBoatId() {
+		return choosingBoatId;
+	}
+
+	public void setChoosingBoatId(int choosingBoatId) {
+		this.choosingBoatId = choosingBoatId;
 	}
 
 	public Boat[] getBoats() {
@@ -222,6 +243,8 @@ public class Game {
 		this.gameIsOver = false;
 		this.gameIsStart =false;
 		this.voyageIsOver=true;
+		this.isChoosingBoat =false;
+		this.choosingBoatId =-1;
 
 		/**玩家初始化*/
 		this.players = new Player[3];
@@ -327,6 +350,8 @@ public class Game {
 		this.choosing = false;
 		this.voyageIsOver = false;
 		this.gameIsStart=false;
+		this.choosingBoatId=-1;
+		this.isChoosingBoat=false;
 
 		//位置全部清空
 		for(Position p:this.pirate.pos_list){
