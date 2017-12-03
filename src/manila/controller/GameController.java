@@ -159,16 +159,8 @@ public class GameController implements MouseListener {
 
 	private boolean setPositionIsRight(int sea) {
 		int max;
-		if(Game.SUM_MAX_STEP-steps<Game.ONCE_MAX_STEP){
-			max=Game.SUM_MAX_STEP-steps;
-		}
-		else {
-			max=Game.ONCE_MAX_STEP;
-		}
-		if(sea<=max)
-			return true;
-		else
-			return false;
+		max=(Game.SUM_MAX_STEP-steps<Game.ONCE_MAX_STEP)? Game.SUM_MAX_STEP-steps:Game.ONCE_MAX_STEP;
+		return  (sea<=max)?true:false;
 	}
 
 	private int cilckOnWhichSea(int x, int y) {
