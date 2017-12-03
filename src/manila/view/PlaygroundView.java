@@ -24,6 +24,7 @@ public class PlaygroundView extends JPanel {
 	private InsuranceAreaView insuranceAreaView;
 	private ShipYardView shipYardView;
 	private HarbourView harbourView;
+	private AvigatorView avigatorView;
 	/** 游戏场景宽度 */
 	public static final int GROUND_W = 1300;
 	/** 游戏场景高度 */
@@ -70,23 +71,25 @@ public class PlaygroundView extends JPanel {
 		this.setPreferredSize(new Dimension(GROUND_W, GROUND_H));
 		this.setLayout(null);
 		this.addMouseListener(new GameController(this.game));
-		
-	//	this.initBoats();
+
 
 		this.pirateAreaView=new PirateAreaView(this.game);
 		this.insuranceAreaView=new InsuranceAreaView(this.game);
 		this.shipYardView=new ShipYardView(this.game);
 		this.harbourView=new HarbourView(this.game);
+		this.avigatorView=new AvigatorView(this.game);
 
 		this.insuranceAreaView.setBounds(InsuranceAreaView.ABSOLUTE_X,InsuranceAreaView.ABSOLUTE_Y,InsuranceAreaView.ABSOLUTE_W,InsuranceAreaView.ABSOLUTE_H);
 		this.pirateAreaView.setBounds(PirateAreaView.ABSOLUTE_X,PirateAreaView.ABSOLUTE_Y,PirateAreaView.ABSOLUTE_W,PirateAreaView.ABSOLUTE_H);
 		this.shipYardView.setBounds(ShipYardView.ABSOLUTE_X,ShipYardView.ABSOLUTE_Y,ShipYardView.ABSOLUTE_W,ShipYardView.ABSOLUTE_H);
 		this.harbourView.setBounds(HarbourView.ABSOLUTE_X,HarbourView.ABSOLUTE_Y,HarbourView.ABSOLUTE_W,HarbourView.ABSOLUTE_H);
+		this.avigatorView.setBounds(AvigatorView.ABSOLUTE_X,AvigatorView.ABSOLUTE_Y,AvigatorView.ABSOLUTE_W,AvigatorView.ABSOLUTE_H);
 
 		this.add(pirateAreaView);
 		this.add(insuranceAreaView);
 		this.add(shipYardView);
 		this.add(harbourView);
+		this.add(avigatorView);
 
 	}
 

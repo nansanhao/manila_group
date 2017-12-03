@@ -93,6 +93,15 @@ public class GameController implements MouseListener {
 					return  i;
 			}
 		}
+		else if(a instanceof Avigator){
+			for (int i=0;i<a.pos_list.length;i++){
+				if(x > AvigatorView.ABSOLUTE_X+AvigatorView.POS_START_X+i*(AvigatorView.POS_W+AvigatorView.POS_INTERVAL)
+						&& x < AvigatorView.ABSOLUTE_X+AvigatorView.POS_START_X+AvigatorView.POS_W+i*(AvigatorView.POS_W+AvigatorView.POS_INTERVAL)
+						&& y > AvigatorView.ABSOLUTE_Y+AvigatorView.POS_START_Y
+						&& y < AvigatorView.ABSOLUTE_Y+AvigatorView.POS_START_Y+AvigatorView.POS_H)
+					return  i;
+			}
+		}
 		return -1;
 	}
 
@@ -131,10 +140,11 @@ public class GameController implements MouseListener {
 	private void setBoatIntoSea(int x, int y) {
 		ChoosingBossView cbv=this.game.getGameV().getChoosingBossView();
 		int sea = cilckOnWhichSea(x,y);
-		if (sea != -1&&setPositionIsRight(sea)) {
+		Boat b=this.game.getBoats()[this.game.getChoosingBoatId()];
+		if (sea != -1&&setPositionIsRight(sea)&&b.getBoatId()==-1) {
 			steps+=sea;
 			int num=cbv.getCbc().getNumOfHasChoosenBoats();
-			Boat b=this.game.getBoats()[this.game.getChoosingBoatId()];
+
 			b.setPos_in_the_sea(sea);
 			b.setBoatId(num);
 			cbv.getCbc().setNumOfHasChoosenBoats(num+1);
@@ -189,6 +199,7 @@ public class GameController implements MouseListener {
 			clickedOnArea(this.game.getPirate(),x,y);
 			clickedOnPos(this.game.getShipYard(),x,y);
 			clickedOnPos(this.game.getHarbour(),x,y);
+			clickedOnPos(this.game.getAvigator(),x,y);
 		}
 		else if(this.game.isChoosingBoat()){
 			setBoatIntoSea(x,y);

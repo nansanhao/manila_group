@@ -50,8 +50,9 @@ public class YardView extends AreaView {
                     PROFIT_BLOCK_W, PROFIT_BLOCK_H);
             g2.fill(r_pos);
             g2.setColor(Color.WHITE);
-            g2.setFont(new Font("SansSerif", Font.PLAIN, 14));
-            g2.drawString(pos_list[i].getProfit()+"", (int)r_pos.getX()+10, (int)r_pos.getY()+POS_H/2+5);
+            g2.setFont(new Font("SansSerif", Font.PLAIN, 18));
+            g2.drawString(pos_list[i].getProfit()+"", (int)r_pos.getX()+5, (int)r_pos.getY()+POS_H/2);
+
 
         }
     }
@@ -66,7 +67,7 @@ public class YardView extends AreaView {
                         POS_W, POS_H);
                 g2.fill(r_pos);
                 g2.setColor(Color.BLACK);
-                g2.setFont(new Font("SansSerif", Font.PLAIN, 14));
+                g2.setFont(new Font("SansSerif", Font.PLAIN, 20));
                 g2.drawString(pos_list[i].getPrice()+"", (int)r_pos.getX()+POS_W/2-4, (int)r_pos.getY()+POS_H/2+5);
             }
             else{

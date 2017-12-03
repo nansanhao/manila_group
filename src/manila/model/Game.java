@@ -270,6 +270,8 @@ public class Game {
 		this.shipYard=new ShipYard();
 		/**港口初始化*/
 		this.harbour=new Harbour();
+		/**领航员初始化*/
+		this.avigator=new Avigator();
 	}
 	
 	/**
