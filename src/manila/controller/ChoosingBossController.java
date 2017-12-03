@@ -138,6 +138,13 @@ public class ChoosingBossController implements ActionListener {
 		else if(command.equals("coco")||command.equals("jade")||command.equals("silk")||command.equals("ginseng")){
 			this.buyshares(command);
 		}
+		else if(command.equals("0")||command.equals("1")||command.equals("2")||command.equals("3")){
+			this.setBoatPosition(Integer.parseInt(command));
+		}
+	}
+
+	private void setBoatPosition(int i) {
+		this.cbv.setThirdPanelActive(i,true);
 	}
 
 	private void buyshares(String command) {

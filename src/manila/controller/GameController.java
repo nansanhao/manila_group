@@ -131,11 +131,12 @@ public class GameController implements MouseListener {
 		if(!this.game.isVoyageIsOver() && this.game.isChoosing()) {
 
 			for(Boat b:this.game.getBoats())
-				this.clickedOnArea(b,x, y);
-			this.clickedOnArea(this.game.getInsurance(),x,y);
-			this.clickedOnArea(this.game.getPirate(),x,y);
-			this.clickedOnPos(this.game.getShipYard(),x,y);
-			this.clickedOnPos(this.game.getHarbour(),x,y);
+				if(b.getBoatId()!=-1)
+				clickedOnArea(b,x, y);
+			clickedOnArea(this.game.getInsurance(),x,y);
+			clickedOnArea(this.game.getPirate(),x,y);
+			clickedOnPos(this.game.getShipYard(),x,y);
+			clickedOnPos(this.game.getHarbour(),x,y);
 		}
 
 	}

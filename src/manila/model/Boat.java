@@ -43,8 +43,11 @@ public class Boat extends Area{
 		this.pos_in_the_sea = 5;
 		this.shipYardID=-1;
 		this.harbourID=-1;
+		this.boatId=-1;
 
 	}
+
+
 
 	public int getHarbourID() {
 		return harbourID;

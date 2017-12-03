@@ -161,20 +161,20 @@ public class PlaygroundView extends JPanel {
 	public void drawBoats(Graphics2D g2){
 		Boat[] boats = this.game.getBoats();
 		for(int i=0;i<boats.length;i++){
-			if(boats[i].getHarbourID()==-1&&boats[i].getShipYardID()==-1) {
-				drawBoat(g2, boats[i],
-						BOAT_START_X + boats[i].getPos_in_the_sea() * (SEA_W + SEA_INTERVAL),
-						BOAT_START_Y + boats[i].getBoatId()* (BOAT_DISTANCE + BOAT_H));
-			}
-			else if (boats[i].getShipYardID()!=-1){
-				drawBoat(g2,boats[i],
-						ShipYardView.SHIP_POS_START_X,
-						ShipYardView.SHIP_POS_START_Y+boats[i].getShipYardID()*(ShipYardView.INTERVAL+BOAT_H));
-			}
-			else if (boats[i].getHarbourID()!=-1){
-				drawBoat(g2,boats[i],
-						HarbourView.SHIP_POS_START_X,
-						HarbourView.SHIP_POS_START_Y+boats[i].getHarbourID()*(HarbourView.INTERVAL+BOAT_H));
+			if(boats[i].getBoatId()!=-1) { //-1指没有出船
+				if (boats[i].getHarbourID() == -1 && boats[i].getShipYardID() == -1) {
+					drawBoat(g2, boats[i],
+							BOAT_START_X + boats[i].getPos_in_the_sea() * (SEA_W + SEA_INTERVAL),
+							BOAT_START_Y + boats[i].getBoatId() * (BOAT_DISTANCE + BOAT_H));
+				} else if (boats[i].getShipYardID() != -1) {
+					drawBoat(g2, boats[i],
+							ShipYardView.SHIP_POS_START_X,
+							ShipYardView.SHIP_POS_START_Y + boats[i].getShipYardID() * (ShipYardView.INTERVAL + BOAT_H));
+				} else if (boats[i].getHarbourID() != -1) {
+					drawBoat(g2, boats[i],
+							HarbourView.SHIP_POS_START_X,
+							HarbourView.SHIP_POS_START_Y + boats[i].getHarbourID() * (HarbourView.INTERVAL + BOAT_H));
+				}
 			}
 		}
 	}

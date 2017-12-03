@@ -23,6 +23,7 @@ public class DiceController implements ActionListener {
 		// roll the dice to move the boats
 		if(!this.game.isVoyageIsOver() && !this.game.isChoosing()&&this.game.isGameIsStart()){
 			for(Boat b : this.game.getBoats()){
+				if(b.getBoatId()!=-1)
 				b.move(this.game.rollDice());
 			}
 			this.game.getGameV().getPlayground().repaint();

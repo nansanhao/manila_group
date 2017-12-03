@@ -113,7 +113,7 @@ public class GameView extends JPanel {
 		this.diceButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
 		this.diceButton.addActionListener(new DiceController(this.game));
 		this.diceView.add(this.diceButton);
-		this.resetButton = new JButton("重置");
+		this.resetButton = new JButton("下一个航程");
 		this.resetButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
 		this.resetButton.addActionListener(new ResetController(this.game));
 		this.diceView.add(this.resetButton);

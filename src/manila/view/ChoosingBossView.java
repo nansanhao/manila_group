@@ -113,6 +113,7 @@ public class ChoosingBossView extends JPanel {
 
     public ChoosingBossView(Game g){
         this.game = g;
+        this.thirdPanel_panels =new JPanel[game.getBoats().length];
         this.cbc = new ChoosingBossController(this);
         this.setPreferredSize(new Dimension(CHOOSING_VIEW_W, CHOOSING_VIEW_H));
         this.cardLayout=new CardLayout();

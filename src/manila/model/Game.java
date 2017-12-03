@@ -51,6 +51,8 @@ public class Game {
 	public static final int ROUND_NUMBER = 3;
 	/** 海路的总长度 */
 	public static final int SEA_LENGTH = 13;
+	/**下海船的数量 */
+	public static final int MAX_BOATS_NUM=3;
 	
 	private GameView gameV;
 
@@ -178,10 +180,11 @@ public class Game {
 		int[] prices1 = {3,4,5,5};
 		int[] prices2 = {2,3,4};
 		int[] prices3 = {3,4,5};
-
+		int[] prices4 ={1,2,3};
 		Position[] pos1 = new Position[prices1.length];
 		Position[] pos2 = new Position[prices2.length];
 		Position[] pos3 = new Position[prices3.length];
+		Position[] pos4 = new Position[prices4.length];
 		
 		for(int i=0;i<prices1.length;i++){
 			pos1[i] = new Position(prices1[i]);
@@ -192,20 +195,22 @@ public class Game {
 		for(int i=0;i<prices3.length;i++){
 			pos3[i] = new Position(prices3[i]);
 		}
+		for(int i=0;i<prices4.length;i++){
+			pos4[i] = new Position(prices4[i]);
+		}
 
 		Boat s1 = new Boat("玉器", 36, pos1);
 		Boat s2 = new Boat("可可",24, pos2);
 		Boat s3 = new Boat("丝绸", 30, pos3);
+		Boat s4 = new Boat("人参",18,pos4);
 
-		this.boats = new Boat[3];
+		this.boats = new Boat[4];
 		boats[0] = s1;
 		boats[1] = s2;
 		boats[2] = s3;
-		int i=0;
-		for(Boat b:this.boats){
-			b.setBoatId(i);
-			i++;
-		}
+		boats[3] = s4;
+
+
 
 
 		/**游戏参数初始化*/
@@ -349,6 +354,7 @@ public class Game {
 			b.setPos_in_the_sea(0);
 			b.setHarbourID(-1);
 			b.setShipYardID(-1);
+			b.setBoatId(-1);
 			for(Position p:b.getPos_list()){
 				p.setSailorID(-1);
 			}
@@ -361,15 +367,17 @@ public class Game {
 
 	public void boatLand() {
 		for(Boat b:this.boats){
-			if(b.getPos_in_the_sea()>SEA_LENGTH){
-				int i=this.harbour.getAvailBoatPosIndex();
-				b.setHarbourID(i);
-				this.harbour.boatPositions[i].setHaveBoat(true);
-			}
-			else if(b.getPos_in_the_sea()<SEA_LENGTH){
-				int i=this.shipYard.getAvailBoatPosIndex();
-				b.setShipYardID(i);
-				this.shipYard.boatPositions[i].setHaveBoat(true);
+			if(b.getBoatId()!=-1){
+				if(b.getPos_in_the_sea()>SEA_LENGTH){
+					int i=this.harbour.getAvailBoatPosIndex();
+					b.setHarbourID(i);
+					this.harbour.boatPositions[i].setHaveBoat(true);
+				}
+				else if(b.getPos_in_the_sea()<SEA_LENGTH){
+					int i=this.shipYard.getAvailBoatPosIndex();
+					b.setShipYardID(i);
+					this.shipYard.boatPositions[i].setHaveBoat(true);
+				}
 			}
 		}
 	}
