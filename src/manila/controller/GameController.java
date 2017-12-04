@@ -159,7 +159,7 @@ public class GameController implements MouseListener {
 				this.game.setChoosing(true);
 				this.game.setGameIsStart(true);
 				this.game.setVoyageIsOver(false);
-				this.game.setChoosingBoat(false);
+				this.game.setSettingBoat(false);
 				this.game.setChoosingBoatId(-1);
 				this.steps=0;
 			}
@@ -201,7 +201,7 @@ public class GameController implements MouseListener {
 			clickedOnPos(this.game.getHarbour(),x,y);
 			clickedOnPos(this.game.getAvigator(),x,y);
 		}
-		else if(this.game.isChoosingBoat()){
+		else if(this.game.isSettingBoat()){
 			setBoatIntoSea(x,y);
 		}
 

@@ -168,7 +168,7 @@ public class ChoosingBossController implements ActionListener {
 			}
 			currentBoatId=i;
 			this.cbv.setThirdPanelActive(currentBoatId,true);
-			this.cbv.getGame().setChoosingBoat(true);
+			this.cbv.getGame().setSettingBoat(true);
 			this.cbv.getGame().setChoosingBoatId(currentBoatId);
 		}
 	}

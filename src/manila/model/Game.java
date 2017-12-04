@@ -38,9 +38,11 @@ public class Game {
 	/** 航程是否已结束 */
 	private boolean voyageIsOver;
 	/** 是否在选船下海 */
-	private boolean isChoosingBoat;
+	private boolean isSettingBoat;
 	/** 哪艘船在被选 */
 	private int choosingBoatId ;
+	/** 是否在选船 用于领航员和海盗*/
+	private boolean isChoosingBoat;
 
 
 
@@ -197,6 +199,14 @@ public class Game {
 		this.shipYard = shipYard;
 	}
 
+	public boolean isSettingBoat() {
+		return isSettingBoat;
+	}
+
+	public void setSettingBoat(boolean settingBoat) {
+		isSettingBoat = settingBoat;
+	}
+
 	public Game(GameView gv){
 		this.gameV = gv;
 
@@ -247,7 +257,8 @@ public class Game {
 		this.gameIsOver = false;
 		this.gameIsStart =false;
 		this.voyageIsOver=true;
-		this.isChoosingBoat =false;
+		this.isSettingBoat =false;
+		this.isChoosingBoat=false;
 		this.choosingBoatId =-1;
 
 		/**玩家初始化*/
@@ -356,8 +367,6 @@ public class Game {
 		this.choosing = false;
 		this.voyageIsOver = false;
 		this.gameIsStart=false;
-		this.choosingBoatId=-1;
-		this.isChoosingBoat=false;
 
 		//位置全部清空
 		for(Position p:this.pirate.pos_list){
