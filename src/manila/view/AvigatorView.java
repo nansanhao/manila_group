@@ -7,36 +7,28 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 public class AvigatorView extends AreaView {
-    protected static final int ABSOLUTE_X=6*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.BOAT_W+10;
-    protected static final int ABSOLUTE_Y=20;
-    protected static final int ABSOLUTE_W=220;
-    protected static final int ABSOLUTE_H=100;
 
 
-    public AvigatorView(Game game) {
+    public static final int ABSOLUTE_X=7*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.SEA_START_X-POS_W-POS_INTERVAL;
+
+    public static final int ABSOLUTE_W=3*AreaView.POS_INTERVAL+2*AreaView.POS_W;
+
+
+    public  AvigatorView(Game game){
         super(game);
-        this.game.getAvigator().setPosX(ABSOLUTE_X);
-        this.game.getAvigator().setPosY(ABSOLUTE_Y);
-
     }
-
-    public void drawArea(Graphics2D g2){
+    @Override
+    public void drawArea(Graphics2D g2) {
         g2.setColor(Color.GRAY);
-        g2.fill(new Rectangle2D.Double(AREA_START_X, AREA_START_Y, ABSOLUTE_W, ABSOLUTE_H));
+        g2.fill(new Rectangle2D.Double(0, 0, ABSOLUTE_W, ABSOLUTE_H));
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.PLAIN, 18));
-        g2.drawString("领航员区域", AREA_START_X+20, AREA_START_Y+20);
+        g2.drawString("小领航员", POS_INTERVAL, 50);
+        g2.drawString("大领航员", POS_W+2*POS_INTERVAL, 50);
 
-        Position[] positions = this.game.getPirate().getPos_list();
+        Position[] positions = this.game.getAvigator().getPos_list();
         this.drawPosition(g2,positions);
 
-    }
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        Graphics2D g2 = (Graphics2D) g;
-
-        this.drawArea(g2);
     }
 }

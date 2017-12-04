@@ -11,29 +11,32 @@ import java.awt.geom.Rectangle2D;
  */
 public class InsuranceAreaView extends AreaView {
 
-    protected static final int ABSOLUTE_X=3*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL);
-    protected static final int ABSOLUTE_Y=20;
+    public static final int ABSOLUTE_X=PlaygroundView.SEA_START_X;
+
     public static final int ABSOLUTE_W=AreaView.POS_W+2*AreaView.POS_INTERVAL;
-    public static final int ABSOLUTE_H=100;
+
 
 
 
 
     public InsuranceAreaView(Game game) {
         super(game);
-        this.game.getInsurance().setPosX(ABSOLUTE_X);
-        this.game.getInsurance().setPosY(ABSOLUTE_Y);
+
     }
 
     @Override
     public void drawArea(Graphics2D g2) {
         g2.setColor(Color.GRAY);
-        g2.fill(new Rectangle2D.Double(AREA_START_X, AREA_START_Y, ABSOLUTE_W, ABSOLUTE_H));
+
+        g2.fill(new Rectangle2D.Double(0, 0, ABSOLUTE_W, ABSOLUTE_H));
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.PLAIN, 18));
-        g2.drawString("保险公司", AREA_START_X+20, AREA_START_Y+20);
-        g2.drawString("保险职员--10$", AREA_START_X+20, AREA_START_Y+40);
+        g2.drawString("保险公司", POS_INTERVAL, 20);
+
+        g2.fill(new Rectangle2D.Double(POS_INTERVAL, 30, POS_W, 20));
+        g2.setColor(Color.WHITE);
+        g2.drawString("10", POS_INTERVAL+POS_W/2-8, 30+16);
 
         Position[] positions=this.game.getInsurance().getPos_list();
         this.drawPosition(g2,positions);
@@ -47,7 +50,7 @@ public class InsuranceAreaView extends AreaView {
                 Rectangle2D r_pos = new Rectangle2D.Double(POS_START_X, POS_START_Y, POS_W, POS_H);
                 g2.fill(r_pos);
                 g2.setColor(Color.BLACK);
-                g2.setFont(new Font("SansSerif", Font.PLAIN, 14));
+                g2.setFont(new Font("SansSerif", Font.PLAIN, 20));
                 g2.drawString("!", (int)r_pos.getX()+POS_W/2-4, (int)r_pos.getY()+POS_H/2+5);
             }
             else{

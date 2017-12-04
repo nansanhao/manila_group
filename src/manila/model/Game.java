@@ -30,12 +30,24 @@ public class Game {
 
 
 
+
 	/**判断游戏是否开始 用于修复船长*/
 	private boolean gameIsStart;
 	/** 当前是否处于玩家选位置的阶段 */
 	private boolean choosing;
 	/** 游戏是否已结束 */
 	private boolean gameIsOver;
+	/** 航程是否已结束 */
+	private boolean voyageIsOver;
+	/** 是否在选船下海 */
+	private boolean isSettingBoat;
+	/** 哪艘船在被选 */
+	private int choosingBoatId ;
+	/** 是否在选船 用于领航员和海盗*/
+	private boolean isChoosingBoat;
+
+
+
 	/** 当前游戏处于第几轮 */
 	private int current_round;
 	/** 当前正在选位置的玩家ID */
@@ -43,16 +55,35 @@ public class Game {
 	/** 被选为船老大的玩家ID */
 	private int boss_pid;
 	/** 当前游戏的黑市*/
-	private BlackMarket blackMarket;
+	private BlackMarket aBlackMarket;
 	/** 游戏的总轮数 */
 	public static final int ROUND_NUMBER = 3;
 	/** 海路的总长度 */
 	public static final int SEA_LENGTH = 13;
+	/**下海船的数量 */
+	public static final int MAX_BOATS_NUM=3;
+	/**单次最大步数*/
+	public static final int ONCE_MAX_STEP=5;
+	/**总共最大步数*/
+	public static final int SUM_MAX_STEP=9;
 	
 	private GameView gameV;
 
-	public void setAvigator(Avigator avigator) {
-		this.avigator = avigator;
+
+	public boolean isVoyageIsOver() {
+		return voyageIsOver;
+	}
+
+	public BlackMarket getaBlackMarket() {
+		return aBlackMarket;
+	}
+
+	public void setaBlackMarket(BlackMarket aBlackMarket) {
+		this.aBlackMarket = aBlackMarket;
+	}
+
+	public void setVoyageIsOver(boolean voyageIsOver) {
+		this.voyageIsOver = voyageIsOver;
 	}
 
 	public Harbour getHarbour() {
@@ -85,6 +116,22 @@ public class Game {
 
 	public void setPlayers(Player[] players) {
 		this.players = players;
+	}
+
+	public boolean isChoosingBoat() {
+		return isChoosingBoat;
+	}
+
+	public void setChoosingBoat(boolean choosingBoat) {
+		isChoosingBoat = choosingBoat;
+	}
+
+	public int getChoosingBoatId() {
+		return choosingBoatId;
+	}
+
+	public void setChoosingBoatId(int choosingBoatId) {
+		this.choosingBoatId = choosingBoatId;
 	}
 
 	public Boat[] getBoats() {
@@ -151,23 +198,31 @@ public class Game {
 		this.boss_pid = boss_pid;
 	}
 
-	public BlackMarket getBlackMarket() {
-		return blackMarket;
+	public void setShipYard(ShipYard shipYard) {
+		this.shipYard = shipYard;
 	}
 
-	public void setBlackMarket(BlackMarket blackMarket) {
-		this.blackMarket = blackMarket;
+	public boolean isSettingBoat() {
+		return isSettingBoat;
+	}
+
+	public void setSettingBoat(boolean settingBoat) {
+		isSettingBoat = settingBoat;
 	}
 
 	public Game(GameView gv){
 		this.gameV = gv;
-		
+
+
+		/**船初始化*/
 		int[] prices1 = {3,4,5,5};
-		int[] prices2 = {2,3,3};
+		int[] prices2 = {2,3,4};
 		int[] prices3 = {3,4,5};
+		int[] prices4 ={1,2,3};
 		Position[] pos1 = new Position[prices1.length];
 		Position[] pos2 = new Position[prices2.length];
 		Position[] pos3 = new Position[prices3.length];
+		Position[] pos4 = new Position[prices4.length];
 		
 		for(int i=0;i<prices1.length;i++){
 			pos1[i] = new Position(prices1[i]);
@@ -178,15 +233,25 @@ public class Game {
 		for(int i=0;i<prices3.length;i++){
 			pos3[i] = new Position(prices3[i]);
 		}
-		
-		Boat s1 = new Boat("丝绸", 36, pos1);
-		Boat s2 = new Boat("可可",18, pos2);
-		Boat s3 = new Boat("玉器", 30, pos3);
-		this.boats = new Boat[3];
+		for(int i=0;i<prices4.length;i++){
+			pos4[i] = new Position(prices4[i]);
+		}
+
+		Boat s1 = new Boat("玉器", 36, pos1);
+		Boat s2 = new Boat("可可",24, pos2);
+		Boat s3 = new Boat("丝绸", 30, pos3);
+		Boat s4 = new Boat("人参",18,pos4);
+
+		this.boats = new Boat[4];
 		boats[0] = s1;
 		boats[1] = s2;
 		boats[2] = s3;
-		
+		boats[3] = s4;
+
+
+
+
+		/**游戏参数初始化*/
 		this.dice_generator = new Random();
 		this.current_pid = 0;
 		this.boss_pid = -1;
@@ -194,24 +259,34 @@ public class Game {
 		this.choosing = false;
 		this.gameIsOver = false;
 		this.gameIsStart =false;
-		
+		this.voyageIsOver=true;
+		this.isSettingBoat =false;
+		this.isChoosingBoat=false;
+		this.choosingBoatId =-1;
+
+		/**玩家初始化*/
 		this.players = new Player[3];
 		this.players[0] = new Player("路飞", 0, Color.RED);
 		this.players[1] = new Player("杰克", 1, Color.GREEN);
 		this.players[2] = new Player("哥伦布", 2, Color.BLUE);
 		// TODO: 2017/11/19 黑市没有初始化 改一下船的生成 加一艘船 哪艘下海由BOSScontroller拓展完成：何剑冲
+
+		this.aBlackMarket=new BlackMarket();
+		this.aBlackMarket.distributeShares(this.players);
+
+
+
 		/**海盗区域初始化*/
 		this.pirate=new Pirate();
 		/**保险公司初始化*/
 		this.insurance=new Insurance();
 		/**修船厂初始化*/
 		this.shipYard=new ShipYard();
-		/**领航员初始化*/
-		this.avigator=new Avigator();
+
 		/**港口初始化*/
 		this.harbour=new Harbour();
-		/**黑市初始化*/
-		this.blackMarket=new BlackMarket();
+		/**领航员初始化*/
+		this.avigator=new Avigator();
 	}
 	
 	/**
@@ -239,23 +314,6 @@ public class Game {
 		return this.players[id];
 	}
 	
-	public void showCurrentState(){
-		for(Boat s : this.boats){
-			String res;
-			res = "The "+s.getCargo_name()+" boat ("+s.getCargo_value()+"): [ ";
-			for(Position pos: s.getPos_list()){
-				if(pos.getSailorID() == -1)
-					res += pos.getPrice()+"$ ";
-				else
-					res += this.players[pos.getSailorID()].getName()+" ";
-			}
-			
-			res += "].";
-			res += "The boat is at: "+s.getPos_in_the_sea(); 
-			System.out.println(res);
-		}
-	}
-	
 	/**
 	 * 一次航程结束之后，结算所有区域及到港的钱
 	 */
@@ -263,16 +321,20 @@ public class Game {
 		//结算将在其他功能逐步完善之后慢慢添加
 		// TODO: 2017/11/19 海盗结算 
 		// TODO: 2017/11/19 领航员结算 
-		// TODO: 2017/11/19 保险公司结算 
-		// TODO: 2017/11/19 修船厂结算 
+		// TODO: 2017/11/19 保险公司结算 完成
+		// TODO: 2017/11/19 修船厂/港口结算 12.1完成
+
 		//TODO：到岸结算
 		for(Boat s : this.boats){
 			if(s.getPos_in_the_sea() > SEA_LENGTH){
 				s.playerGetProfit(this);
 			}
-			else
-				System.out.println("The boat "+s.getCargo_name()+" has sank!");
+			if(s.getHarbourID()!=-1)//即进港了
+				this.getaBlackMarket().updatePrice(s.getCargo_name());
 		}
+		this.shipYard.playerGetProfit(this);
+		this.harbour.playerGetProfit(this);
+		this.insurance.playerGetProfit(this);
 
 		
 		for(Player p : this.players)
@@ -307,15 +369,39 @@ public class Game {
 		//游戏数据包括船位置，船老大，和一些其他，将会在功能逐步完善之后逐步加入
 		this.current_round = 0;
 		this.choosing = false;
-		this.gameIsOver = false;
+		this.voyageIsOver = false;
 		this.gameIsStart=false;
+
+		//位置全部清空
 		for(Position p:this.pirate.pos_list){
 			p.setSailorID(-1);
 		}
+		for(Position p:this.shipYard.pos_list){
+			p.setSailorID(-1);
+		}
+		for(Position p:this.harbour.pos_list){
+			p.setSailorID(-1);
+		}
+		for(Position p:this.avigator.pos_list) {
+			p.setSailorID(-1);
+		}
 		this.insurance.pos_list[0].setSailorID(-1);
+
+
+		//船全部清空
+		for(BoatPosition p:this.shipYard.boatPositions){
+			p.setHaveBoat(false);
+		}
+		for(BoatPosition p:this.harbour.boatPositions){
+			p.setHaveBoat(false);
+		}
+
+		//船重置
 		for (Boat b:this.boats){
 			b.setPos_in_the_sea(0);
-			b.setPosX(this.gameV.getPlayground().BOAT_START_X);
+			b.setHarbourID(-1);
+			b.setShipYardID(-1);
+			b.setBoatId(-1);
 			for(Position p:b.getPos_list()){
 				p.setSailorID(-1);
 			}
@@ -326,4 +412,20 @@ public class Game {
 	}
 
 
+	public void boatLand() {
+		for(Boat b:this.boats){
+			if(b.getBoatId()!=-1){
+				if(b.getPos_in_the_sea()>SEA_LENGTH){
+					int i=this.harbour.getAvailBoatPosIndex();
+					b.setHarbourID(i);
+					this.harbour.boatPositions[i].setHaveBoat(true);
+				}
+				else if(b.getPos_in_the_sea()<SEA_LENGTH){
+					int i=this.shipYard.getAvailBoatPosIndex();
+					b.setShipYardID(i);
+					this.shipYard.boatPositions[i].setHaveBoat(true);
+				}
+			}
+		}
+	}
 }

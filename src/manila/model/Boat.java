@@ -11,10 +11,16 @@ public class Boat extends Area{
 	private String cargo_name;
 	/** 货物的总价值 */
 	private int cargo_value;
-	/** 船上的空位数组 */
-	//private Position[] pos_list;
 	/** 船在海中的位置 */
 	private int pos_in_the_sea;
+	/**船处在哪个港口*/
+	private int harbourID;
+	/**船再哪个修船厂*/
+	private int shipYardID;
+
+
+	/**船的号码第几艘船*/
+	private int boatId;
 	
 	/** 船（左上角）在图形界面上的x坐标 */
 	//private int posX;
@@ -22,7 +28,8 @@ public class Boat extends Area{
 	//private int posY;
 	/**是否被截获*/
 	boolean isRobbed;
-	
+
+
 	/**
 	 * 小船构造函数
 	 * @param n 货物名
@@ -34,6 +41,36 @@ public class Boat extends Area{
 		this.cargo_value = v;
 		this.pos_list = pl;
 		this.pos_in_the_sea = 0;
+		this.shipYardID=-1;
+		this.harbourID=-1;
+		this.boatId=-1;
+
+	}
+
+
+
+	public int getHarbourID() {
+		return harbourID;
+	}
+
+	public void setHarbourID(int harbourID) {
+		this.harbourID = harbourID;
+	}
+
+	public int getShipYardID() {
+		return shipYardID;
+	}
+
+	public void setShipYardID(int shipYardID) {
+		this.shipYardID = shipYardID;
+	}
+
+	public int getBoatId() {
+		return boatId;
+	}
+
+	public void setBoatId(int boatId) {
+		this.boatId = boatId;
 	}
 
 	public String getCargo_name() {
@@ -66,7 +103,6 @@ public class Boat extends Area{
 	 */
 	public void move(int step){
 		this.pos_in_the_sea += step;
-		this.setPosX(this.getPosX()+step * (PlaygroundView.SEA_INTERVAL+ PlaygroundView.SEA_W));
 
 	}
 
@@ -84,11 +120,15 @@ public class Boat extends Area{
 		Player[] players=game.getPlayers();
 		int money_to_share;
 		System.out.println("The boat "+this.getCargo_name()+" has arrived");
-		money_to_share = this.getCargo_value()/this.getFilledPosNum();
-		System.out.println("money_to_share: "+money_to_share);
-		for(Position pos : this.getPos_list()){
-			if(pos.getSailorID() != -1)//-1是空位
-				players[pos.getSailorID()].receiveProfit(money_to_share);
+		if(getAvailPosIndex()!=0){ //如果船不为空才能算钱
+			money_to_share = this.getCargo_value()/this.getFilledPosNum();
+			System.out.println("money_to_share: "+money_to_share);
+			for(Position pos : this.getPos_list()){
+				if(pos.getSailorID() != -1)//-1是空位
+					players[pos.getSailorID()].receiveProfit(money_to_share);
+			}
 		}
 	}
+
+
 }

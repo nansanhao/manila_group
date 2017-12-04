@@ -13,29 +13,28 @@ import java.awt.geom.Rectangle2D;
  */
 public class PirateAreaView extends AreaView {
 
-    public static final int ABSOLUTE_X=12*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.BOAT_W;
-    public static final int ABSOLUTE_Y=20;
-    public static final int ABSOLUTE_W=200;
-    public static final int ABSOLUTE_H=100;
+    public static final int ABSOLUTE_X=13*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.SEA_START_X-POS_W-POS_INTERVAL;
+
+    public static final int ABSOLUTE_W=3*AreaView.POS_INTERVAL+2*AreaView.POS_W;
+
 
 
 
     public PirateAreaView(Game game) {
         super(game);
-        this.game.getPirate().setPosX(ABSOLUTE_X);
-        this.game.getPirate().setPosY(ABSOLUTE_Y);
 
     }
 
     public void drawArea(Graphics2D g2){
         g2.setColor(Color.GRAY);
-        g2.fill(new Rectangle2D.Double(AREA_START_X, AREA_START_Y, ABSOLUTE_W, ABSOLUTE_H));
+
+        g2.fill(new Rectangle2D.Double(0, 0, ABSOLUTE_W, ABSOLUTE_H));
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.PLAIN, 18));
-        g2.drawString("海盗区域", AREA_START_X+20, AREA_START_Y+20);
-        g2.drawString("海盗老大", AREA_START_X+20, AREA_START_Y+40);
-        g2.drawString("海盗小弟", AREA_START_X+POS_W+POS_INTERVAL, AREA_START_Y+40);
+        g2.drawString("海盗船", POS_INTERVAL, 20);
+        g2.drawString("海盗老大", POS_INTERVAL, 50);
+        g2.drawString("海盗小弟", POS_W+2*POS_INTERVAL, 50);
 
         Position[] positions = this.game.getPirate().getPos_list();
         this.drawPosition(g2,positions);

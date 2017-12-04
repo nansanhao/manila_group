@@ -19,7 +19,7 @@ import manila.model.Player;
  */
 public class GameView extends JPanel {
 	/** 信息窗口的宽度 */
-	private static final int INFO_W = 300;
+	private static final int INFO_W = 350;
 	/** 信息窗口的高度 */
 	private static final int INFO_H = 900;
 
@@ -57,6 +57,7 @@ public class GameView extends JPanel {
 	public void setChoosingBossView(ChoosingBossView choosingBossView) {
 		this.choosingBossView = choosingBossView;
 	}
+
 	public GameView(){
 		this.game = new Game(this);
 
@@ -77,6 +78,7 @@ public class GameView extends JPanel {
         this.add(this.playground);
         this.add(this.infoView);
 
+
 	}
 	/**
 	 * 对玩家信息视图进行初始化
@@ -84,7 +86,7 @@ public class GameView extends JPanel {
 	public void makePlayerView(){
 		this.playersView = new JPanel();
 		this.playersView.setLayout(new GridLayout(4,1));
-		this.playersView.setPreferredSize(new Dimension(INFO_W, 240));
+		this.playersView.setPreferredSize(new Dimension(INFO_W, 300));
 
 		
 		JLabel text = new JLabel("玩家信息");
@@ -111,10 +113,11 @@ public class GameView extends JPanel {
 		this.diceButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
 		this.diceButton.addActionListener(new DiceController(this.game));
 		this.diceView.add(this.diceButton);
-		this.resetButton = new JButton("重置");
+		this.resetButton = new JButton("下一个航程");
 		this.resetButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
 		this.resetButton.addActionListener(new ResetController(this.game));
 		this.diceView.add(this.resetButton);
+		this.diceView.add(new BlackMarketView(this.game)); //TODO 暂时添加在DICEVIEW中
 	}
 	
 	/**
@@ -126,10 +129,11 @@ public class GameView extends JPanel {
 		for(PlayerView pv : this.playersV){
 			Player p = pv.getPlayer();
 			if(p.getPid() == pid){
-				if(!active){
-					pv.getScoreV().setText(p.getAccount_balance()+"$");
-					pv.getWorker_nbV().setText(p.getWorker_nb()+"");
-				}
+				pv.getScoreV().setText(p.getAccount_balance()+"$");
+				pv.getWorker_nbV().setText(p.getWorker_nb()+"");
+				int[] numOfShares=p.getNumOfShares();
+				pv.getSharesV().setText("玉器："+numOfShares[0]+"  丝绸："+numOfShares[1]+"  可可："+numOfShares[2]+
+						"  人参："+numOfShares[3]+"  抵押股票:"+p.getNumOfPledgeShares());
 				pv.setActive(active);
 			}
 			
@@ -162,7 +166,7 @@ public class GameView extends JPanel {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method st ub
 		JFrame mw = new JFrame();
 		mw.setTitle("Manila");
 		GameView gv = new GameView();
