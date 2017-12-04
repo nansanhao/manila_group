@@ -31,8 +31,14 @@ public class Avigator extends Area {
 
     @Override
     public void playerGetProfit(Game game) {
-        //TODO：参照boat的获利：郑抗
+    }
 
+    public int getFirstId(){
+        for(int i=0; i<this.pos_list.length; i++){
+            if(this.pos_list[i].getSailorID() != -1)
+                return pos_list[i].getSailorID();
+        }
+        return -1;
     }
 }
 

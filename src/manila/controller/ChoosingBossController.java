@@ -129,9 +129,7 @@ public class ChoosingBossController implements ActionListener {
 		g.setBoss_pid(boss_pid);
 		
 
-		
-		// 修改余额的显示
-		g.getGameV().updatePlayersView(boss_pid, false);
+
 		// 显示边框
 		g.getGameV().updatePlayersView(boss_pid, true);
 
