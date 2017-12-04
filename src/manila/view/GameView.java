@@ -34,6 +34,8 @@ public class GameView extends JPanel {
 	private JPanel playersView;
 	/** 摇骰子的窗口 */
 	private JPanel diceView;
+	/**日志窗口*/
+	private LogView logView;
 
 
 
@@ -64,6 +66,7 @@ public class GameView extends JPanel {
 		this.choosingBossView=new ChoosingBossView(this.game);
 		this.playground = new PlaygroundView(this.game);
         this.infoView = new JPanel();
+        this.logView=new LogView();
         
         this.makePlayerView();
         this.makeDiceView();
@@ -77,6 +80,7 @@ public class GameView extends JPanel {
 
         this.add(this.playground);
         this.add(this.infoView);
+        this.add(this.logView);
 
 
 	}

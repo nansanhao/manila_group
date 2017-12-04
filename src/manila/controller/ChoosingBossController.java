@@ -108,6 +108,7 @@ public class ChoosingBossController implements ActionListener {
 	 * 将下一名玩家设为当前玩家，并更新竞选面板的显示内容。
 	 */
 	public void pass(){
+		System.out.println("跳过了该玩家");
 		this.cbv.updateBidView(this.cbv.getGame().getCurrent_pid(), false);
 		
 		this.cbv.getGame().switchPlayer();
