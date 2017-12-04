@@ -24,10 +24,6 @@ public class Pirate extends Area{
 //        game.getPlayerByID(this.pos_list[0].getSailorID()).receiveProfit(theRobbedBoat.getCargo_value());
     }
 
-    @Override
-    public int clickOnWhichPos(int x, int y) {
-        return 0;
-    }
 
 
     //下面的方法有待商榷....

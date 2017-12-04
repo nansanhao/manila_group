@@ -55,16 +55,17 @@ public class BlackMarket {
     public void updatePrice(String cargo_name) {
         // TODO: 2017/11/17  根据到了港口的船更新黑市价格：范贤明，11.24完成
         for (int i = 0; i < cargo_shares.length; i++) {
-            if (cargo_shares[i][0].getCargo_name().equals(cargo_name)) {
-                for (int j = 0; j < cargo_shares[i].length; j++) {
-                    int price = cargo_shares[i][1].getPrice();
+                if (cargo_shares[i][0].getCargo_name().equals(cargo_name)) {
+                    int price = cargo_shares[i][0].getPrice();
                     if (price < 10) {
-                        cargo_shares[i][j].setPrice(price + 5);
+                        price += 5;
                     } else {
-                        cargo_shares[i][j].setPrice(price + 10);
+                        price += 10;
+                    }
+                    for (int j = 0; j < cargo_shares[i].length; j++) {
+                        cargo_shares[i][j].setPrice(price);
                     }
                 }
-            }
         }
     }
 
@@ -88,7 +89,7 @@ public class BlackMarket {
      * @param random_number
      * @return 若都卖出去了就返回-1
      */
-    private int getUnOwnedSharesIndex(int random_number) {
+    public int getUnOwnedSharesIndex(int random_number) {
         for(int i=0;i<cargo_shares[random_number].length;i++)
         {
             if(cargo_shares[random_number][i].getOnwer_id()==-1)
@@ -96,5 +97,7 @@ public class BlackMarket {
         }
         return  -1;
     }
+
+
 }
 

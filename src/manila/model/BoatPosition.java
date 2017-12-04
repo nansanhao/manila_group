@@ -1,27 +1,29 @@
 package manila.model;
 
 public class BoatPosition {
-    private int boatPrice;
-    private String boatCargo_name;
+    private int profit;
+    private boolean isHaveBoat;
 
-    public BoatPosition(int boatPrice) {
-        this.boatPrice = boatPrice;
-        this.boatCargo_name=null;
+        public BoatPosition(int profit) {
+        this.profit=profit;
+        this.isHaveBoat=false;
     }
 
-    public int getBoatPrice() {
-        return boatPrice;
+
+    public int getProfit() {
+        return profit;
     }
 
-    public void setBoatPrice(int boatPrice) {
-        this.boatPrice = boatPrice;
+    public void setProfit(int profit) {
+        this.profit = profit;
     }
 
-    public String getBoatCargo_name() {
-        return boatCargo_name;
+    public boolean isHaveBoat() {
+        return isHaveBoat;
     }
 
-    public void setBoatCargo_name(String boatCargo_name) {
-        this.boatCargo_name = boatCargo_name;
+    public void setHaveBoat(boolean haveBoat) {
+        isHaveBoat = haveBoat;
     }
+
 }

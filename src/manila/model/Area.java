@@ -16,9 +16,9 @@ public  abstract class Area {
      */
     public Position[] pos_list;
     /** 区域（左上角）在图形界面上的x坐标 */
-    private int posX;
+    //private int posX;
     /**区域（左上角）在图形界面上的y坐标 */
-    private int posY;
+    //private int posY;
 
     public Position[] getPos_list() {
         return pos_list;
@@ -27,7 +27,7 @@ public  abstract class Area {
     public void setPos_list(Position[] pos_list) {
         this.pos_list = pos_list;
     }
-
+/*
     public int getPosX() {
         return posX;
     }
@@ -43,7 +43,7 @@ public  abstract class Area {
     public void setPosY(int posY) {
         this.posY = posY;
     }
-
+*/
     /**
      * 获得区域当前空着的位置的编号（进入区域时自动从较低的编号开始）
      * @return 当前编号最小的空位所对应的编号值
@@ -87,34 +87,7 @@ public  abstract class Area {
      * @param y 光标的纵坐标
      * @return 是否在该船的范围内
      */
-    public boolean isCursorInside(int x, int y){
 
-        if(this instanceof Boat){
-            if(x > this.posX && x < this.posX+ PlaygroundView.BOAT_W
-                    && y > this.posY && y< this.posY+PlaygroundView.BOAT_H)
-                return true;
-            return false;
-        }
-        else if(this instanceof Pirate)
-        {
-            if(x > this.posX && x < this.posX+ PirateAreaView.ABSOLUTE_W
-                    && y > this.posY && y< this.posY+PirateAreaView.ABSOLUTE_H)
-                return true;
-            return false;
-        }
-        else if(this instanceof Insurance)
-        {
-            if(x > this.posX && x < this.posX+ InsuranceAreaView.ABSOLUTE_W
-                    && y > this.posY && y< this.posY+InsuranceAreaView.ABSOLUTE_H)
-                return true;
-            return false;
-        }
-        else
-        {
-            return false;
-        }
-
-    }
 
     /**
      * 进入能进入的位置
@@ -131,8 +104,6 @@ public  abstract class Area {
     public abstract void playerGetProfit(Game game);
 
 
-
-    public abstract int clickOnWhichPos(int x,int y);
 
     public  void joinInPos(int numOfPos, int pid){
         this.pos_list[numOfPos].setSailorID(pid);

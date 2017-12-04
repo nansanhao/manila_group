@@ -12,28 +12,27 @@ import java.awt.geom.Rectangle2D;
  */
 public abstract class AreaView extends JPanel{
 
-
-    /** 区域宽度 */
-    protected static final int AREA_W = 400;
-    /** 区域高度 */
-    protected static final int AREA_H = 800;
-    /**区域的开始位置的x坐标*/
-    protected static final int AREA_START_X=0;
-    /**区域的开始位置的y坐标*/
-    protected static final int AREA_START_Y=0;
     /** 区域上位置的宽度 */
-    public static final int POS_W = 50;
+    public static final int POS_W = PlaygroundView.SEA_W+2*PlaygroundView.SEA_INTERVAL;
     /** 区域上位置的高度 */
-    public static final int POS_H = 25;
+    public static final int POS_H = POS_W/2;
 
 
     /** 区域最上面位置左上角的x坐标 */
-    protected static final int POS_START_X = 20;
+    public static final int POS_START_X = PlaygroundView.SEA_W;
     /** 区域最上面位置左上角的y坐标 */
-    protected static final int POS_START_Y = 60;
+    public static final int POS_START_Y = 60;
 
     /** 区域位置间在x方向上的间隔 */
-    protected static final int POS_INTERVAL = 50;
+    public static final int POS_INTERVAL = PlaygroundView.SEA_W;
+
+    /**区域起始Y坐标*/
+    public static final int ABSOLUTE_Y=20;
+    /**区域高度*/
+    public static final int ABSOLUTE_H=POS_START_Y+POS_H+POS_INTERVAL;
+
+
+
 
     protected Game game;
 
@@ -62,7 +61,7 @@ public abstract class AreaView extends JPanel{
                         POS_W, POS_H);
                 g2.fill(r_pos);
                 g2.setColor(Color.BLACK);
-                g2.setFont(new Font("SansSerif", Font.PLAIN, 14));
+                g2.setFont(new Font("SansSerif", Font.PLAIN, 20));
                 g2.drawString(pos_list[i].getPrice()+"", (int)r_pos.getX()+POS_W/2-4, (int)r_pos.getY()+POS_H/2+5);
             }
             else{
@@ -79,4 +78,6 @@ public abstract class AreaView extends JPanel{
         Graphics2D g2 = (Graphics2D) g;
         this.drawArea(g2);
     }
+
+
 }

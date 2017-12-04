@@ -57,6 +57,7 @@ public class GameView extends JPanel {
 	public void setChoosingBossView(ChoosingBossView choosingBossView) {
 		this.choosingBossView = choosingBossView;
 	}
+
 	public GameView(){
 		this.game = new Game(this);
 
@@ -76,6 +77,7 @@ public class GameView extends JPanel {
 
         this.add(this.playground);
         this.add(this.infoView);
+
 
 	}
 	/**
@@ -111,10 +113,11 @@ public class GameView extends JPanel {
 		this.diceButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
 		this.diceButton.addActionListener(new DiceController(this.game));
 		this.diceView.add(this.diceButton);
-		this.resetButton = new JButton("重置");
+		this.resetButton = new JButton("下一个航程");
 		this.resetButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
 		this.resetButton.addActionListener(new ResetController(this.game));
 		this.diceView.add(this.resetButton);
+		this.diceView.add(new BlackMarketView(this.game)); //TODO 暂时添加在DICEVIEW中
 	}
 	
 	/**
@@ -126,13 +129,11 @@ public class GameView extends JPanel {
 		for(PlayerView pv : this.playersV){
 			Player p = pv.getPlayer();
 			if(p.getPid() == pid){
-				if(!active){
-					pv.getScoreV().setText(p.getAccount_balance()+"$");
-					pv.getWorker_nbV().setText(p.getWorker_nb()+"");
-					int[] numOfShares=p.getNumOfShares();
-					pv.getSharesV().setText("玉器："+numOfShares[0]+"  丝绸："+numOfShares[1]+"  可可："+numOfShares[2]+
-							"  人参："+numOfShares[3]+"  抵押股票:"+p.getNumOfPledgeShares());
-				}
+				pv.getScoreV().setText(p.getAccount_balance()+"$");
+				pv.getWorker_nbV().setText(p.getWorker_nb()+"");
+				int[] numOfShares=p.getNumOfShares();
+				pv.getSharesV().setText("玉器："+numOfShares[0]+"  丝绸："+numOfShares[1]+"  可可："+numOfShares[2]+
+						"  人参："+numOfShares[3]+"  抵押股票:"+p.getNumOfPledgeShares());
 				pv.setActive(active);
 			}
 			
