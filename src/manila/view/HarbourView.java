@@ -20,6 +20,7 @@ public class HarbourView extends YardView{
 
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.PLAIN, 18));
+
         g2.drawString("港口", 18, 18);
 
         Position[] positions = this.game.getHarbour().getPos_list();

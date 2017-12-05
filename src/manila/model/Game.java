@@ -23,6 +23,8 @@ public class Game {
 	private ShipYard shipYard;
 	/**港口*/
 	private Harbour harbour;
+
+
 	/** 随机数产生器 */
 	private Random dice_generator;
 
@@ -69,8 +71,17 @@ public class Game {
 	
 	private GameView gameV;
 
+
 	public boolean isVoyageIsOver() {
 		return voyageIsOver;
+	}
+
+	public BlackMarket getaBlackMarket() {
+		return aBlackMarket;
+	}
+
+	public void setaBlackMarket(BlackMarket aBlackMarket) {
+		this.aBlackMarket = aBlackMarket;
 	}
 
 	public void setVoyageIsOver(boolean voyageIsOver) {
@@ -189,14 +200,6 @@ public class Game {
 		this.boss_pid = boss_pid;
 	}
 
-	public BlackMarket getaBlackMarket() {
-		return aBlackMarket;
-	}
-
-	public void setaBlackMarket(BlackMarket aBlackMarket) {
-		this.aBlackMarket = aBlackMarket;
-	}
-
 	public void setShipYard(ShipYard shipYard) {
 		this.shipYard = shipYard;
 	}
@@ -289,6 +292,7 @@ public class Game {
 		this.insurance=new Insurance();
 		/**修船厂初始化*/
 		this.shipYard=new ShipYard();
+
 		/**港口初始化*/
 		this.harbour=new Harbour();
 		/**领航员初始化*/

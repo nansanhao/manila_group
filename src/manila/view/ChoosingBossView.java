@@ -17,7 +17,9 @@ public class ChoosingBossView extends JPanel {
 
 
     public static final int CHOOSING_VIEW_W=350;
-    public static final int CHOOSING_VIEW_H=160;
+
+    public static final int CHOOSING_VIEW_H=200;
+
 
 
     private CardLayout cardLayout;
