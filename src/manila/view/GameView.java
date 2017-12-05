@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import manila.controller.DiceController;
 import manila.controller.ResetController;
@@ -37,6 +38,7 @@ public class GameView extends JPanel {
 
 
 
+
 	/**船老大窗口*/
 	private ChoosingBossView choosingBossView;
 
@@ -64,7 +66,7 @@ public class GameView extends JPanel {
 		this.choosingBossView=new ChoosingBossView(this.game);
 		this.playground = new PlaygroundView(this.game);
         this.infoView = new JPanel();
-        
+
         this.makePlayerView();
         this.makeDiceView();
 
@@ -73,7 +75,8 @@ public class GameView extends JPanel {
         this.infoView.setLayout(new BorderLayout());
         this.infoView.add(playersView, BorderLayout.NORTH);
         this.infoView.add(diceView, BorderLayout.CENTER);
-        this.infoView.add(choosingBossView,BorderLayout.SOUTH);
+        this.infoView.add(this.choosingBossView,BorderLayout.SOUTH);
+
 
         this.add(this.playground);
         this.add(this.infoView);
@@ -108,8 +111,8 @@ public class GameView extends JPanel {
 	 */
 	public void makeDiceView(){
 		this.diceView = new JPanel();
-		this.diceView.setPreferredSize(new Dimension(INFO_W, 50));
-		this.diceView.setBackground(Color.GRAY);
+		this.diceView.setPreferredSize(new Dimension(INFO_W, 600));
+		this.diceView.setBackground(Color.WHITE);
 		this.diceButton = new JButton("前进");
 		this.diceButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
 		this.diceButton.addActionListener(new DiceController(this.game));
@@ -119,6 +122,8 @@ public class GameView extends JPanel {
 		this.resetButton.addActionListener(new ResetController(this.game));
 		this.diceView.add(this.resetButton);
 		this.diceView.add(new BlackMarketView(this.game)); //TODO 暂时添加在DICEVIEW中
+		this.diceView.add(new LogView());//日志板
+
 	}
 	
 	/**

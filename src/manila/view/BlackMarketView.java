@@ -1,11 +1,13 @@
 package manila.view;
 
 import manila.model.Game;
+
 import manila.model.Shares;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+
 
 public class BlackMarketView extends JPanel {
 
