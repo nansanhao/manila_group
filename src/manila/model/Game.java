@@ -325,11 +325,10 @@ public class Game {
 	 */
 	public void calculateProfits(){
 		//结算将在其他功能逐步完善之后慢慢添加
-		// TODO: 2017/11/19 海盗结算 
-		// TODO: 2017/11/19 领航员结算 
+		// TODO: 2017/11/19 海盗结算
+
 		// TODO: 2017/11/19 保险公司结算 完成
 		// TODO: 2017/11/19 修船厂/港口结算 12.1完成
-
 		//TODO：到岸结算
 		for(Boat s : this.boats){
 			if(s.getPos_in_the_sea() > SEA_LENGTH){
