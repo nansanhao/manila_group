@@ -85,19 +85,20 @@ public class GameView extends JPanel {
 	 */
 	public void makePlayerView(){
 		this.playersView = new JPanel();
-		this.playersView.setLayout(new GridLayout(4,1));
-		this.playersView.setPreferredSize(new Dimension(INFO_W, 300));
+		this.playersView.setLayout(null);
+		this.playersView.setPreferredSize(new Dimension(INFO_W, 200));
 
 		
 		JLabel text = new JLabel("玩家信息");
-		text.setHorizontalTextPosition(SwingConstants.LEFT);
-		text.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 25));
-		this.playersView.add(text,BorderLayout.CENTER);
+		text.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 18));
+		text.setBounds(0,0,INFO_W,20);
+		this.playersView.add(text);
 		Player[] players = this.game.getPlayers();
 		this.playersV = new PlayerView[players.length];
 		for(int i=0; i<players.length; i++){
 			PlayerView pv = new PlayerView(players[i],true);
 			this.playersV[i] = pv;
+			pv.setBounds(0,20+i*60,INFO_W,60);
 			this.playersView.add(pv);
 		}
 	}

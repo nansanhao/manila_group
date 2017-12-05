@@ -277,10 +277,10 @@ public class GameController implements MouseListener {
 		else if(this.game.isSettingBoat()){ //放船
 			setBoatIntoSea(x,y);
 		}
-		else if(this.game.isChoosingBoat()){
+		else if(this.game.isChoosingBoat()){ //选船
 			chooseBoat(x,y);
 		}
-		else if(this.game.isMovingBoat()){
+		else if(this.game.isMovingBoat()){ //移船
 			AvigatorMoveBoat(x,y);
 		}
 
