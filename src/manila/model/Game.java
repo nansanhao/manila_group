@@ -43,6 +43,8 @@ public class Game {
 	private int choosingBoatId ;
 	/** 是否在选船 用于领航员和海盗*/
 	private boolean isChoosingBoat;
+	/**领航员是否在工作*/
+	private boolean isMovingBoat;
 
 
 
@@ -205,6 +207,14 @@ public class Game {
 
 	public void setSettingBoat(boolean settingBoat) {
 		isSettingBoat = settingBoat;
+	}
+
+	public boolean isMovingBoat() {
+		return isMovingBoat;
+	}
+
+	public void setMovingBoat(boolean movingBoat) {
+		isMovingBoat = movingBoat;
 	}
 
 	public Game(GameView gv){
@@ -407,6 +417,14 @@ public class Game {
 		}
 	}
 
+
+	public Boat getBoatByID(int id){
+		for(Boat b:this.boats){
+			if(b.getBoatId()==id)
+				return b;
+		}
+		return null;
+	}
 
 	public void boatLand() {
 		for(Boat b:this.boats){

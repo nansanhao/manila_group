@@ -129,9 +129,7 @@ public class ChoosingBossController implements ActionListener {
 		g.setBoss_pid(boss_pid);
 		
 
-		
-		// 修改余额的显示
-		g.getGameV().updatePlayersView(boss_pid, false);
+
 		// 显示边框
 		g.getGameV().updatePlayersView(boss_pid, true);
 
@@ -152,7 +150,7 @@ public class ChoosingBossController implements ActionListener {
 		else if(command.equals("confirm")&&this.bid_amount!=0){
 			this.confirm();
 		}
-		else if(command.equals("coco")||command.equals("jade")||command.equals("silk")||command.equals("ginseng")){
+		else if(command.equals("4")||command.equals("5")||command.equals("6")||command.equals("7")||command.equals("8")){
 			this.buyshares(command);
 		}
 		else if(command.equals("0")||command.equals("1")||command.equals("2")||command.equals("3")){
@@ -178,27 +176,20 @@ public class ChoosingBossController implements ActionListener {
 		Game g=this.cbv.getGame();
 		BlackMarket blackMarket=g.getaBlackMarket();
 		Player p =g.getPlayerByID(g.getCurrent_pid());
-		if(command.equals("jade")){
-			cargo_id=0;
-		}
-		else if(command.equals("silk")){
-			cargo_id=1;
-		}
-		else if(command.equals("coco")){
-			cargo_id=2;
+		cargo_id=Integer.parseInt(command)-this.getCbv().getGame().getBoats().length;
+		if(cargo_id!=4){
+			int sharesIndex =blackMarket.getUnOwnedSharesIndex(cargo_id);
+			if(sharesIndex!=-1){
+				Shares s=blackMarket.getCargo_shares()[cargo_id][sharesIndex];
+				s.setOwner(p);
+				p.payPos(s.getPrice());
+				g.getGameV().updatePlayersView(boss_pid,true);
+				this.cbv.getCardLayout().next(this.cbv);
+			}
 		}
 		else {
-			cargo_id=3;
-		}
-
-		int sharesIndex =blackMarket.getUnOwnedSharesIndex(cargo_id);
-		if(sharesIndex!=-1){
-			Shares s=blackMarket.getCargo_shares()[cargo_id][sharesIndex];
-			s.setOwner(p);
-			p.payPos(s.getPrice());
 			g.getGameV().updatePlayersView(boss_pid,true);
 			this.cbv.getCardLayout().next(this.cbv);
-
 		}
 
 	}
