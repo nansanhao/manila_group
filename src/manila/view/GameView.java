@@ -67,11 +67,6 @@ public class GameView extends JPanel {
 		this.playground = new PlaygroundView(this.game);
         this.infoView = new JPanel();
 
-		JPanel jPanel_temp=new JPanel();
-		jPanel_temp.setLayout(new BorderLayout());
-		jPanel_temp.add(this.choosingBossView,BorderLayout.NORTH);
-		jPanel_temp.add(new LogView(),BorderLayout.SOUTH);
-        
         this.makePlayerView();
         this.makeDiceView();
 
@@ -80,7 +75,7 @@ public class GameView extends JPanel {
         this.infoView.setLayout(new BorderLayout());
         this.infoView.add(playersView, BorderLayout.NORTH);
         this.infoView.add(diceView, BorderLayout.CENTER);
-        this.infoView.add(jPanel_temp,BorderLayout.SOUTH);
+        this.infoView.add(this.choosingBossView,BorderLayout.SOUTH);
 
 
         this.add(this.playground);
@@ -93,19 +88,20 @@ public class GameView extends JPanel {
 	 */
 	public void makePlayerView(){
 		this.playersView = new JPanel();
-		this.playersView.setLayout(new GridLayout(4,1));
-		this.playersView.setPreferredSize(new Dimension(INFO_W, 300));
+		this.playersView.setLayout(null);
+		this.playersView.setPreferredSize(new Dimension(INFO_W, 200));
 
 		
 		JLabel text = new JLabel("玩家信息");
-		text.setHorizontalTextPosition(SwingConstants.LEFT);
-		text.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 25));
-		this.playersView.add(text,BorderLayout.CENTER);
+		text.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 18));
+		text.setBounds(0,0,INFO_W,20);
+		this.playersView.add(text);
 		Player[] players = this.game.getPlayers();
 		this.playersV = new PlayerView[players.length];
 		for(int i=0; i<players.length; i++){
 			PlayerView pv = new PlayerView(players[i],true);
 			this.playersV[i] = pv;
+			pv.setBounds(0,20+i*60,INFO_W,60);
 			this.playersView.add(pv);
 		}
 	}
@@ -115,7 +111,7 @@ public class GameView extends JPanel {
 	 */
 	public void makeDiceView(){
 		this.diceView = new JPanel();
-		this.diceView.setPreferredSize(new Dimension(INFO_W, 50));
+		this.diceView.setPreferredSize(new Dimension(INFO_W, 600));
 		this.diceView.setBackground(Color.WHITE);
 		this.diceButton = new JButton("前进");
 		this.diceButton.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 24));
@@ -126,6 +122,7 @@ public class GameView extends JPanel {
 		this.resetButton.addActionListener(new ResetController(this.game));
 		this.diceView.add(this.resetButton);
 		this.diceView.add(new BlackMarketView(this.game)); //TODO 暂时添加在DICEVIEW中
+		this.diceView.add(new LogView());//日志板
 
 	}
 	

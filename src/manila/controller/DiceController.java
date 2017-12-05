@@ -21,7 +21,9 @@ public class DiceController implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		// roll the dice to move the boats
-		if(!this.game.isVoyageIsOver() && !this.game.isChoosing()&&this.game.isGameIsStart()){
+		if(!this.game.isVoyageIsOver() && !this.game.isChoosing()&&this.game.isGameIsStart()
+				&&!this.game.isChoosingBoat()&&!this.game.isMovingBoat()
+				){
 			for(Boat b : this.game.getBoats()){
 				if(b.getBoatId()!=-1)
 				b.move(this.game.rollDice());
@@ -31,6 +33,15 @@ public class DiceController implements ActionListener {
 			// prepare the next round
 			this.game.setCurrent_round(this.game.getCurrent_round()+1);
 			this.game.setChoosing(true);
+
+			if(this.game.getCurrent_round()==Game.ROUND_NUMBER-1&&this.game.getAvigator().getFirstId()!=-1){
+				this.game.setChoosing(false);
+				this.game.setChoosingBoat(true);
+				this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(),false);
+				this.game.setCurrent_pid(this.game.getAvigator().getFirstId());
+				this.game.getGameV().updatePlayersView(this.game.getAvigator().getFirstId(),true);
+
+			}
 			
 			if(this.game.getCurrent_round() == Game.ROUND_NUMBER){
 				// game is over

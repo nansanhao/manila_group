@@ -17,6 +17,8 @@ public class Boat extends Area{
 	private int harbourID;
 	/**船再哪个修船厂*/
 	private int shipYardID;
+	/**是否被选中*/
+	private boolean isChoosen;
 
 
 	/**船的号码第几艘船*/
@@ -44,6 +46,7 @@ public class Boat extends Area{
 		this.shipYardID=-1;
 		this.harbourID=-1;
 		this.boatId=-1;
+		this.isChoosen=false;
 
 	}
 
@@ -95,6 +98,14 @@ public class Boat extends Area{
 
 	public void setPos_in_the_sea(int pos_in_the_sea) {
 		this.pos_in_the_sea = pos_in_the_sea;
+	}
+
+	public boolean isChoosen() {
+		return isChoosen;
+	}
+
+	public void setChoosen(boolean choosen) {
+		isChoosen = choosen;
 	}
 
 	/**

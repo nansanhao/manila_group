@@ -31,6 +31,7 @@ public class LogSystem extends PrintStream{
         final String time = new String(format.format(date));
         final String message = new String(buf, off, len);
         this.text.append(message);
+        this.text.setCaretPosition(this.text.getText().length());
     }
 
 }

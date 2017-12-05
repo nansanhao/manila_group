@@ -1,10 +1,6 @@
 package manila.view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
@@ -136,7 +132,8 @@ public class PlaygroundView extends JPanel {
 	public void drawBoat(Graphics2D g2, Boat b,int boat_pos_X,int boat_pos_Y){
 
 		g2.setColor(Color.lightGray);
-		g2.fill(new Rectangle2D.Double(boat_pos_X, boat_pos_Y, BOAT_W, BOAT_H));
+		Rectangle2D r=new Rectangle2D.Double(boat_pos_X, boat_pos_Y, BOAT_W, BOAT_H);
+		g2.fill(r);
 		
 		g2.setColor(Color.BLACK);
 		g2.setFont(new Font("SansSerif", Font.PLAIN, 18));
@@ -160,6 +157,11 @@ public class PlaygroundView extends JPanel {
 						boat_pos_Y+POS_START_Y,
 						POS_W, POS_H));
 			}
+		}
+		if(b.isChoosen()){
+			g2.setStroke(new BasicStroke(5));
+			g2.setColor(Color.orange);
+			g2.drawRect(boat_pos_X, boat_pos_Y, BOAT_W, BOAT_H);
 		}
 	}
 	

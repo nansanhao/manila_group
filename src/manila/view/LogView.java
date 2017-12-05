@@ -3,44 +3,38 @@ package manila.view;
 import manila.model.LogSystem;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class LogView extends JPanel {
     /**区域高度*/
-    public static final int ABSOLUTE_H=100;
+    public static final int ABSOLUTE_H=220;
     public static final int ABSOLUTE_W=350;
 
     /**文本区*/
     private JTextArea logText;
-    private JScrollPane jScrollPane;
-
-    public JTextArea getLogText() {
-        return logText;
-    }
-
-    public void setLogText(JTextArea logText) {
-        this.logText = logText;
-    }
 
     public LogView() {
         this.setPreferredSize(new Dimension(ABSOLUTE_W, ABSOLUTE_H));
-        //this.setBorder(new EmptyBorder(5,5,5,5));
-        this.setBackground(Color.GREEN);
-        this.logText= new JTextArea("日志输出：\n",8,22);
-        this.logText.setEditable(true);
-        this.logText.setFont(new Font("标楷体", Font.BOLD, 17));
+        this.setBackground(Color.WHITE);
+
+        this.logText= new JTextArea("日志输出：\n",6,22);
+        this.logText.setBackground(Color.LIGHT_GRAY);
+        this.logText.setEditable(false);
+        this.logText.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 17));
         this.logText.setLineWrap(true);        //激活自动换行功能
-        //this.logText.setWrapStyleWord(true);            // 激活断行不断字功能
+        this.logText.setWrapStyleWord(true);            // 激活断行不断字功能
 
+        JTextArea textArea=new JTextArea("日志板");
+        textArea.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 20));
+        textArea.setEnabled(false);
+        textArea.setDisabledTextColor(Color.black);
 
-        this.jScrollPane=new JScrollPane(this.logText);
-        this.add(jScrollPane);
-        JScrollBar vertical = this.jScrollPane.getVerticalScrollBar();
-        vertical.setValue( vertical.getMaximum());
-        LogSystem mps = new LogSystem(System.out, this.logText);
-        System.setOut(mps);
-        System.setErr(mps);
+        this.add(textArea);
+        this.add(new JScrollPane(this.logText));
+
+        LogSystem logSystem = new LogSystem(System.out, this.logText);
+        System.setOut(logSystem);
+        System.setErr(logSystem);
 
     }
 }

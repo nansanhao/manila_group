@@ -17,7 +17,9 @@ public class ChoosingBossView extends JPanel {
 
 
     public static final int CHOOSING_VIEW_W=350;
+
     public static final int CHOOSING_VIEW_H=200;
+
 
 
     private CardLayout cardLayout;
@@ -155,29 +157,18 @@ public class ChoosingBossView extends JPanel {
 
     private JPanel makeSecondPanel() {
         JPanel secondPanel=new JPanel();
-        secondPanel.setLayout(new GridLayout(2,2));
+        Boat[] boats=this.game.getBoats();
+        secondPanel.setLayout(null);
 
-        JButton jade= new JButton("玉器");
-        JButton silk= new JButton("丝绸");
-        JButton coco= new JButton("可可");
-        JButton ginseng= new JButton("人参");
+        for(int i=0;i<=boats.length;i++){
+            JButton button=(i==boats.length)?new JButton("不买"):new JButton(boats[i].getCargo_name());
+            button.setActionCommand(boats.length+i+"");// 4~8
+            button.addActionListener(this.cbc);
+            button.setBounds(4+i*(CHOOSING_VIEW_W/(boats.length+1)),CHOOSING_VIEW_H/2-25,
+                    CHOOSING_VIEW_W/(boats.length+1)-2*4,50);
+            secondPanel.add(button);
 
-        jade.setActionCommand("jade");
-        silk.setActionCommand("silk");
-        coco.setActionCommand("coco");
-        ginseng.setActionCommand("ginseng");
-
-        jade.addActionListener(this.cbc);
-        silk.addActionListener(this.cbc);
-        coco.addActionListener(this.cbc);
-        ginseng.addActionListener(this.cbc);
-
-        secondPanel.add(jade);
-        secondPanel.add(silk);
-        secondPanel.add(coco);
-        secondPanel.add(ginseng);
-
-
+        }
         return secondPanel;
     }
 
