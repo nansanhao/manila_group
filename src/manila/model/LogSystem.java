@@ -22,7 +22,7 @@ public class LogSystem extends PrintStream{
     }
 
     /**
-     * 在这里重截,所有的打印方法都要调用的方法
+     * 在这里重载,所有的打印方法都要调用的方法
      */
     public void write(byte buf[], int off, int len) {
 
