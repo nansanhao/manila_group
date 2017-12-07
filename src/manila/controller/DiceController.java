@@ -28,14 +28,16 @@ public class DiceController implements ActionListener {
 				if(b.getBoatId()!=-1)
 				b.move(this.game.rollDice());
 			}
+
 			this.game.getGameV().getPlayground().repaint();
 			
 			// prepare the next round
 			this.game.setCurrent_round(this.game.getCurrent_round()+1);
 			this.game.setChoosing(true);
 
-			if(this.game.getCurrent_round()==Game.ROUND_NUMBER-1){//TODO测试用
-				this.game.getBoatByID(1).setPos_in_the_sea(13);
+			if(this.game.getCurrent_round()==Game.ROUND_NUMBER){
+				this.game.boatLand();
+				this.game.getGameV().getPlayground().repaint();
 			}
 
 			if(this.game.getCurrent_round()!=1&&this.game.isRobbed()&&this.game.getPirate().getFirstId()!=-1){
@@ -47,13 +49,8 @@ public class DiceController implements ActionListener {
 			}
 
 			else if(this.game.getCurrent_round() == Game.ROUND_NUMBER&&!(this.game.isRobbed()&&this.game.getPirate().getFirstId()!=-1)){
-				// game is over
-				this.game.setVoyageIsOver(true);
-				this.game.setChoosing(false);
-				this.game.boatLand();
-				this.game.getGameV().getPlayground().repaint();
-				this.game.calculateProfits();
-				this.game.showWinner();
+				// voyage is over
+				this.game.endVoyage();
 			}
 
 		}

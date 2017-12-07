@@ -30,9 +30,19 @@ public class Pirate extends Area{
      * 船长决定船去哪
      */
     public void playerGetProfit(Game game) {
-        //TODO：结算劫船之后：何剑冲 需在Game中加一个获取哪艘船被劫的方法
-//        Boat theRobbedBoat=game.getRobbedBoat();
-//        game.getPlayerByID(this.pos_list[0].getSailorID()).receiveProfit(theRobbedBoat.getCargo_value());
+        if(this.getAvailPosIndex()!=0){//不为空
+            int profit=0;
+            for(Boat b:game.getBoats()){
+                if(b.getPos_in_the_sea()==Game.SEA_LENGTH)
+                    profit+=b.getCargo_value();
+            }
+            Player[] players=game.getPlayers();
+            for(Position pos : this.getPos_list()){
+                if(pos.getSailorID() != -1)//-1是空位
+                    players[pos.getSailorID()].receiveProfit(profit/getFilledPosNum());
+            }
+        }
+
     }
 
 
@@ -42,6 +52,7 @@ public class Pirate extends Area{
     public void updateCaptiain(){
         this.pos_list[0].setSailorID(this.pos_list[1].getSailorID());
         this.pos_list[1].setSailorID(-1);
+        this.current_pos=0;
     }
 
 

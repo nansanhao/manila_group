@@ -365,6 +365,7 @@ public class Game {
 		this.shipYard.playerGetProfit(this);
 		this.harbour.playerGetProfit(this);
 		this.insurance.playerGetProfit(this);
+		this.pirate.playerGetProfit(this);
 
 		
 		for(Player p : this.players)
@@ -542,4 +543,22 @@ public class Game {
 		gameV.updatePlayersView(current_pid, true);
 		gameV.getPlayground().repaint();
 	}
+
+	public Boat getFirstRobbedBoat() {
+		for (Boat b : this.boats) {
+			if (b.getPos_in_the_sea() == SEA_LENGTH && b.getHarbourID() == -1 && b.getShipYardID() == -1) {
+				return b;
+			}
+		}
+		return null;
+	}
+
+	public void endVoyage(){
+		setVoyageIsOver(true);
+		setChoosing(false);
+		calculateProfits();
+		gameV.getPlayersView().repaint();
+		showWinner();
+	}
+
 }

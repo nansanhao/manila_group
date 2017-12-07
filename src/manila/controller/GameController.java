@@ -196,7 +196,7 @@ public class GameController implements MouseListener {
 		return -1;
 	}
 
-	private void AvigatorMoveBoat(int x, int y) {
+	private void avigatorMoveBoat(int x, int y) {
 		int num=cilckOnWhichSea(x,y);
 		if(num!=-1&&moveIsRight(num)){
 			this.game.getBoatByID(this.game.getChoosingBoatId()).setPos_in_the_sea(num);
@@ -256,7 +256,7 @@ public class GameController implements MouseListener {
 		}
 	}
 
-	private void PirateRobBoat(int x, int y) {
+	private void pirateRobBoat(int x, int y) {
 		int num=-1,boat_id=-1;
 		for(Boat b:this.game.getBoats()){
 			if(b.getPos_in_the_sea()==13) {
@@ -290,7 +290,47 @@ public class GameController implements MouseListener {
 		return -1;
 	}
 
+	private void pirateReturnBoat(int x, int y) {
+		int toWhere = ReturnToWhere(x, y); //1为港口 2为修船厂
+		Boat b = this.game.getFirstRobbedBoat();
+		if (toWhere == 1 && this.game.getHarbour().getAvailBoatPosIndex() != -1) {
+			int i = this.game.getHarbour().getAvailBoatPosIndex();
+			b.setHarbourID(i);
+			this.game.getHarbour().boatPositions[i].setHaveBoat(true);
+			b.setChoosen(false);
+			if(this.game.getFirstRobbedBoat()!=null){
+				this.game.getFirstRobbedBoat().setChoosen(true);
+			}
+			else{
+				this.game.setReturning(false);
+			}
+			this.game.getGameV().getPlayground().repaint();
 
+		} else if (toWhere == 2 && this.game.getShipYard().getAvailBoatPosIndex() != -1) {
+			int i = this.game.getShipYard().getAvailBoatPosIndex();
+			b.setShipYardID(i);
+			this.game.getShipYard().boatPositions[i].setHaveBoat(true);
+			b.setChoosen(false);
+			if(this.game.getFirstRobbedBoat()!=null){
+				this.game.getFirstRobbedBoat().setChoosen(true);
+			}
+			else{
+				this.game.setReturning(false);
+				this.game.endVoyage();
+			}
+			this.game.getGameV().getPlayground().repaint();
+		}
+	}
+
+	private int ReturnToWhere(int x,int y){ // 把船归还到那
+		if(x > HarbourView.ABSOLUTE_X && x < HarbourView.ABSOLUTE_X+ HarbourView.ABSOLUTE_W
+				&& y > HarbourView.ABSOLUTE_Y && y< HarbourView.ABSOLUTE_Y+HarbourView.ABSOLUTE_H)
+			return 1;
+		else if(x > ShipYardView.ABSOLUTE_X && x < ShipYardView.ABSOLUTE_X+ ShipYardView.ABSOLUTE_W
+				&& y > ShipYardView.ABSOLUTE_Y && y< ShipYardView.ABSOLUTE_Y+ShipYardView.ABSOLUTE_H)
+			return 2;
+		return -1;
+	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
@@ -315,10 +355,13 @@ public class GameController implements MouseListener {
 			chooseBoat(x,y);
 		}
 		else if(this.game.isMovingBoat()){ //移船
-			AvigatorMoveBoat(x,y);
+			avigatorMoveBoat(x,y);
 		}
 		else if(this.game.isRobbing()) { //上船
-			PirateRobBoat(x,y);
+			pirateRobBoat(x,y);
+		}
+		else if(this.game.isReturning()){
+			pirateReturnBoat(x,y);
 		}
 
 	}
