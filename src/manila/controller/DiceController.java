@@ -22,7 +22,7 @@ public class DiceController implements ActionListener {
 		// TODO Auto-generated method stub
 		// roll the dice to move the boats
 		if(!this.game.isVoyageIsOver() && !this.game.isChoosing()&&this.game.isGameIsStart()
-				&&!this.game.isChoosingBoat()&&!this.game.isMovingBoat()
+				&&!this.game.isChoosingBoat()&&!this.game.isMovingBoat()&&!this.game.isRobbing()&&!this.game.isReturning()
 				){
 			for(Boat b : this.game.getBoats()){
 				if(b.getBoatId()!=-1)
@@ -34,16 +34,19 @@ public class DiceController implements ActionListener {
 			this.game.setCurrent_round(this.game.getCurrent_round()+1);
 			this.game.setChoosing(true);
 
-			if(this.game.getCurrent_round()==Game.ROUND_NUMBER-1&&this.game.getAvigator().getFirstId()!=-1){
-				this.game.setChoosing(false);
-				this.game.setChoosingBoat(true);
-				this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(),false);
-				this.game.setCurrent_pid(this.game.getAvigator().getFirstId());
-				this.game.getGameV().updatePlayersView(this.game.getAvigator().getFirstId(),true);
-				this.game.getAvigator().switchPos_id();
+			if(this.game.getCurrent_round()==Game.ROUND_NUMBER-1){//TODO测试用
+				this.game.getBoatByID(1).setPos_in_the_sea(13);
 			}
-			
-			if(this.game.getCurrent_round() == Game.ROUND_NUMBER){
+
+			if(this.game.getCurrent_round()!=1&&this.game.isRobbed()&&this.game.getPirate().getFirstId()!=-1){
+				this.game.switchToPirate();
+			}
+
+			else if(this.game.getCurrent_round()==Game.ROUND_NUMBER-1&&this.game.getAvigator().getFirstId()!=-1){
+				this.game.switchToAvigator();
+			}
+
+			else if(this.game.getCurrent_round() == Game.ROUND_NUMBER&&!(this.game.isRobbed()&&this.game.getPirate().getFirstId()!=-1)){
 				// game is over
 				this.game.setVoyageIsOver(true);
 				this.game.setChoosing(false);

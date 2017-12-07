@@ -47,6 +47,10 @@ public class Game {
 	private boolean isChoosingBoat;
 	/**领航员是否在工作*/
 	private boolean isMovingBoat;
+	/**海盗是否在上船*/
+	private boolean isRobbing;
+	/**海盗是否在放船*/
+	private boolean isReturning;
 
 
 
@@ -220,6 +224,22 @@ public class Game {
 		isMovingBoat = movingBoat;
 	}
 
+	public boolean isRobbing() {
+		return isRobbing;
+	}
+
+	public void setRobbing(boolean robbing) {
+		isRobbing = robbing;
+	}
+
+	public boolean isReturning() {
+		return isReturning;
+	}
+
+	public void setReturning(boolean returning) {
+		isReturning = returning;
+	}
+
 	public Game(GameView gv){
 		this.gameV = gv;
 
@@ -272,6 +292,8 @@ public class Game {
 		this.voyageIsOver=true;
 		this.isSettingBoat =false;
 		this.isChoosingBoat=false;
+		this.isReturning=false;
+		this.isRobbing=false;
 		this.choosingBoatId =-1;
 
 		/**玩家初始化*/
@@ -443,5 +465,81 @@ public class Game {
 				}
 			}
 		}
+	}
+
+	public boolean isRobbed(){
+		for(Boat b:this.boats){
+			if(b.getPos_in_the_sea()==13)
+				return true;
+		}
+		return false;
+	}
+
+	public void showBoats() {
+		if (current_round == 2) {
+			for(Boat b:boats){
+				if(b.getPos_in_the_sea()==13) {
+					b.setChoosen(true);
+				}
+			}
+		}
+		else if(current_round==ROUND_NUMBER){
+			for(Boat b:boats){
+				if(b.getPos_in_the_sea()==13) {
+					b.setChoosen(true);
+					break;
+				}
+			}
+		}
+
+		this.gameV.getPlayground().repaint();
+	}
+
+	public void switchToAvigator(){
+		choosing=false;
+		isChoosingBoat=true;
+		gameV.updatePlayersView(current_pid,false);
+		current_pid=(avigator.getFirstId());
+		gameV.updatePlayersView(avigator.getFirstId(),true);
+		avigator.switchPos_id();
+	}
+
+	public void switchToPirate(){
+
+		choosing=false;
+		if(current_round==2)
+			isRobbing=true;
+		else if(current_round==ROUND_NUMBER)
+			isReturning=true;
+		gameV.updatePlayersView(current_pid,false);
+		current_pid=(pirate.getFirstId());
+		gameV.updatePlayersView(pirate.getFirstId(),true);
+		pirate.switchPos_id();
+		showBoats();
+	}
+
+	public void nextPirate(boolean isPass) {
+		pirate.switchPos_id();
+		gameV.updatePlayersView(current_pid,false);
+		if(pirate.getCurrent_pos()==-1){
+			for(Boat b:boats)
+				b.setChoosen(false);
+			isRobbing=false;
+			if(avigator.getFirstId()!=-1){
+				switchToAvigator();
+			}
+			else{
+				current_pid=boss_pid;
+				choosing=true;
+			}
+		}
+		else{
+			int pos=pirate.getCurrent_pos();
+			current_pid=pirate.pos_list[pos].getSailorID();
+			if(!isPass)
+				pirate.updateCaptiain();
+		}
+		gameV.updatePlayersView(current_pid, true);
+		gameV.getPlayground().repaint();
 	}
 }

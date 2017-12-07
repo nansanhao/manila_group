@@ -4,6 +4,16 @@ package manila.model;
  * 海盗类，里面有两个位置，第一个是海盗老大，第二个是海盗小弟
  */
 public class Pirate extends Area{
+    /**当前活动的位子*/
+    private int current_pos;
+
+    public int getCurrent_pos() {
+        return current_pos;
+    }
+
+    public void setCurrent_pos(int current_pos) {
+        this.current_pos = current_pos;
+    }
 
     public Pirate( ) {
         int[] prices = {5,5};
@@ -12,6 +22,7 @@ public class Pirate extends Area{
             aPos_list[i] = new Position(prices[i]);
         }
         this.pos_list=aPos_list;
+        this.current_pos=-1;
     }
     @Override
     /**
@@ -25,30 +36,14 @@ public class Pirate extends Area{
     }
 
 
-
-    //下面的方法有待商榷....
-    /**
-     * 抢劫船，船长船员选择上船
-     * @param boats 从GAME获取当前在海上的船数组 遍历是否有位置
-     */
-    public void getOnBoat(Boat[] boats){
-        //TODO
-    }
-
     /**
      * 一个人上船后，更新海盗船长
      */
     public void updateCaptiain(){
-        //TODO
+        this.pos_list[0].setSailorID(this.pos_list[1].getSailorID());
+        this.pos_list[1].setSailorID(-1);
     }
 
-    /**
-     * 船长决定让船是否进港口 若是让船再move1格 且黑市货物升价
-     * @param choice 从controller获得 1进港口 0进船厂
-     */
-    public void moveBoatTo(int choice){
-
-    }
 
     public int getFirstId(){
         for(int i=0; i<this.pos_list.length; i++){
@@ -58,12 +53,21 @@ public class Pirate extends Area{
         return -1;
     }
 
-    public int getNextId(Game game){
-        int current_id=game.getCurrent_pid();
-        if(current_id==pos_list[0].getSailorID())
-            return pos_list[1].getSailorID();
-        else {
-            return -1;
+    public void switchPos_id(){
+        if(this.current_pos==-1)
+        {
+            for(int i=0; i<this.pos_list.length; i++){
+                if(this.pos_list[i].getSailorID() != -1) {
+                    this.current_pos=i;
+                    break;
+                }
+            }
+        }
+        else if(this.current_pos==0&&pos_list[1].getSailorID()!=-1){
+            this.current_pos=1;
+        }
+        else{
+            this.current_pos=-1;
         }
     }
 }

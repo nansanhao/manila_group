@@ -28,7 +28,7 @@ public class GameController implements MouseListener {
 		this.steps = steps;
 	}
 
-	public void clickedOnArea(Area a, int x, int y){
+	private void clickedOnArea(Area a, int x, int y){
 		if(isCursorInside(a,x,y)&&a.getAvailPosIndex()!=-1){
 			Player p = this.game.getCurrentPlayer();
 			p.payPos(a.getAvailPosPrice());
@@ -50,7 +50,7 @@ public class GameController implements MouseListener {
 		}
 	}
 
-	public void clickedOnPos(Area a, int x, int y){
+	private void clickedOnPos(Area a, int x, int y){
 		int numOfPos=clickOnWhichPos(a,x,y);
 			if(numOfPos!=-1&&a.pos_list[numOfPos].getSailorID()==-1){
 			Player p = this.game.getCurrentPlayer();
@@ -61,7 +61,6 @@ public class GameController implements MouseListener {
 			// modify the view
 			this.game.getGameV().getPlayground().repaint();
 			this.game.getGameV().updatePlayersView(p.getPid(), false);
-
 
 			if(this.game.getCurrent_pid() == this.game.getBoss_pid()-1
 					|| this.game.getCurrent_pid() == this.game.getPlayers().length+this.game.getBoss_pid()-1){
@@ -104,10 +103,20 @@ public class GameController implements MouseListener {
 					return  i;
 			}
 		}
+
+		else if(a instanceof Pirate){
+			for (int i=0;i<a.pos_list.length;i++){
+				if(x > PirateAreaView.ABSOLUTE_X+PirateAreaView.POS_START_X+i*(PirateAreaView.POS_W+PirateAreaView.POS_INTERVAL)
+						&& x < PirateAreaView.ABSOLUTE_X+PirateAreaView.POS_START_X+PirateAreaView.POS_W+i*(PirateAreaView.POS_W+PirateAreaView.POS_INTERVAL)
+						&& y > PirateAreaView.ABSOLUTE_Y+PirateAreaView.POS_START_Y
+						&& y < PirateAreaView.ABSOLUTE_Y+PirateAreaView.POS_START_Y+PirateAreaView.POS_H)
+					return  i;
+			}
+		}
 		return -1;
 	}
 
-	public boolean isCursorInside(Area a,int x, int y){
+	private boolean isCursorInside(Area a,int x, int y){
 
 		if(a instanceof Boat){
 			Boat aBoat=(Boat) a;
@@ -246,6 +255,43 @@ public class GameController implements MouseListener {
 			}
 		}
 	}
+
+	private void PirateRobBoat(int x, int y) {
+		int num=-1,boat_id=-1;
+		for(Boat b:this.game.getBoats()){
+			if(b.getPos_in_the_sea()==13) {
+				num = clickOnWhichBoatPos(b.getBoatId(), x, y);
+				boat_id=b.getBoatId();
+			}
+		}
+		if(isCursorInside(this.game.getPirate(),x,y)){
+			this.game.nextPirate(true);
+		}
+		else if(num!=-1&&this.game.getBoatByID(boat_id).pos_list[num].getSailorID()!=this.game.getCurrent_pid()){
+			this.game.getBoatByID(boat_id).pos_list[num].setSailorID(this.game.getCurrent_pid());
+			this.game.getPirate().pos_list[this.game.getPirate().getCurrent_pos()].setSailorID(-1);
+			this.game.nextPirate(false);
+		}
+	}
+
+	private int clickOnWhichBoatPos(int boat_id ,int x, int y) {
+		Boat boat=this.game.getBoatByID(boat_id);
+		int boat_x=PlaygroundView.BOAT_START_X+boat.getPos_in_the_sea()*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL);
+		int boat_y=PlaygroundView.BOAT_START_Y+boat_id*(PlaygroundView.BOAT_DISTANCE+PlaygroundView.BOAT_H);
+		for (int i=0;i<boat.pos_list.length;i++){
+			if(x > boat_x+PlaygroundView.POS_START_X-i*(PlaygroundView.POS_W+PlaygroundView.POS_INTERVAL)
+					&& x < boat_x+PlaygroundView.POS_START_X-i*(PlaygroundView.POS_W+PlaygroundView.POS_INTERVAL)+PlaygroundView.POS_W
+					&& y > boat_y+PlaygroundView.POS_START_Y
+					&& y < boat_y+PlaygroundView.POS_START_Y+PlaygroundView.POS_H
+					)
+				return  i;
+		}
+
+		return -1;
+	}
+
+
+
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -271,8 +317,12 @@ public class GameController implements MouseListener {
 		else if(this.game.isMovingBoat()){ //移船
 			AvigatorMoveBoat(x,y);
 		}
+		else if(this.game.isRobbing()) { //上船
+			PirateRobBoat(x,y);
+		}
 
 	}
+
 
 
 

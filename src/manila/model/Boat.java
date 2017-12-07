@@ -23,13 +23,6 @@ public class Boat extends Area{
 
 	/**船的号码第几艘船*/
 	private int boatId;
-	
-	/** 船（左上角）在图形界面上的x坐标 */
-	//private int posX;
-	/** 船（左上角）在图形界面上的y坐标 */
-	//private int posY;
-	/**是否被截获*/
-	boolean isRobbed;
 
 
 	/**
@@ -117,15 +110,6 @@ public class Boat extends Area{
 
 	}
 
-	/**
-	 * 船是否被海盗截获
-	 * @return
-	 */
-	public boolean isRobbed(){
-		// TODO: 2017/11/17 比较船当前位置与海的海盗位置(Game的静态变量：Game.SEA_LENGTH)：
-
-		return false;
-	}
 	@Override
 	public void playerGetProfit(Game game) {
 		Player[] players=game.getPlayers();

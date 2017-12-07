@@ -51,15 +51,15 @@ public class PlaygroundView extends JPanel {
 	public static final int BOAT_START_Y = SEA_START_Y+BOAT_DISTANCE;
 	
 	/** 小船上位置的宽度 */
-	private static final int POS_W = 25;
+	public static final int POS_W = 25;
 	/** 小船上位置的高度 */
-	private static final int POS_H = 60;
+	public static final int POS_H = 60;
 	/** 小船上最右位置左上角的x坐标 */
-	private static final int POS_START_X = BOAT_W-35-POS_W;
+	public static final int POS_START_X = BOAT_W-35-POS_W;
 	/** 小船上最右位置左上角的y坐标 */
-	private static final int POS_START_Y = 20;
+	public static final int POS_START_Y = 20;
 	/** 小船上位置间在X方向上的间隔 */
-	private static final int POS_INTERVAL = 10;
+	public static final int POS_INTERVAL = 10;
 	
 	private Game game;
 
