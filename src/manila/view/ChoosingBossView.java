@@ -25,8 +25,6 @@ public class ChoosingBossView extends JPanel {
     private CardLayout cardLayout;
 
 
-    /**日志板*/
-    private JPanel consolePanel;
 
     /**第三个面板中的每一格*/
     private ChoiceBlock[] thirdPanel_panels;
@@ -89,28 +87,8 @@ public class ChoosingBossView extends JPanel {
         this.bossLabel = bossLabel;
     }
 
-    public JPanel getFirstPanel() {
-        return firstPanel;
-    }
-
-    public void setFirstPanel(JPanel firstPanel) {
-        this.firstPanel = firstPanel;
-    }
-
     public CardLayout getCardLayout() {
         return cardLayout;
-    }
-
-    public JPanel getSecondPnael() {
-        return secondPnael;
-    }
-
-    public JPanel getConsolePanel() {
-        return consolePanel;
-    }
-
-    public void setConsolePanel(JPanel consolePanel) {
-        this.consolePanel = consolePanel;
     }
 
     public ChoosingBossController getCbc() {
@@ -133,11 +111,10 @@ public class ChoosingBossView extends JPanel {
         this.firstPanel=makeFirstPanel();
         this.secondPnael=makeSecondPanel();
         this.thirdPanel=makeThirdPanel();
-        this.consolePanel=makeConsolePanel();
         this.add(this.firstPanel);
         this.add(this.secondPnael);
         this.add(this.thirdPanel);
-        this.add(this.consolePanel);
+        this.add(new JPanel());
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.setVisible(true);
@@ -245,11 +222,6 @@ public class ChoosingBossView extends JPanel {
 
     }
 
-
-    private JPanel makeConsolePanel(){
-        JPanel cPanel = new JPanel();
-        return  cPanel;
-    }
 
 
     public void setThirdPanelActive(int i,boolean active){

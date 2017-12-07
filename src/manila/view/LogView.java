@@ -17,15 +17,15 @@ public class LogView extends JPanel {
         this.setPreferredSize(new Dimension(ABSOLUTE_W, ABSOLUTE_H));
         this.setBackground(Color.WHITE);
 
-        this.logText= new JTextArea("日志输出：\n",6,22);
+        this.logText= new JTextArea("日志输出：\n",8,25);
         this.logText.setBackground(Color.LIGHT_GRAY);
         this.logText.setEditable(false);
-        this.logText.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 17));
+        this.logText.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 15));
         this.logText.setLineWrap(true);        //激活自动换行功能
         this.logText.setWrapStyleWord(true);            // 激活断行不断字功能
 
         JTextArea textArea=new JTextArea("日志板");
-        textArea.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 20));
+        textArea.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 18));
         textArea.setEnabled(false);
         textArea.setDisabledTextColor(Color.black);
 
