@@ -36,7 +36,9 @@ public class DiceController implements ActionListener {
 			this.game.setChoosing(true);
 
 			if(this.game.getCurrent_round()==Game.ROUND_NUMBER){
+				this.game.getBoatByID(0).setPos_in_the_sea(13);
 				this.game.boatLand();
+
 				this.game.getGameV().getPlayground().repaint();
 			}
 

@@ -557,7 +557,6 @@ public class Game {
 		setVoyageIsOver(true);
 		setChoosing(false);
 		calculateProfits();
-		gameV.getPlayersView().repaint();
 		showWinner();
 	}
 

@@ -303,8 +303,9 @@ public class GameController implements MouseListener {
 			}
 			else{
 				this.game.setReturning(false);
+				this.game.endVoyage();
 			}
-			this.game.getGameV().getPlayground().repaint();
+			this.game.getGameV().repaint();
 
 		} else if (toWhere == 2 && this.game.getShipYard().getAvailBoatPosIndex() != -1) {
 			int i = this.game.getShipYard().getAvailBoatPosIndex();
@@ -318,7 +319,7 @@ public class GameController implements MouseListener {
 				this.game.setReturning(false);
 				this.game.endVoyage();
 			}
-			this.game.getGameV().getPlayground().repaint();
+			this.game.getGameV().repaint();
 		}
 	}
 
