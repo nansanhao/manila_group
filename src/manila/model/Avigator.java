@@ -8,6 +8,15 @@ import manila.view.PlaygroundView;
  */
 public class Avigator extends Area {
 
+    private int current_pos;
+
+    public int getCurrent_pos() {
+        return current_pos;
+    }
+
+    public void setCurrent_pos(int current_pos) {
+        this.current_pos = current_pos;
+    }
 
     public Avigator() {
         //TODO：需要为领航员初始化属性，如位置等，参照其父类：郑抗:11.24完成
@@ -15,19 +24,9 @@ public class Avigator extends Area {
         pos_list[0] = new Position(2);
         pos_list[1] = new Position(5);
         this.pos_list = pos_list;
+        this.current_pos=-1;
     }
 
-    /**
-     * 领航员可以移动船
-     *
-     * @param boat 将被移动的船
-     * @param step 移动的步数
-     */
-    public void moveBoat(Boat boat, int step) {
-        // TODO: 2017/11/19 郑抗:11.24完成
-        boat.setPos_in_the_sea(boat.getPos_in_the_sea() + step);
-
-    }
 
     @Override
     public void playerGetProfit(Game game) {
@@ -39,6 +38,25 @@ public class Avigator extends Area {
                 return pos_list[i].getSailorID();
         }
         return -1;
+    }
+
+
+    public void switchPos_id(){
+        if(this.current_pos==-1)
+        {
+            for(int i=0; i<this.pos_list.length; i++){
+                if(this.pos_list[i].getSailorID() != -1) {
+                    this.current_pos=i;
+                    break;
+                }
+            }
+        }
+        else if(this.current_pos==0&&pos_list[1].getSailorID()!=-1){
+            this.current_pos=1;
+        }
+        else{
+            this.current_pos=-1;
+        }
     }
 }
 

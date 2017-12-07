@@ -194,47 +194,35 @@ public class GameController implements MouseListener {
 			this.game.getBoatByID(this.game.getChoosingBoatId()).setChoosen(false);
 			this.game.getGameV().getPlayground().repaint();
 			this.game.setMovingBoat(false);
-			if(this.game.getCurrent_pid()==this.game.getAvigator().pos_list[0].getSailorID()){ //如果当前是小领航员
-				int p_id=this.game.getAvigator().pos_list[1].getSailorID();
-				this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(),false);
-				this.game.setChoosingBoatId(-1);
-				if(p_id!=-1) {//判断下一个有没有人
-					this.game.setCurrent_pid(p_id);
-					this.game.setChoosingBoat(true);
-				}
-				else {//下一个没人 TODO
-					this.game.setCurrent_pid(this.game.getBoss_pid());
-					this.game.setChoosing(true);
-				}
-				this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(),true);
-			}
-			else if(this.game.getCurrent_pid()==this.game.getAvigator().pos_list[1].getSailorID()){ //大领航员
-				if(move_steps<2){
+			this.game.setChoosingBoatId(-1);
+			if(this.game.getAvigator().getCurrent_pos()==1&&move_steps<2)
 				this.game.setChoosingBoat(true);
-				}
-				else  {
-					this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(), false);
+			else{
+				this.game.getAvigator().switchPos_id();
+				this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(),false);
+				if(this.game.getAvigator().getCurrent_pos()==-1){
 					this.game.setCurrent_pid(this.game.getBoss_pid());
-					this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(), true);
-					this.game.setChoosingBoatId(-1);
 					this.game.setChoosing(true);
-					this.game.setChoosingBoat(false);
 					move_steps = 0;
 				}
+				else{
+					int pos=this.game.getAvigator().getCurrent_pos();
+					this.game.setCurrent_pid(this.game.getAvigator().pos_list[pos].getSailorID());
+					this.game.setChoosingBoat(true);
+				}
+				this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(), true);
 			}
 		}
 	}
 
 	private boolean moveIsRight(int num) {
-		int current_pid=this.game.getCurrent_pid();
 		Avigator avigator=this.game.getAvigator();
-		Position[] positions=avigator.pos_list;
 		Boat boat=this.game.getBoatByID(this.game.getChoosingBoatId());
 		int distance = Math.abs(num-boat.getPos_in_the_sea());
-		if(current_pid==positions[0].getSailorID()){
+		if(avigator.getCurrent_pos()==0){
 			return (distance==1)?true:false;
 		}
-		else if(current_pid==positions[1].getSailorID()){
+		else if(avigator.getCurrent_pos()==1){
 			if(move_steps==0&&distance>0&&distance<=2) {
 				move_steps+=distance;
 				return true;
@@ -254,7 +242,7 @@ public class GameController implements MouseListener {
 				this.game.setChoosingBoatId(b.getBoatId());
 				this.game.getGameV().getPlayground().repaint();
 				this.game.setMovingBoat(true);
-				this.game.setChoosingBoat(false);//TODO
+				this.game.setChoosingBoat(false);
 			}
 		}
 	}

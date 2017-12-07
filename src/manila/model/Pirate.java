@@ -49,4 +49,21 @@ public class Pirate extends Area{
     public void moveBoatTo(int choice){
 
     }
+
+    public int getFirstId(){
+        for(int i=0; i<this.pos_list.length; i++){
+            if(this.pos_list[i].getSailorID() != -1)
+                return pos_list[i].getSailorID();
+        }
+        return -1;
+    }
+
+    public int getNextId(Game game){
+        int current_id=game.getCurrent_pid();
+        if(current_id==pos_list[0].getSailorID())
+            return pos_list[1].getSailorID();
+        else {
+            return -1;
+        }
+    }
 }

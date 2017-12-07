@@ -21,6 +21,8 @@ public class Player {
 	/** 持有的股票 */
 	private List<Shares> haveShares;
 
+
+
 	public String getName() {
 		return name;
 	}

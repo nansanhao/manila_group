@@ -40,7 +40,7 @@ public class DiceController implements ActionListener {
 				this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(),false);
 				this.game.setCurrent_pid(this.game.getAvigator().getFirstId());
 				this.game.getGameV().updatePlayersView(this.game.getAvigator().getFirstId(),true);
-
+				this.game.getAvigator().switchPos_id();
 			}
 			
 			if(this.game.getCurrent_round() == Game.ROUND_NUMBER){
