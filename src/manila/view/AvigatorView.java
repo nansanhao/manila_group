@@ -13,7 +13,6 @@ public class AvigatorView extends AreaView {
     /**区域位置的宽度*/
     public static final int ABSOLUTE_W=3*AreaView.POS_INTERVAL+2*AreaView.POS_W;
 
-
     public  AvigatorView(Game game){
         super(game);
     }

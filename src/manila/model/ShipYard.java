@@ -15,10 +15,6 @@ public class ShipYard extends Area{
         return boatPositions;
     }
 
-    public void setBoatPositions(BoatPosition[] boatPositions) {
-        this.boatPositions = boatPositions;
-    }
-
     public ShipYard(){
 
         // TODO: 2017/11/20 初始化修船厂：郑抗 11.23完成
@@ -37,6 +33,7 @@ public class ShipYard extends Area{
         this.boatPositions=boatPosition;
 
     }
+
     /**
      * 获得区域当前空着的位置的编号（进入区域时自动从较低的编号开始）
      * @return 当前编号最小的空位所对应的编号值
@@ -50,7 +47,6 @@ public class ShipYard extends Area{
         return -1;
     }
 
-
     @Override
     public void playerGetProfit(Game game) {
         // TODO: 2017/11/20 修船场结算 ：郑抗 11.23完成
@@ -58,9 +54,9 @@ public class ShipYard extends Area{
         for(int i=0;i<this.boatPositions.length;i++){
             if(boatPositions[i].isHaveBoat()&&this.pos_list[i].getSailorID()!=-1){
                 game.getPlayerByID(this.pos_list[i].getSailorID()).receiveProfit(boatPositions[i].getProfit());
+                System.out.println(game.getPlayerByID(this.pos_list[i].getSailorID()).getName()+"在船厂获得了"+boatPositions[i].getProfit()+"$");
             }
         }
     }
-
 
 }

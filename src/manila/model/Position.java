@@ -22,10 +22,6 @@ public class Position {
 		return price;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
 	public int getSailorID() {
 		return sailorID;
 	}
@@ -33,6 +29,5 @@ public class Position {
 	public void setSailorID(int sailorID) {
 		this.sailorID = sailorID;
 	}
-	
-	
+
 }

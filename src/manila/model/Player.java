@@ -21,28 +21,18 @@ public class Player {
 	/** 持有的股票 */
 	private List<Shares> haveShares;
 
+
+
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public int getPid() {
 		return pid;
 	}
 
-	public void setPid(int pid) {
-		this.pid = pid;
-	}
-
 	public int getAccount_balance() {
 		return account_balance;
-	}
-
-	public void setAccount_balance(int account_balance) {
-		this.account_balance = account_balance;
 	}
 
 	public int getWorker_nb() {
@@ -57,17 +47,10 @@ public class Player {
 		return c;
 	}
 
-	public void setC(Color c) {
-		this.c = c;
-	}
-
 	public List<Shares> getHaveShares() {
 		return haveShares;
 	}
 
-	public void setHaveShares(List<Shares> haveShares) {
-		this.haveShares = haveShares;
-	}
 	/**
 	 * 玩家构造函数
 	 * @param name 玩家姓名
@@ -92,8 +75,8 @@ public class Player {
 	}
 
 	/**
-	 * 上船为位置花钱
-	 * @param amount
+	 * 为放置同伙消费，让小于0则抵押股票 若没有股票抵押则最低为0
+	 * @param amount 消费金额
 	 */
 	public void payPos(int amount){
 		//TODO：加一个判断跟处理，破产后不再花钱：范贤明 11.23完成
@@ -135,7 +118,7 @@ public class Player {
 
 	/**
 	 * 返回还有多少张没被抵押的股票
-	 * @return
+	 * @return 没被抵押股票数
 	 */
 	public int getNumOfUnPledgeShares(){
 		int i=0;
@@ -147,6 +130,10 @@ public class Player {
 		return i;
 	}
 
+	/**
+	 * 添加股票到持有股票数组中
+	 * @param shares
+	 */
 	public void addShares(Shares shares) {
 		this.haveShares.add(shares);
 	}
@@ -166,7 +153,7 @@ public class Player {
 
 	/**
 	 * 用量获得各股票种类的数量
-	 * @return 0是玉器 1是丝绸 2可可 3人参
+	 * @return  每个元素分别为对应股票的持有数 int[0]是玉器 int[1]是丝绸 int[2]可可 int[3]人参
 	 */
 	public int[] getNumOfShares(){
 		int num[] = {0,0,0,0};
@@ -185,6 +172,23 @@ public class Player {
 		return num;
 	}
 
-
+	/**
+	 * 获得游戏结束时玩家总持有金额 需加上股票价格和减少赎回的量
+	 * @return
+	 */
+	public int getFinalMoney(){
+		int money=0;
+		money+=account_balance;
+		int num_pledgeShares=0;
+		for(Shares s:haveShares){
+			money+=s.getPrice();
+			if(s.getStatus_pledge()==2)
+				num_pledgeShares++;
+		}
+		money-=(12*num_pledgeShares);
+		if(money<0)
+			money=0;
+		return  money;
+	}
 
 }
