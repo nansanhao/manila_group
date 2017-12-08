@@ -8,9 +8,9 @@ import java.awt.geom.Rectangle2D;
 
 public class AvigatorView extends AreaView {
 
-
+    /**区域位置的X坐标*/
     public static final int ABSOLUTE_X=7*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.SEA_START_X-POS_W-POS_INTERVAL;
-
+    /**区域位置的宽度*/
     public static final int ABSOLUTE_W=3*AreaView.POS_INTERVAL+2*AreaView.POS_W;
 
 

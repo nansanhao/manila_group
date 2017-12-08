@@ -5,7 +5,11 @@ import manila.model.Boat;
 import javax.swing.*;
 import java.awt.*;
 
-public class ChoiceBlock extends JPanel {
+/**
+ * 用于选择
+ */
+
+public class ChoiceBlockView extends JPanel {
     private JButton button;
     private Boat boat;
     private ChoosingBossView choosingBossView;
@@ -26,7 +30,7 @@ public class ChoiceBlock extends JPanel {
             this.boat = boat;
         }
 
-    public ChoiceBlock(int command,ChoosingBossView cbc,Boat boat) {
+    public ChoiceBlockView(int command, ChoosingBossView cbc, Boat boat) {
         this.boat = boat;
         this.choosingBossView=cbc;
         this.setLayout(null);

@@ -2,7 +2,6 @@ package manila.view;
 
 import java.awt.*;
 
-import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import javax.swing.*;
 
 import manila.controller.ChoosingBossController;
@@ -29,7 +28,7 @@ public class ChoosingBossView extends JPanel {
     private JPanel consolePanel;
 
     /**第三个面板中的每一格*/
-    private ChoiceBlock[] thirdPanel_panels;
+    private ChoiceBlockView[] thirdPanel_panels;
     /**第三面板*/
     private JPanel thirdPanel;
     /**第二个面板*/
@@ -117,13 +116,13 @@ public class ChoosingBossView extends JPanel {
         return cbc;
     }
 
-    public ChoiceBlock[] getThirdPanel_panels() {
+    public ChoiceBlockView[] getThirdPanel_panels() {
         return thirdPanel_panels;
     }
 
     public ChoosingBossView(Game g){
         this.game = g;
-        this.thirdPanel_panels =new ChoiceBlock[game.getBoats().length];
+        this.thirdPanel_panels =new ChoiceBlockView[game.getBoats().length];
         this.cbc = new ChoosingBossController(this);
         this.setPreferredSize(new Dimension(CHOOSING_VIEW_W, CHOOSING_VIEW_H));
         this.cardLayout=new CardLayout();
@@ -234,7 +233,7 @@ public class ChoosingBossView extends JPanel {
         thirdPanel.setLayout(new GridLayout(1,boats.length));
 
         for(int i=0;i<boats.length;i++){
-            ChoiceBlock panel=new ChoiceBlock(i,this,boats[i]);
+            ChoiceBlockView panel=new ChoiceBlockView(i,this,boats[i]);
             //加到主panel中
             thirdPanel_panels[i]=panel;
              thirdPanel.add(panel);
