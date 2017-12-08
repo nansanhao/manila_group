@@ -40,24 +40,12 @@ public class PlayerView extends JPanel {
 		return sharesV;
 	}
 
-	public void setSharesV(JLabel sharesV) {
-		this.sharesV = sharesV;
-	}
-
 	public JLabel getScoreV() {
 		return scoreV;
 	}
 
-	public void setScoreV(JLabel scoreV) {
-		this.scoreV = scoreV;
-	}
-
 	public JLabel getWorker_nbV() {
 		return worker_nbV;
-	}
-
-	public void setWorker_nbV(JLabel worker_nbV) {
-		this.worker_nbV = worker_nbV;
 	}
 
 	public Player getPlayer() {
@@ -66,10 +54,6 @@ public class PlayerView extends JPanel {
 
 	public void setPlayer(Player player) {
 		this.player = player;
-	}
-
-	public boolean isActive() {
-		return active;
 	}
 	/**
 	 * 玩家视图构造函数
@@ -109,7 +93,7 @@ public class PlayerView extends JPanel {
 	}
 
 	/**
-	 * 将view中的玩家设置为活跃状态或者不活跃状态
+	 * 将当前作用玩家的信息栏点亮，将view中的玩家设置为活跃状态或者不活跃状态
 	 * @param active 活跃状态
 	 */
 	public void setActive(boolean active) {
@@ -122,12 +106,4 @@ public class PlayerView extends JPanel {
 		}
 	}
 
-	public boolean isShowComplete() {
-		return showComplete;
-	}
-
-	public void setShowComplete(boolean showComplete) {
-		this.showComplete = showComplete;
-	}
-	
 }

@@ -12,7 +12,6 @@ import java.awt.geom.Rectangle2D;
  * 海盗区域View
  */
 public class PirateAreaView extends AreaView {
-
     /**区域位置X坐标*/
     public static final int ABSOLUTE_X=13*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.SEA_START_X-POS_W-POS_INTERVAL;
     /**区域位置宽度*/

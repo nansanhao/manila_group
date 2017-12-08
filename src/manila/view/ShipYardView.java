@@ -12,7 +12,6 @@ public class ShipYardView extends YardView {
     /**船厂里船位置的起始Y*/
     public static final int SHIP_POS_START_Y=ABSOLUTE_Y+POS_START_Y;
 
-
     public ShipYardView(Game game) {
         super(game);
     }

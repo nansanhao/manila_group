@@ -11,22 +11,21 @@ import manila.model.*;
  * Manila 游戏选举船老大的窗口。
  */
 public class ChoosingBossView extends JPanel {
+    /**关联的game和cbc类*/
     private Game game;
-    private ChoosingBossController cbc;
 
-    /**view的宽度*/
+    private ChoosingBossController cbc;
+    /**选船长栏的宽度*/
     public static final int CHOOSING_VIEW_W=350;
-    /**view的高度*/
+    /**选船长栏的高度*/
     public static final int CHOOSING_VIEW_H=200;
 
-    /**卡片布局*/
+    /**该View中的JPANEL的布局类*/
     private CardLayout cardLayout;
 
-    /**日志板*/
-    private JPanel consolePanel;
-
-    /**第三个面板中的每一格*/
+    /**第三个面板中的每一格JPANEL 用于选择船只*/
     private ChoiceBlockView[] thirdPanel_panels;
+
     /**第三面板*/
     private JPanel thirdPanel;
     /**第二个面板*/
@@ -66,48 +65,12 @@ public class ChoosingBossView extends JPanel {
         return amountT;
     }
 
-    public void setAmountT(JTextField amountT) {
-        this.amountT = amountT;
-    }
-
-    public PlayerView[] getPvList() {
-        return pvList;
-    }
-
-    public void setPvList(PlayerView[] pvList) {
-        this.pvList = pvList;
-    }
-
     public JLabel getBossLabel() {
         return bossLabel;
     }
 
-    public void setBossLabel(JLabel bossLabel) {
-        this.bossLabel = bossLabel;
-    }
-
-    public JPanel getFirstPanel() {
-        return firstPanel;
-    }
-
-    public void setFirstPanel(JPanel firstPanel) {
-        this.firstPanel = firstPanel;
-    }
-
     public CardLayout getCardLayout() {
         return cardLayout;
-    }
-
-    public JPanel getSecondPnael() {
-        return secondPnael;
-    }
-
-    public JPanel getConsolePanel() {
-        return consolePanel;
-    }
-
-    public void setConsolePanel(JPanel consolePanel) {
-        this.consolePanel = consolePanel;
     }
 
     public ChoosingBossController getCbc() {
@@ -130,18 +93,21 @@ public class ChoosingBossView extends JPanel {
         this.firstPanel=makeFirstPanel();
         this.secondPnael=makeSecondPanel();
         this.thirdPanel=makeThirdPanel();
-        this.consolePanel=makeConsolePanel();
         this.add(this.firstPanel);
         this.add(this.secondPnael);
         this.add(this.thirdPanel);
-        this.add(this.consolePanel);
+        this.add(new JPanel());
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.setVisible(true);
     }
 
 
-
+    /**
+     * 更新对应玩家的窗口 若要点亮则传入true
+     * @param pid 被选中玩家
+     * @param active 是否点亮
+     */
     public void updateBidView(int pid, boolean active){
         for(PlayerView pv : this.pvList){
             Player p = pv.getPlayer();
@@ -151,7 +117,10 @@ public class ChoosingBossView extends JPanel {
         }
     }
 
-
+    /**
+     * 制作卡片布局中的第一个页面即用金额竞选
+     * @return
+     */
     private JPanel makeSecondPanel() {
         JPanel secondPanel=new JPanel();
         Boat[] boats=this.game.getBoats();
@@ -169,6 +138,10 @@ public class ChoosingBossView extends JPanel {
         return secondPanel;
     }
 
+    /**
+     * 制作卡片布局中的第二个页面即购买股票
+     * @return
+     */
     private JPanel makeFirstPanel(){
 
         JPanel firstPanel=new JPanel();
@@ -225,6 +198,10 @@ public class ChoosingBossView extends JPanel {
         return  firstPanel;
     }
 
+    /**
+     * 制作卡片布局中的第三个页面即放置船的位置
+     * @return
+     */
     private JPanel makeThirdPanel(){
         JPanel thirdPanel=new JPanel();
         Boat[] boats=game.getBoats();
@@ -243,12 +220,11 @@ public class ChoosingBossView extends JPanel {
     }
 
 
-    private JPanel makeConsolePanel(){
-        JPanel cPanel = new JPanel();
-        return  cPanel;
-    }
-
-
+    /**
+     * 更新对应船是否被选中
+     * @param i 格子的id
+     * @param active  若选中则点亮传入 true
+     */
     public void setThirdPanelActive(int i,boolean active){
         if(active){
             thirdPanel_panels[i].setBorder(BorderFactory.createLineBorder(Color.ORANGE));
@@ -259,6 +235,10 @@ public class ChoosingBossView extends JPanel {
 
     }
 
+
+    /**
+     * 点击下一个航程时同样要将该panel进行初始化
+     */
     public void reset() {
         this.bossLabel.setText("xxxx");
         this.cbc.setBid_amount(0);
@@ -270,7 +250,5 @@ public class ChoosingBossView extends JPanel {
             setThirdPanelActive(i,false);
         }
     }
-
-
 }
 

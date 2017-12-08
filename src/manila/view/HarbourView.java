@@ -12,12 +12,15 @@ import java.awt.geom.Rectangle2D;
  */
 
 public class HarbourView extends YardView{
+    /**重写区域的Y坐标*/
     public static final int ABSOLUTE_Y=PlaygroundView.SEA_START_Y;
+    /**重写区域上船开始的坐标*/
     public static final int SHIP_POS_START_Y=ABSOLUTE_Y+POS_START_Y;
 
     public HarbourView(Game game) {
         super(game);
     }
+
     public void drawArea (Graphics2D g2){
         g2.setColor(Color.GRAY);
         g2.fill(new Rectangle2D.Double(0, 0, ABSOLUTE_W, ABSOLUTE_H));
