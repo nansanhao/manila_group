@@ -5,8 +5,14 @@ import manila.model.Boat;
 import javax.swing.*;
 import java.awt.*;
 
-public class ChoiceBlock extends JPanel {
-    /**选择的按钮*/
+
+
+public class ChoiceBlockView extends JPanel {
+    /**
+     * 该PENAL用于放置船只
+     */
+
+    /** 选择按钮*/
     private JButton button;
     /**对应被选中的船引用*/
     private Boat boat;
@@ -23,7 +29,8 @@ public class ChoiceBlock extends JPanel {
      * @param cbv   关联的cbv类
      * @param boat 船的引用
      */
-    public ChoiceBlock(int command,ChoosingBossView cbv,Boat boat) {
+
+    public ChoiceBlockView(int command, ChoosingBossView cbv, Boat boat) {
         this.boat = boat;
         this.choosingBossView=cbv;
         this.setLayout(null);

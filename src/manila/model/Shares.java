@@ -50,6 +50,10 @@ public class Shares {
         this.onwer_id=-1;
     }
 
+    /**
+     * 设置股票拥有者且两者关联
+     * @param owner
+     */
     public void setOwner(Player owner) {
         this.owner = owner;
         owner.addShares(this);
@@ -68,16 +72,6 @@ public class Shares {
             return true;
     }
 
-    /**
-     * 改变股票状态，如果是1改为2，是2则改为1
-     */
-    public void changeStatus_pledge(){
-        // TODO: 2017/11/17 改变股票状态：何剑冲 11.20完成
-        if(this.status_pledge==1)
-            this.status_pledge=2;
-        else if(this.status_pledge==2)
-            this.status_pledge=1;
-    }
 
 
 }

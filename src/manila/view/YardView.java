@@ -7,6 +7,9 @@ import manila.model.Position;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * 船停靠的区域，子类有海港和修理厂
+ */
 public class YardView extends AreaView {
 
     /**区域宽度*/
@@ -42,10 +45,9 @@ public class YardView extends AreaView {
     /**获利的格子的Y坐标相对于区域*/
     public static final int PROFIT_BLOCK_START_Y=POS_START_Y;
 
+
     /**船进入港口后的X坐标*/
     public static final int SHIP_POS_START_X=ABSOLUTE_X+PROFIT_BLOCK_START_X-INTERVAL-PlaygroundView.BOAT_W;
-
-
 
     public YardView(Game game) {
         super(game);

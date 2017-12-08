@@ -11,8 +11,6 @@ import java.awt.geom.Rectangle2D;
 
 public class BlackMarketView extends JPanel {
 
-
-
     /**第一格股票的X*/
     public static final int BLOCK_START_X=10;
     /**第一格股票的Y*/
