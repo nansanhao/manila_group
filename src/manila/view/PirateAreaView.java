@@ -12,22 +12,18 @@ import java.awt.geom.Rectangle2D;
  * 海盗区域View
  */
 public class PirateAreaView extends AreaView {
-
+    /**区域位置X坐标*/
     public static final int ABSOLUTE_X=13*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL)+PlaygroundView.SEA_START_X-POS_W-POS_INTERVAL;
-
+    /**区域位置宽度*/
     public static final int ABSOLUTE_W=3*AreaView.POS_INTERVAL+2*AreaView.POS_W;
-
-
-
 
     public PirateAreaView(Game game) {
         super(game);
-
     }
 
     public void drawArea(Graphics2D g2){
-        g2.setColor(Color.GRAY);
 
+        g2.setColor(Color.GRAY);
         g2.fill(new Rectangle2D.Double(0, 0, ABSOLUTE_W, ABSOLUTE_H));
 
         g2.setColor(Color.BLACK);
@@ -44,7 +40,6 @@ public class PirateAreaView extends AreaView {
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
-
         this.drawArea(g2);
     }
 }

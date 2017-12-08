@@ -10,14 +10,10 @@ import java.awt.geom.Rectangle2D;
  * 保险公司的区域View
  */
 public class InsuranceAreaView extends AreaView {
-
+    /**重写区域的XY坐标*/
     public static final int ABSOLUTE_X=PlaygroundView.SEA_START_X;
 
     public static final int ABSOLUTE_W=AreaView.POS_W+2*AreaView.POS_INTERVAL;
-
-
-
-
 
     public InsuranceAreaView(Game game) {
         super(game);
@@ -42,7 +38,7 @@ public class InsuranceAreaView extends AreaView {
         this.drawPosition(g2,positions);
 
     }
-
+    @Override
     public void drawPosition(Graphics2D g2,Position[] pos_list){
 
             if(pos_list[0].getSailorID() == -1){

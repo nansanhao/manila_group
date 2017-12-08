@@ -19,7 +19,6 @@ public class PlaygroundView extends JPanel {
 	private PirateAreaView pirateAreaView;
 	private InsuranceAreaView insuranceAreaView;
 	private ShipYardView shipYardView;
-
 	private AvigatorView avigatorView;
 	private HarbourView harbourView;
 
@@ -51,15 +50,15 @@ public class PlaygroundView extends JPanel {
 	public static final int BOAT_START_Y = SEA_START_Y+BOAT_DISTANCE;
 	
 	/** 小船上位置的宽度 */
-	private static final int POS_W = 25;
+	public static final int POS_W = 25;
 	/** 小船上位置的高度 */
-	private static final int POS_H = 60;
+	public static final int POS_H = 60;
 	/** 小船上最右位置左上角的x坐标 */
-	private static final int POS_START_X = BOAT_W-35-POS_W;
+	public static final int POS_START_X = BOAT_W-35-POS_W;
 	/** 小船上最右位置左上角的y坐标 */
-	private static final int POS_START_Y = 20;
+	public static final int POS_START_Y = 20;
 	/** 小船上位置间在X方向上的间隔 */
-	private static final int POS_INTERVAL = 10;
+	public static final int POS_INTERVAL = 10;
 	
 	private Game game;
 
@@ -74,7 +73,6 @@ public class PlaygroundView extends JPanel {
 		this.pirateAreaView=new PirateAreaView(this.game);
 		this.insuranceAreaView=new InsuranceAreaView(this.game);
 		this.shipYardView=new ShipYardView(this.game);
-
 		this.avigatorView=new AvigatorView(this.game);
 		this.harbourView=new HarbourView(this.game);
 
@@ -125,7 +123,7 @@ public class PlaygroundView extends JPanel {
 	}
 	
 	/**
-	 * 根据小船的信息在界面上画出一条小船以及船上的所有位置
+	 * 根据小船的信息在界面上画出一条小船以及船上的所有位置 若被选中则有外框
 	 * @param g2 图形类
 	 * @param b 一个小船对象
 	 */
@@ -166,7 +164,7 @@ public class PlaygroundView extends JPanel {
 	}
 	
 	/**
-	 * 画出所有的小船
+	 * 画出所有的小船 若在港口在按照港口坐标 船厂同理
 	 * @param g2 图形类
 	 */
 	public void drawBoats(Graphics2D g2){

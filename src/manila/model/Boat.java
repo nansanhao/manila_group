@@ -23,13 +23,6 @@ public class Boat extends Area{
 
 	/**船的号码第几艘船*/
 	private int boatId;
-	
-	/** 船（左上角）在图形界面上的x坐标 */
-	//private int posX;
-	/** 船（左上角）在图形界面上的y坐标 */
-	//private int posY;
-	/**是否被截获*/
-	boolean isRobbed;
 
 
 	/**
@@ -49,8 +42,6 @@ public class Boat extends Area{
 		this.isChoosen=false;
 
 	}
-
-
 
 	public int getHarbourID() {
 		return harbourID;
@@ -80,16 +71,8 @@ public class Boat extends Area{
 		return cargo_name;
 	}
 
-	public void setCargo_name(String cargo_name) {
-		this.cargo_name = cargo_name;
-	}
-
 	public int getCargo_value() {
 		return cargo_value;
-	}
-
-	public void setCargo_value(int cargo_value) {
-		this.cargo_value = cargo_value;
 	}
 
 	public int getPos_in_the_sea() {
@@ -114,32 +97,24 @@ public class Boat extends Area{
 	 */
 	public void move(int step){
 		this.pos_in_the_sea += step;
-
 	}
 
-	/**
-	 * 船是否被海盗截获
-	 * @return
-	 */
-	public boolean isRobbed(){
-		// TODO: 2017/11/17 比较船当前位置与海的海盗位置(Game的静态变量：Game.SEA_LENGTH)：
-
-		return false;
-	}
 	@Override
 	public void playerGetProfit(Game game) {
-		Player[] players=game.getPlayers();
+		Player[] players = game.getPlayers();
 		int money_to_share;
-		System.out.println("The boat "+this.getCargo_name()+" has arrived");
-		if(getAvailPosIndex()!=0){ //如果船不为空才能算钱
-			money_to_share = this.getCargo_value()/this.getFilledPosNum();
-			System.out.println("money_to_share: "+money_to_share);
-			for(Position pos : this.getPos_list()){
-				if(pos.getSailorID() != -1)//-1是空位
+		String s = new String("");
+		if (getAvailPosIndex() != 0) { //如果船不为空才能算钱
+			System.out.println(this.cargo_name + "船运送成功！");
+			money_to_share = this.getCargo_value() / this.getFilledPosNum();
+			for (Position pos : this.getPos_list()) {
+				if (pos.getSailorID() != -1) {//-1是空位
 					players[pos.getSailorID()].receiveProfit(money_to_share);
+					s += "玩家" + players[pos.getSailorID()].getName() + "获得" + money_to_share + "$\n";
+				}
 			}
+			System.out.println(s);
 		}
 	}
-
 
 }

@@ -5,30 +5,34 @@ import manila.model.Boat;
 import javax.swing.*;
 import java.awt.*;
 
-public class ChoiceBlock extends JPanel {
+
+
+public class ChoiceBlockView extends JPanel {
+    /**
+     * 该PENAL用于放置船只
+     */
+
+    /** 选择按钮*/
     private JButton button;
+    /**对应被选中的船引用*/
     private Boat boat;
+    /**关联的CBV类*/
     private ChoosingBossView choosingBossView;
 
     public JButton getButton() {
             return button;
         }
 
-    public void setButton(JButton button) {
-            this.button = button;
-        }
+    /**
+     * 根据传入的船引用构造一个小格子 用船中的信息生成格子内的信息
+     * @param command 按钮对应的命令字符
+     * @param cbv   关联的cbv类
+     * @param boat 船的引用
+     */
 
-    public Boat getBoat() {
-            return boat;
-        }
-
-    public void setBoat(Boat boat) {
-            this.boat = boat;
-        }
-
-    public ChoiceBlock(int command,ChoosingBossView cbc,Boat boat) {
+    public ChoiceBlockView(int command, ChoosingBossView cbv, Boat boat) {
         this.boat = boat;
-        this.choosingBossView=cbc;
+        this.choosingBossView=cbv;
         this.setLayout(null);
 
         //设置按钮

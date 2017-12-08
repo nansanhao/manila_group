@@ -24,7 +24,8 @@ public class GameView extends JPanel {
 	/** 信息窗口的高度 */
 	private static final int INFO_H = 900;
 
-    
+
+    /**主游戏*/
 	private Game game;
 	
 	/** 游戏场景窗口 */
@@ -36,15 +37,8 @@ public class GameView extends JPanel {
 	/** 摇骰子的窗口 */
 	private JPanel diceView;
 
-
-
-
 	/**船老大窗口*/
 	private ChoosingBossView choosingBossView;
-
-	/**区域窗口*/
-	private JPanel areaView;
-	
 	/** 存放玩家信息视图的数组 */
 	private PlayerView[] playersV;
 	/** 控制摇骰子的按钮 */
@@ -56,8 +50,10 @@ public class GameView extends JPanel {
 		return choosingBossView;
 	}
 
-	public void setChoosingBossView(ChoosingBossView choosingBossView) {
-		this.choosingBossView = choosingBossView;
+
+	public PlaygroundView getPlayground() {
+		return playground;
+
 	}
 
 	public GameView(){
@@ -77,11 +73,8 @@ public class GameView extends JPanel {
         this.infoView.add(diceView, BorderLayout.CENTER);
         this.infoView.add(this.choosingBossView,BorderLayout.SOUTH);
 
-
         this.add(this.playground);
         this.add(this.infoView);
-
-
 	}
 	/**
 	 * 对玩家信息视图进行初始化
@@ -91,7 +84,6 @@ public class GameView extends JPanel {
 		this.playersView.setLayout(null);
 		this.playersView.setPreferredSize(new Dimension(INFO_W, 200));
 
-		
 		JLabel text = new JLabel("玩家信息");
 		text.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 18));
 		text.setBounds(0,0,INFO_W,20);
@@ -107,7 +99,7 @@ public class GameView extends JPanel {
 	}
 	
 	/**
-	 * 对摇骰子的视图进行初始化
+	 * 对摇骰子的视图进行初始化 在此Jpanel下添加黑市的子jpanel
 	 */
 	public void makeDiceView(){
 		this.diceView = new JPanel();
@@ -147,29 +139,6 @@ public class GameView extends JPanel {
 	}
 	
 
-	public PlaygroundView getPlayground() {
-		return playground;
-	}
-
-	public void setPlayground(PlaygroundView playground) {
-		this.playground = playground;
-	}
-
-	public JPanel getPlayersView() {
-		return playersView;
-	}
-
-	public void setPlayersView(JPanel playersView) {
-		this.playersView = playersView;
-	}
-
-	public PlayerView[] getPlayersV() {
-		return playersV;
-	}
-
-	public void setPlayersV(PlayerView[] playersV) {
-		this.playersV = playersV;
-	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method st ub

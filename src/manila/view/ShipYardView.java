@@ -9,8 +9,8 @@ import java.awt.geom.Rectangle2D;
 
 public class ShipYardView extends YardView {
 
+    /**船厂里船位置的起始Y*/
     public static final int SHIP_POS_START_Y=ABSOLUTE_Y+POS_START_Y;
-
 
     public ShipYardView(Game game) {
         super(game);
@@ -23,7 +23,6 @@ public class ShipYardView extends YardView {
         g2.setColor(Color.BLACK);
         g2.setFont(new Font("SansSerif", Font.PLAIN, 18));
         g2.drawString("修船厂", 18, 18);
-
 
         Position[] positions = this.game.getShipYard().getPos_list();
         BoatPosition[] boat_positions = this.game.getShipYard().getBoatPositions();

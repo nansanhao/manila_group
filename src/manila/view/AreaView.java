@@ -17,7 +17,6 @@ public abstract class AreaView extends JPanel{
     /** 区域上位置的高度 */
     public static final int POS_H = POS_W/2;
 
-
     /** 区域最上面位置左上角的x坐标 */
     public static final int POS_START_X = PlaygroundView.SEA_W;
     /** 区域最上面位置左上角的y坐标 */

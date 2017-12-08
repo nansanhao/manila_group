@@ -29,8 +29,6 @@ public class Game {
 	private Random dice_generator;
 
 
-
-
 	/**判断游戏是否开始 用于修复船长*/
 	private boolean gameIsStart;
 	/** 当前是否处于玩家选位置的阶段 */
@@ -47,8 +45,10 @@ public class Game {
 	private boolean isChoosingBoat;
 	/**领航员是否在工作*/
 	private boolean isMovingBoat;
-
-
+	/**海盗是否在上船*/
+	private boolean isRobbing;
+	/**海盗是否在放船*/
+	private boolean isReturning;
 
 	/** 当前游戏处于第几轮 */
 	private int current_round;
@@ -68,7 +68,9 @@ public class Game {
 	public static final int ONCE_MAX_STEP=5;
 	/**总共最大步数*/
 	public static final int SUM_MAX_STEP=9;
-	
+	/**最大股票价格*/
+	public static final int MAX_SHARES_PRICE=30;
+	/**对应gameV*/
 	private GameView gameV;
 
 
@@ -80,20 +82,12 @@ public class Game {
 		return aBlackMarket;
 	}
 
-	public void setaBlackMarket(BlackMarket aBlackMarket) {
-		this.aBlackMarket = aBlackMarket;
-	}
-
 	public void setVoyageIsOver(boolean voyageIsOver) {
 		this.voyageIsOver = voyageIsOver;
 	}
 
 	public Harbour getHarbour() {
 		return harbour;
-	}
-
-	public void setHarbour(Harbour harbour) {
-		this.harbour = harbour;
 	}
 
 	public Pirate getPirate() {
@@ -116,10 +110,6 @@ public class Game {
 		return players;
 	}
 
-	public void setPlayers(Player[] players) {
-		this.players = players;
-	}
-
 	public boolean isChoosingBoat() {
 		return isChoosingBoat;
 	}
@@ -138,10 +128,6 @@ public class Game {
 
 	public Boat[] getBoats() {
 		return boats;
-	}
-
-	public void setBoats(Boat[] boats) {
-		this.boats = boats;
 	}
 
 	public boolean isChoosing() {
@@ -172,10 +158,6 @@ public class Game {
 		return gameIsOver;
 	}
 
-	public void setGameIsOver(boolean gameIsOver) {
-		this.gameIsOver = gameIsOver;
-	}
-
 	public int getCurrent_round() {
 		return current_round;
 	}
@@ -188,20 +170,12 @@ public class Game {
 		return gameV;
 	}
 
-	public void setGameV(GameView gameV) {
-		this.gameV = gameV;
-	}
-
 	public int getBoss_pid() {
 		return boss_pid;
 	}
 
 	public void setBoss_pid(int boss_pid) {
 		this.boss_pid = boss_pid;
-	}
-
-	public void setShipYard(ShipYard shipYard) {
-		this.shipYard = shipYard;
 	}
 
 	public boolean isSettingBoat() {
@@ -218,6 +192,18 @@ public class Game {
 
 	public void setMovingBoat(boolean movingBoat) {
 		isMovingBoat = movingBoat;
+	}
+
+	public boolean isRobbing() {
+		return isRobbing;
+	}
+
+	public boolean isReturning() {
+		return isReturning;
+	}
+
+	public void setReturning(boolean returning) {
+		isReturning = returning;
 	}
 
 	public Game(GameView gv){
@@ -272,6 +258,8 @@ public class Game {
 		this.voyageIsOver=true;
 		this.isSettingBoat =false;
 		this.isChoosingBoat=false;
+		this.isReturning=false;
+		this.isRobbing=false;
 		this.choosingBoatId =-1;
 
 		/**玩家初始化*/
@@ -279,7 +267,7 @@ public class Game {
 		this.players[0] = new Player("路飞", 0, Color.RED);
 		this.players[1] = new Player("杰克", 1, Color.GREEN);
 		this.players[2] = new Player("哥伦布", 2, Color.BLUE);
-		// TODO: 2017/11/19 黑市没有初始化 改一下船的生成 加一艘船 哪艘下海由BOSScontroller拓展完成：何剑冲
+		// TODO: 2017/11/19 黑市的初始化和分发股票 何剑冲完成
 
 		this.aBlackMarket=new BlackMarket();
 		this.aBlackMarket.distributeShares(this.players);
@@ -329,22 +317,22 @@ public class Game {
 	 */
 	public void calculateProfits(){
 		//结算将在其他功能逐步完善之后慢慢添加
-		// TODO: 2017/11/19 海盗结算 
-		// TODO: 2017/11/19 领航员结算 
+		// TODO: 2017/11/19 海盗结算 完成
 		// TODO: 2017/11/19 保险公司结算 完成
 		// TODO: 2017/11/19 修船厂/港口结算 12.1完成
-
-		//TODO：到岸结算
+		System.out.println(">------------------------------------------------------");
 		for(Boat s : this.boats){
 			if(s.getPos_in_the_sea() > SEA_LENGTH){
 				s.playerGetProfit(this);
 			}
-			if(s.getHarbourID()!=-1)//即进港了
+			if(s.getHarbourID()!=-1){//即进港了
 				this.getaBlackMarket().updatePrice(s.getCargo_name());
+			}
 		}
 		this.shipYard.playerGetProfit(this);
 		this.harbour.playerGetProfit(this);
 		this.insurance.playerGetProfit(this);
+		this.pirate.playerGetProfit(this);
 
 		
 		for(Player p : this.players)
@@ -352,21 +340,28 @@ public class Game {
 	}
 	
 	/**
-	 * 在终端打印出谁是获胜玩家，即得分最高（账户余额最高）。
+	 * 游戏结束时
+	 * 在日志板打印出谁是获胜玩家，即得分最高（账户余额最高）。
 	 */
 	public void showWinner(){
 		int winner_id = 0;
 		int high_balance = -1;
+		System.out.println(">------------------------------------------------------");
+		System.out.println("游戏结束！");
 		for(Player p : this.players){
-			if(p.getAccount_balance() > high_balance){
+			if(p.getFinalMoney() > high_balance){
 				winner_id = p.getPid();
-				high_balance = p.getAccount_balance();
+				high_balance = p.getFinalMoney();
 			}
-			System.out.println(p.getName()+" has "+p.getAccount_balance()+"$");
+			System.out.println(p.getName()+" 有 "+p.getFinalMoney()+"$");
 		}
-		System.out.println("The winner is: "+this.players[winner_id].getName());
+		System.out.println("胜者是: "+this.players[winner_id].getName());
 	}
 
+	/**
+	 * 每次放置同伙后
+	 * 切换到下一个玩家
+	 */
 	public void switchPlayer(){
 		this.current_pid = (this.current_pid+1)%this.players.length;
 	}
@@ -421,7 +416,11 @@ public class Game {
 		}
 	}
 
-
+	/**
+	 * 通过船是第几艘获取船的引用
+	 * @param id 船的号码
+	 * @return 船的引用
+	 */
 	public Boat getBoatByID(int id){
 		for(Boat b:this.boats){
 			if(b.getBoatId()==id)
@@ -430,6 +429,9 @@ public class Game {
 		return null;
 	}
 
+	/**
+	 * 第三回合是船要上岸 若大于13到港口 小于13到船厂 等于13保留
+	 */
 	public void boatLand() {
 		for(Boat b:this.boats){
 			if(b.getBoatId()!=-1){
@@ -444,6 +446,142 @@ public class Game {
 					this.shipYard.boatPositions[i].setHaveBoat(true);
 				}
 			}
+		}
+	}
+
+	/**
+	 * 判断有没有船到达13格
+	 * @return 有返回 true 无返回 false
+	 */
+	public boolean isRobbed(){
+		for(Boat b:this.boats){
+			if(b.getPos_in_the_sea()==13)
+				return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 到达第2/3回合时若有船到达13格将其选中给海盗玩家使用
+	 */
+	public void showBoats() {
+		if (current_round == 2) {
+			for(Boat b:boats){
+				if(b.getPos_in_the_sea()==13) {
+					b.setChoosen(true);
+				}
+			}
+		}
+		else if(current_round==ROUND_NUMBER){
+			for(Boat b:boats){
+				if(b.getPos_in_the_sea()==13) {
+					b.setChoosen(true);
+					break;
+				}
+			}
+		}
+
+		this.gameV.getPlayground().repaint();
+	}
+
+	/**
+	 * 切换到领航员玩家
+	 */
+	public void switchToAvigator(){
+		choosing=false;
+		isChoosingBoat=true;
+		gameV.updatePlayersView(current_pid,false);
+		current_pid=(avigator.getFirstId());
+		gameV.updatePlayersView(avigator.getFirstId(),true);
+		avigator.switchPos_id();
+		System.out.println(">------------------------------------------------------");
+		System.out.println("请领航员-"+getPlayerByID(current_pid).getName()+"选择小船并将其移动");
+	}
+
+	/**
+	 * 切换到海盗玩家
+	 */
+	public void switchToPirate(){
+		gameV.updatePlayersView(current_pid,false);
+		current_pid=(pirate.getFirstId());
+		choosing=false;
+		if(current_round==2) {
+			isRobbing=true;
+			System.out.println(">------------------------------------------------------");
+			System.out.println("遇到海盗了！");
+			System.out.println("请海盗-"+getPlayerByID(current_pid).getName()+"选择船上的位置抢劫");
+			System.out.println("点击海盗区域则视为放弃");
+		}
+		else if(current_round==ROUND_NUMBER) {
+			isReturning = true;
+			System.out.println(">------------------------------------------------------");
+			System.out.println("遇到海盗了！");
+			System.out.println("请海盗-"+getPlayerByID(current_pid).getName()+"选择把船归还到何处");
+			System.out.println("请点击船厂或者港口区域");
+		}
+
+		gameV.updatePlayersView(pirate.getFirstId(),true);
+		pirate.switchPos_id();
+		showBoats();
+
+	}
+
+	/**
+	 * 切换到下一个海盗玩家
+	 * @param isPass 第一个玩家是否选择了跳过不上船
+	 */
+	public void nextPirate(boolean isPass) {
+		pirate.switchPos_id();
+		gameV.updatePlayersView(current_pid,false);
+		if(pirate.getCurrent_pos()==-1){
+			for(Boat b:boats)
+				b.setChoosen(false);
+			isRobbing=false;
+			if(avigator.getFirstId()!=-1){
+				switchToAvigator();
+			}
+			else{
+				current_pid=boss_pid;
+				choosing=true;
+			}
+		}
+		else{
+			int pos=pirate.getCurrent_pos();
+			current_pid=pirate.pos_list[pos].getSailorID();
+			if(!isPass)
+				pirate.updateCaptiain();
+			System.out.println("请海盗-"+getPlayerByID(current_pid).getName()+"选择船上的位置抢劫");
+			System.out.println("点击海盗区域则视为放弃");
+		}
+		gameV.updatePlayersView(current_pid, true);
+		gameV.getPlayground().repaint();
+	}
+
+	/**
+	 * 按顺序获得第一艘被打劫的船的引用
+	 * @return 到达13格的船的引用
+	 */
+	public Boat getFirstRobbedBoat() {
+		for (Boat b : this.boats) {
+			if (b.getPos_in_the_sea() == SEA_LENGTH && b.getHarbourID() == -1 && b.getShipYardID() == -1) {
+				return b;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * 结束一轮航程将属性关闭 等待点击下一个航程 若股票到达30游戏结束 输出胜利者
+	 */
+	public void endVoyage(){
+		setVoyageIsOver(true);
+		setChoosing(false);
+		calculateProfits();
+		System.out.println(">------------------------------------------------------");
+		System.out.println("该次航程结束，请点击下一次航程进入下一航程");
+		if(this.aBlackMarket.getTopPrice()==MAX_SHARES_PRICE){
+			gameIsOver=true;
+			showWinner();
 		}
 	}
 }

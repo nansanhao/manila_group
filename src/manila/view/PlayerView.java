@@ -15,6 +15,7 @@ import manila.model.Player;
  * 玩家的信息展示界面
  */
 public class PlayerView extends JPanel {
+
 	/** 玩家颜色块的大小 */
 	private static int colorV_size = 10;
 	/** 得分（账户余额）标签 */
@@ -39,24 +40,12 @@ public class PlayerView extends JPanel {
 		return sharesV;
 	}
 
-	public void setSharesV(JLabel sharesV) {
-		this.sharesV = sharesV;
-	}
-
 	public JLabel getScoreV() {
 		return scoreV;
 	}
 
-	public void setScoreV(JLabel scoreV) {
-		this.scoreV = scoreV;
-	}
-
 	public JLabel getWorker_nbV() {
 		return worker_nbV;
-	}
-
-	public void setWorker_nbV(JLabel worker_nbV) {
-		this.worker_nbV = worker_nbV;
 	}
 
 	public Player getPlayer() {
@@ -65,10 +54,6 @@ public class PlayerView extends JPanel {
 
 	public void setPlayer(Player player) {
 		this.player = player;
-	}
-
-	public boolean isActive() {
-		return active;
 	}
 	/**
 	 * 玩家视图构造函数
@@ -96,7 +81,6 @@ public class PlayerView extends JPanel {
 		this.colorV.setPreferredSize(new Dimension(colorV_size, colorV_size));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
-		
 		this.add(this.nameV);
 		
 		if(this.showComplete){
@@ -105,12 +89,13 @@ public class PlayerView extends JPanel {
 			this.add(this.worker_nbV);
 			this.add(this.sharesV);
 		}
-		
 		this.setBackground(Color.WHITE);
 	}
 
-
-
+	/**
+	 * 将当前作用玩家的信息栏点亮，将view中的玩家设置为活跃状态或者不活跃状态
+	 * @param active 活跃状态
+	 */
 	public void setActive(boolean active) {
 		this.active = active;
 		if(active){
@@ -121,12 +106,4 @@ public class PlayerView extends JPanel {
 		}
 	}
 
-	public boolean isShowComplete() {
-		return showComplete;
-	}
-
-	public void setShowComplete(boolean showComplete) {
-		this.showComplete = showComplete;
-	}
-	
 }
