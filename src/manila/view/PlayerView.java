@@ -15,6 +15,7 @@ import manila.model.Player;
  * 玩家的信息展示界面
  */
 public class PlayerView extends JPanel {
+
 	/** 玩家颜色块的大小 */
 	private static int colorV_size = 10;
 	/** 得分（账户余额）标签 */
@@ -96,7 +97,6 @@ public class PlayerView extends JPanel {
 		this.colorV.setPreferredSize(new Dimension(colorV_size, colorV_size));
 
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
-		
 		this.add(this.nameV);
 		
 		if(this.showComplete){
@@ -105,12 +105,13 @@ public class PlayerView extends JPanel {
 			this.add(this.worker_nbV);
 			this.add(this.sharesV);
 		}
-		
 		this.setBackground(Color.WHITE);
 	}
 
-
-
+	/**
+	 * 将view中的玩家设置为活跃状态或者不活跃状态
+	 * @param active 活跃状态
+	 */
 	public void setActive(boolean active) {
 		this.active = active;
 		if(active){

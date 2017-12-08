@@ -29,7 +29,7 @@ public class Harbour extends Area {
     @Override
 
     public void playerGetProfit(Game game) {
-        // TODO: 2017/11/24  参照ShipYard 完成功能：范贤明
+        // TODO: 2017/11/24  参照ShipYard 完成功能：范贤明 ：11.25完成
         for(int i=0;i<this.boatPositions.length;i++){
             if(boatPositions[i].isHaveBoat()&&this.pos_list[i].getSailorID()!=-1){
                 game.getPlayerByID(this.pos_list[i].getSailorID()).receiveProfit(boatPositions[i].getProfit());
