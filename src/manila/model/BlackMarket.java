@@ -22,7 +22,7 @@ public class BlackMarket {
     }
 
     public BlackMarket() {
-        //TODO：范贤明
+        //TODO：范贤明：11.25完成
         cargo_shares = new Shares[4][5];
         for (int i = 0; i < 5; i++) {
             cargo_shares[0][i] = new Shares(0, "玉器", 1);
