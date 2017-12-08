@@ -44,7 +44,9 @@
 #### 二. 项目分工
 
 - [第零期任务](http://www.jianshu.com/p/1db5454e95f3)
-- 第一期任务
+- [第一期任务](http://www.jianshu.com/p/f9eff529e969)
+- [第二期任务](http://www.jianshu.com/p/b1998a91224e)
+- [第三期任务](http://www.jianshu.com/p/e09dd326fd95)
 
 ## 项目开发日志：
 
