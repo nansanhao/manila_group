@@ -24,7 +24,6 @@ public class GameView extends JPanel {
 	/** 信息窗口的高度 */
 	private static final int INFO_H = 900;
 
-    
 	private Game game;
 	
 	/** 游戏场景窗口 */
@@ -35,9 +34,6 @@ public class GameView extends JPanel {
 	private JPanel playersView;
 	/** 摇骰子的窗口 */
 	private JPanel diceView;
-
-
-
 
 	/**船老大窗口*/
 	private ChoosingBossView choosingBossView;
@@ -56,8 +52,8 @@ public class GameView extends JPanel {
 		return choosingBossView;
 	}
 
-	public void setChoosingBossView(ChoosingBossView choosingBossView) {
-		this.choosingBossView = choosingBossView;
+	public PlaygroundView getPlayground() {
+		return playground;
 	}
 
 	public GameView(){
@@ -107,7 +103,7 @@ public class GameView extends JPanel {
 	}
 	
 	/**
-	 * 对摇骰子的视图进行初始化
+	 * 对摇骰子的视图进行初始化 在此Jpanel下添加黑市的子jpanel
 	 */
 	public void makeDiceView(){
 		this.diceView = new JPanel();
@@ -147,29 +143,6 @@ public class GameView extends JPanel {
 	}
 	
 
-	public PlaygroundView getPlayground() {
-		return playground;
-	}
-
-	public void setPlayground(PlaygroundView playground) {
-		this.playground = playground;
-	}
-
-	public JPanel getPlayersView() {
-		return playersView;
-	}
-
-	public void setPlayersView(JPanel playersView) {
-		this.playersView = playersView;
-	}
-
-	public PlayerView[] getPlayersV() {
-		return playersV;
-	}
-
-	public void setPlayersV(PlayerView[] playersV) {
-		this.playersV = playersV;
-	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method st ub

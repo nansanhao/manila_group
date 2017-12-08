@@ -8,13 +8,8 @@ public class Shares {
     private int price;
     /**货物名字*/
     private String cargo_name;
-
-
-
     /**股票状态，1为持有，2为抵押*/
     private int status_pledge;
-
-
     /**股票持有者*/
     private Player owner;
     /**持有者ID*/
@@ -24,16 +19,8 @@ public class Shares {
         return onwer_id;
     }
 
-    public void setOnwer_id(int onwer_id) {
-        this.onwer_id = onwer_id;
-    }
-
     public String getCargo_name() {
         return cargo_name;
-    }
-
-    public void setCargo_name(String cargo_name) {
-        this.cargo_name = cargo_name;
     }
 
     public int getPrice() {
@@ -52,9 +39,7 @@ public class Shares {
         this.status_pledge = status_pledge;
     }
 
-    public Player getOwner() {
-        return owner;
-    }
+
 
 
 

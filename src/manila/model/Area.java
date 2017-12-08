@@ -11,14 +11,8 @@ import java.awt.*;
  * 区域类，被其他实际区域继承
  */
 public  abstract class Area {
-    /**
-     * 区域上的座位
-     */
+    /**区域上的座位*/
     public Position[] pos_list;
-    /** 区域（左上角）在图形界面上的x坐标 */
-    //private int posX;
-    /**区域（左上角）在图形界面上的y坐标 */
-    //private int posY;
 
     public Position[] getPos_list() {
         return pos_list;
@@ -66,20 +60,13 @@ public  abstract class Area {
     }
 
     /**
-     * 判断鼠标光标是否在该船的范围内
-     * @param x 光标的横坐标
-     * @param y 光标的纵坐标
-     * @return 是否在该船的范围内
-     */
-
-
-    /**
      * 进入能进入的位置
      * @param pid 进入人的Id
      */
     public void joinIn(int pid){
         this.pos_list[getAvailPosIndex()].setSailorID(pid);
     }
+
 
     /**
      * 根据各个区域的规则让players获取利润， 该方法在Game的calculateProfit调用
@@ -88,7 +75,11 @@ public  abstract class Area {
     public abstract void playerGetProfit(Game game);
 
 
-
+    /**
+     * 按照posID进入区域对应的座位
+     * @param numOfPos 对应座位的id
+     * @param pid 进入的玩家id
+     */
     public  void joinInPos(int numOfPos, int pid){
         this.pos_list[numOfPos].setSailorID(pid);
     }

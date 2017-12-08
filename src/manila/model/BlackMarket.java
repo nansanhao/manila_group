@@ -6,23 +6,16 @@ import java.util.Random;
  * 黑市类，里面是当前四种股票的价格
  */
 public class BlackMarket {
-    /**
-     * 黑市里的股票，结构为二维数组，数组每行为一种股票，一行里有一定数量的该种股票
-     */
+    /**黑市里的股票，结构为二维数组，数组每行为一种股票，一行里有一定数量的该种股票*/
     private Shares[][] cargo_shares;
-
+    /**生成随机数用于派发*/
     private Random random;
 
     public Shares[][] getCargo_shares() {
         return cargo_shares;
     }
 
-    public void setCargo_shares(Shares[][] cargo_shares) {
-        this.cargo_shares = cargo_shares;
-    }
-
     public BlackMarket() {
-        //TODO：范贤明
         cargo_shares = new Shares[4][5];
         for (int i = 0; i < 5; i++) {
             cargo_shares[0][i] = new Shares(0, "玉器", 1);
@@ -35,7 +28,6 @@ public class BlackMarket {
 
     /**
      * 获得当前黑市里最高股票的价钱
-     *
      * @return 最高价
      */
     public int getTopPrice() {
@@ -70,8 +62,10 @@ public class BlackMarket {
         }
     }
 
-
-    /**用于初始化发黑市股票*/
+    /**
+     * 用随机数派发股票
+     * @param players 传入玩家类数组
+     */
     public void distributeShares(Player[] players) {
         int random_number;//随机股票种类
         for(Player p:players){

@@ -39,6 +39,10 @@ public class BlackMarketView extends JPanel {
         this.drawShares(g2);
     }
 
+    /**
+     * 画出每一格股票 若股票等于当前价格则放大
+     * @param g2
+     */
     private void drawShares(Graphics2D g2) {
         int block_x,block_y;
         String price;

@@ -12,21 +12,19 @@ import manila.model.*;
  * Manila 游戏选举船老大的窗口。
  */
 public class ChoosingBossView extends JPanel {
+    /**关联的game和cbc类*/
     private Game game;
+
     private ChoosingBossController cbc;
-
-
+    /**选船长栏的宽度*/
     public static final int CHOOSING_VIEW_W=350;
-
+    /**选船长栏的高度*/
     public static final int CHOOSING_VIEW_H=200;
 
-
-
+    /**该View中的JPANEL的布局类*/
     private CardLayout cardLayout;
 
-
-
-    /**第三个面板中的每一格*/
+    /**第三个面板中的每一格JPANEL*/
     private ChoiceBlock[] thirdPanel_panels;
     /**第三面板*/
     private JPanel thirdPanel;
@@ -67,24 +65,8 @@ public class ChoosingBossView extends JPanel {
         return amountT;
     }
 
-    public void setAmountT(JTextField amountT) {
-        this.amountT = amountT;
-    }
-
-    public PlayerView[] getPvList() {
-        return pvList;
-    }
-
-    public void setPvList(PlayerView[] pvList) {
-        this.pvList = pvList;
-    }
-
     public JLabel getBossLabel() {
         return bossLabel;
-    }
-
-    public void setBossLabel(JLabel bossLabel) {
-        this.bossLabel = bossLabel;
     }
 
     public CardLayout getCardLayout() {
@@ -121,7 +103,11 @@ public class ChoosingBossView extends JPanel {
     }
 
 
-
+    /**
+     * 更新对应玩家的窗口 若要点亮则传入true
+     * @param pid 被选中玩家
+     * @param active 是否点亮
+     */
     public void updateBidView(int pid, boolean active){
         for(PlayerView pv : this.pvList){
             Player p = pv.getPlayer();
@@ -131,7 +117,10 @@ public class ChoosingBossView extends JPanel {
         }
     }
 
-
+    /**
+     * 制作卡片布局中的第一个页面即用金额竞选
+     * @return
+     */
     private JPanel makeSecondPanel() {
         JPanel secondPanel=new JPanel();
         Boat[] boats=this.game.getBoats();
@@ -149,6 +138,10 @@ public class ChoosingBossView extends JPanel {
         return secondPanel;
     }
 
+    /**
+     * 制作卡片布局中的第二个页面即购买股票
+     * @return
+     */
     private JPanel makeFirstPanel(){
 
         JPanel firstPanel=new JPanel();
@@ -205,6 +198,10 @@ public class ChoosingBossView extends JPanel {
         return  firstPanel;
     }
 
+    /**
+     * 制作卡片布局中的第三个页面即放置船的位置
+     * @return
+     */
     private JPanel makeThirdPanel(){
         JPanel thirdPanel=new JPanel();
         Boat[] boats=game.getBoats();
@@ -223,7 +220,11 @@ public class ChoosingBossView extends JPanel {
     }
 
 
-
+    /**
+     * 更新对应船是否被选中
+     * @param i 格子的id
+     * @param active  若选中则点亮传入 true
+     */
     public void setThirdPanelActive(int i,boolean active){
         if(active){
             thirdPanel_panels[i].setBorder(BorderFactory.createLineBorder(Color.ORANGE));
@@ -234,7 +235,9 @@ public class ChoosingBossView extends JPanel {
 
     }
 
-
+    /**
+     * 点击下一个航程时同样要将该panel进行初始化
+     */
     public void reset() {
         this.bossLabel.setText("xxxx");
         this.cbc.setBid_amount(0);
@@ -246,7 +249,5 @@ public class ChoosingBossView extends JPanel {
             setThirdPanelActive(i,false);
         }
     }
-
-
 }
 

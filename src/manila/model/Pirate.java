@@ -11,10 +11,6 @@ public class Pirate extends Area{
         return current_pos;
     }
 
-    public void setCurrent_pos(int current_pos) {
-        this.current_pos = current_pos;
-    }
-
     public Pirate( ) {
         int[] prices = {5,5};
         Position[] aPos_list = new Position[prices.length];
@@ -46,6 +42,11 @@ public class Pirate extends Area{
         }
     }
 
+    /**
+     * 判断有没有船到达13格
+     * @param game
+     * @return 有返回true 无返回false
+     */
     private boolean boatIsRobbed(Game game){
         for (Boat b : game.getBoats()) {
             if (b.getPos_in_the_sea() == Game.SEA_LENGTH)
@@ -53,9 +54,6 @@ public class Pirate extends Area{
         }
         return false;
     }
-
-
-
 
 
     /**
@@ -67,7 +65,10 @@ public class Pirate extends Area{
         this.current_pos=0;
     }
 
-
+    /**
+     * 获得当前第一个非空座位上的玩家ID
+     * @return 若为空返回-1 若有玩家返回玩家ID
+     */
     public int getFirstId(){
         for(int i=0; i<this.pos_list.length; i++){
             if(this.pos_list[i].getSailorID() != -1)
@@ -76,6 +77,9 @@ public class Pirate extends Area{
         return -1;
     }
 
+    /**
+     * 切换到下一个作用的座位，若后面座位无人则设置为-1
+     */
     public void switchPos_id(){
         if(this.current_pos==-1)
         {

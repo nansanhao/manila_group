@@ -10,11 +10,11 @@ import manila.view.*;
  * 控制鼠标交互的事件监听类
  */
 public class GameController implements MouseListener {
-	
+	/**关联到游戏类*/
 	private Game game;
-
+	/**放置船时已放置船的位置的和*/
 	private int steps;
-
+	/**大领航员工作时，已移动的格数*/
 	private int move_steps;
 
 
@@ -24,6 +24,13 @@ public class GameController implements MouseListener {
 		this.move_steps=0;
 	}
 
+	/**
+	 * 点到对应的区域应该找到第一个默认位置让玩家放置同伙
+	 * 其后玩家的同伙数减少
+	 * @param a	 点到哪个区域
+	 * @param x 鼠标x坐标
+	 * @param y 鼠标y坐标
+	 */
 	private void clickedOnArea(Area a, int x, int y){
 		if(isCursorInside(a,x,y)&&a.getAvailPosIndex()!=-1){
 			Player p = this.game.getCurrentPlayer();
@@ -48,6 +55,12 @@ public class GameController implements MouseListener {
 		}
 	}
 
+	/**
+	 * 对到对应区域内的对应位置放置玩家同伙
+	 * @param a 点到的区域
+	 * @param x	 鼠标x坐标
+	 * @param y 鼠标y坐标
+	 */
 	private void clickedOnPos(Area a, int x, int y){
 		int numOfPos=clickOnWhichPos(a,x,y);
 			if(numOfPos!=-1&&a.pos_list[numOfPos].getSailorID()==-1){
@@ -71,6 +84,13 @@ public class GameController implements MouseListener {
 
 	}
 
+	/**
+	 * 判断玩家点到对应区域的第几个位置
+	 * @param a 判断的区域
+	 * @param x 鼠标x坐标
+	 * @param y 鼠标y坐标
+	 * @return 位置ID
+	 */
 	private int clickOnWhichPos(Area a, int x, int y) {
 		if(a instanceof ShipYard) {
 			for (int i = 0; i < a.pos_list.length; i++) {
@@ -114,6 +134,13 @@ public class GameController implements MouseListener {
 		return -1;
 	}
 
+	/**
+	 * 判断是否点到对应区域
+	 * @param a 判断的区域
+	 * @param x	 鼠标x坐标
+	 * @param y 鼠标y坐标
+	 * @return 点到则为true 否则为false
+	 */
 	private boolean isCursorInside(Area a,int x, int y){
 
 		if(a instanceof Boat){
@@ -146,6 +173,11 @@ public class GameController implements MouseListener {
 
 	}
 
+	/**
+	 * 将当前在CBC选好对应的船放置在鼠标所点那一格海里
+	 * @param x 鼠标的x坐标
+	 * @param y	 鼠标的y坐标
+	 */
 	private void setBoatIntoSea(int x, int y) {
 		ChoosingBossView cbv=this.game.getGameV().getChoosingBossView();
 		int sea = cilckOnWhichSea(x,y);
@@ -178,12 +210,23 @@ public class GameController implements MouseListener {
 
 	}
 
+	/**
+	 * 判断点到那一格海是否符合游戏的规则
+	 * @param sea 点到的海的格数
+	 * @return  符合返回true 否则返回false
+	 */
 	private boolean setPositionIsRight(int sea) {
 		int max;
 		max=(Game.SUM_MAX_STEP-steps<Game.ONCE_MAX_STEP)? Game.SUM_MAX_STEP-steps:Game.ONCE_MAX_STEP;
 		return  (sea<=max)?true:false;
 	}
 
+	/**
+	 * 得到所点地方在哪一格海
+	 * @param x 鼠标x坐标
+	 * @param y 鼠标y坐标
+	 * @return 点的海的格数 没有点到返回-1
+	 */
 	private int cilckOnWhichSea(int x, int y) {
 
 		for(int i=0;i<=this.game.SEA_LENGTH;i++){
@@ -196,6 +239,12 @@ public class GameController implements MouseListener {
 		return -1;
 	}
 
+	/**
+	 * 到领航员作用的环节，领航员选择好船后，点击Playground，
+	 * 将之坐标传入调用clickOnWhichSea()，返回点的格数判断是否符合规则，若负责则移动船
+	 * @param x 鼠标x坐标
+	 * @param y	 鼠标y坐标
+	 */
 	private void avigatorMoveBoat(int x, int y) {
 		int num=cilckOnWhichSea(x,y);
 		if(num!=-1&&moveIsRight(num)){
@@ -226,6 +275,11 @@ public class GameController implements MouseListener {
 		}
 	}
 
+	/**
+	 * 用于判断点的格数是否符合领航员移动的规则
+	 * @param num 点的海的格数
+	 * @return 符合返回true 否则返回false
+	 */
 	private boolean moveIsRight(int num) {
 		Avigator avigator=this.game.getAvigator();
 		Boat boat=this.game.getBoatByID(this.game.getChoosingBoatId());
@@ -246,6 +300,11 @@ public class GameController implements MouseListener {
 		return false;
 	}
 
+	/**
+	 * 领航员通过点击选择要移动的船
+	 * @param x 鼠标x坐标
+	 * @param y	 鼠标y坐标
+	 */
 	private void chooseBoat(int x, int y) {
 		for(Boat b:this.game.getBoats()){
 			if(isCursorInside(b,x,y)){
@@ -258,6 +317,11 @@ public class GameController implements MouseListener {
 		}
 	}
 
+	/**
+	 * 海盗通过点击，劫掠小船上对应的位置，并将原来的玩家赶下船，若点到海盗区域可以自动跳过不上船
+	 * @param x 鼠标x坐标
+	 * @param y 鼠标y坐标
+	 */
 	private void pirateRobBoat(int x, int y) {
 		int num=-1,boat_id=-1;
 		for(Boat b:this.game.getBoats()){
@@ -276,6 +340,13 @@ public class GameController implements MouseListener {
 		}
 	}
 
+	/**
+	 * 通过点击获得所点坐标点的船的对应的位置ID，若位置上跟海盗同一个人则返回-1
+ 	 * @param boat_id 判断的船的ID
+	 * @param x 鼠标x坐标
+	 * @param y	 鼠标y坐标
+	 * @return 船上被点位置ID
+	 */
 	private int clickOnWhichBoatPos(int boat_id ,int x, int y) {
 		Boat boat=this.game.getBoatByID(boat_id);
 		int boat_x=PlaygroundView.BOAT_START_X+boat.getPos_in_the_sea()*(PlaygroundView.SEA_W+PlaygroundView.SEA_INTERVAL);
@@ -292,6 +363,11 @@ public class GameController implements MouseListener {
 		return -1;
 	}
 
+	/**
+	 * 海盗通过点击把船放回到所点的区域
+	 * @param x	 鼠标x坐标
+	 * @param y 鼠标y坐标
+	 */
 	private void pirateReturnBoat(int x, int y) {
 		int toWhere = ReturnToWhere(x, y); //1为港口 2为修船厂
 		Boat b = this.game.getFirstRobbedBoat();
@@ -325,6 +401,12 @@ public class GameController implements MouseListener {
 		}
 	}
 
+	/**
+	 * 返回点到的区域
+	 * @param x 鼠标x坐标
+	 * @param y 鼠标y坐标
+	 * @return 1为港口 2为船厂 其他为-1
+	 */
 	private int ReturnToWhere(int x,int y){ // 把船归还到那
 		if(x > HarbourView.ABSOLUTE_X && x < HarbourView.ABSOLUTE_X+ HarbourView.ABSOLUTE_W
 				&& y > HarbourView.ABSOLUTE_Y && y< HarbourView.ABSOLUTE_Y+HarbourView.ABSOLUTE_H)

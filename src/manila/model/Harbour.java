@@ -8,10 +8,9 @@ public class Harbour extends Area {
         return boatPositions;
     }
 
-    public void setBoatPositions(BoatPosition[] boatPositions) {
-        this.boatPositions = boatPositions;
-    }
-
+    /**
+     * 构造方法： 生成3个船坞位置记录不同船坞的获利价格和是否有船
+     */
     public Harbour(){
         Position[] pos_list=new Position[3];
         pos_list[0]=new Position(4);
@@ -38,6 +37,10 @@ public class Harbour extends Area {
         }
     }
 
+    /**
+     * 获得港口空的船坞
+     * @return 船坞ID 满了则返回-1
+     */
     public int getAvailBoatPosIndex(){
         for(int i=0; i<this.boatPositions.length; i++){
             if(!this.boatPositions[i].isHaveBoat())

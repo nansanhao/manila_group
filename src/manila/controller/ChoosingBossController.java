@@ -15,14 +15,15 @@ import manila.view.ChoosingBossView;
  * Manila 游戏选举船老大的窗口控制器。
  */
 public class ChoosingBossController implements ActionListener {
-
+	/**关联到对应的view类*/
 	private ChoosingBossView cbv;
-
-
-
+	/**当前竞选的价格*/
 	private int bid_amount;
+	/**当前船长的id*/
 	private int boss_pid;
+	/**当前被选的船的ID用于放置船*/
 	private int currentBoatId;
+	/**已经放置好船的数量*/
 	private int numOfHasChoosenBoats;
 
 	public ChoosingBossView getCbv() {
@@ -119,6 +120,10 @@ public class ChoosingBossController implements ActionListener {
 		this.cbv.getCardLayout().next(this.cbv);
 	}
 
+	/**
+	 * 选择需要放到海里的船
+	 * @param i 选择船的id
+	 */
 	private void setBoatPosition(int i) {
 
 		if(numOfHasChoosenBoats<Game.MAX_BOATS_NUM){ //判断够三艘没有
@@ -132,6 +137,10 @@ public class ChoosingBossController implements ActionListener {
 		}
 	}
 
+	/**
+	 * 竞选成功后，船长选择购买股票，并且可以选择不购买
+	 * @param command 点击到哪个按钮的命令数
+	 */
 	private void buyshares(String command) {
 		int cargo_id =-1;
 		Game g=this.cbv.getGame();
@@ -162,6 +171,11 @@ public class ChoosingBossController implements ActionListener {
 		}
 	}
 
+	/**
+	 * 用于判断 输入的字符串是否为数字
+	 * @param str 输入的字符串
+	 * @return 若为数字返回true 否则为false
+	 */
 	public static boolean isNumeric(String str){
 		Pattern pattern = Pattern.compile("[0-9]*$");
 		Matcher isNum = pattern.matcher(str);

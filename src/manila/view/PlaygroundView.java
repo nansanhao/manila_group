@@ -125,7 +125,7 @@ public class PlaygroundView extends JPanel {
 	}
 	
 	/**
-	 * 根据小船的信息在界面上画出一条小船以及船上的所有位置
+	 * 根据小船的信息在界面上画出一条小船以及船上的所有位置 若被选中则有外框
 	 * @param g2 图形类
 	 * @param b 一个小船对象
 	 */
@@ -166,7 +166,7 @@ public class PlaygroundView extends JPanel {
 	}
 	
 	/**
-	 * 画出所有的小船
+	 * 画出所有的小船 若在港口在按照港口坐标 船厂同理
 	 * @param g2 图形类
 	 */
 	public void drawBoats(Graphics2D g2){

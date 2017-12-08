@@ -43,8 +43,6 @@ public class Boat extends Area{
 
 	}
 
-
-
 	public int getHarbourID() {
 		return harbourID;
 	}
@@ -73,16 +71,8 @@ public class Boat extends Area{
 		return cargo_name;
 	}
 
-	public void setCargo_name(String cargo_name) {
-		this.cargo_name = cargo_name;
-	}
-
 	public int getCargo_value() {
 		return cargo_value;
-	}
-
-	public void setCargo_value(int cargo_value) {
-		this.cargo_value = cargo_value;
 	}
 
 	public int getPos_in_the_sea() {
