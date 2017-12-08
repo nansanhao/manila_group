@@ -22,11 +22,12 @@ public class DiceController implements ActionListener {
 		// TODO Auto-generated method stub
 		// roll the dice to move the boats
 		if(!this.game.isVoyageIsOver() && !this.game.isChoosing()&&this.game.isGameIsStart()
-				&&!this.game.isChoosingBoat()&&!this.game.isMovingBoat()&&!this.game.isRobbing()&&!this.game.isReturning()
-				){
+				&&!this.game.isChoosingBoat()&&!this.game.isMovingBoat()&&!this.game.isRobbing()&&!this.game.isReturning()){
 			for(Boat b : this.game.getBoats()){
-				if(b.getBoatId()!=-1)
-				b.move(this.game.rollDice());
+				if(b.getBoatId()!=-1) {
+					int step=this.game.rollDice();
+					b.move(step);
+				}
 			}
 
 			this.game.getGameV().getPlayground().repaint();
@@ -36,28 +37,19 @@ public class DiceController implements ActionListener {
 			this.game.setChoosing(true);
 
 			if(this.game.getCurrent_round()==Game.ROUND_NUMBER){
-				this.game.getBoatByID(0).setPos_in_the_sea(13);
 				this.game.boatLand();
-
 				this.game.getGameV().getPlayground().repaint();
 			}
-
 			if(this.game.getCurrent_round()!=1&&this.game.isRobbed()&&this.game.getPirate().getFirstId()!=-1){
 				this.game.switchToPirate();
 			}
-
 			else if(this.game.getCurrent_round()==Game.ROUND_NUMBER-1&&this.game.getAvigator().getFirstId()!=-1){
 				this.game.switchToAvigator();
 			}
-
 			else if(this.game.getCurrent_round() == Game.ROUND_NUMBER&&!(this.game.isRobbed()&&this.game.getPirate().getFirstId()!=-1)){
 				// voyage is over
 				this.game.endVoyage();
 			}
-
 		}
-
-		
 	}
-
 }

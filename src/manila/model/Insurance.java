@@ -25,9 +25,10 @@ public class Insurance extends Area{
                     cost+=s.getBoatPositions()[i].getProfit();
             }
             game.getPlayerByID(this.pos_list[0].getSailorID()).payPos(cost);
+            System.out.println(game.getPlayerByID(pos_list[0].getSailorID()).getName()+"需赔给船厂"+cost+"$");
         }
-
     }
+
 
 
 }

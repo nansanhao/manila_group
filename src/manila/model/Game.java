@@ -72,6 +72,8 @@ public class Game {
 	public static final int ONCE_MAX_STEP=5;
 	/**总共最大步数*/
 	public static final int SUM_MAX_STEP=9;
+	/**最大股票价格*/
+	public static final int MAX_SHARES_PRICE=30;
 	
 	private GameView gameV;
 
@@ -351,16 +353,17 @@ public class Game {
 	 */
 	public void calculateProfits(){
 		//结算将在其他功能逐步完善之后慢慢添加
-		// TODO: 2017/11/19 海盗结算
+		// TODO: 2017/11/19 海盗结算 完成
 		// TODO: 2017/11/19 保险公司结算 完成
 		// TODO: 2017/11/19 修船厂/港口结算 12.1完成
-		//TODO：到岸结算
+		System.out.println(">------------------------------------------------------");
 		for(Boat s : this.boats){
 			if(s.getPos_in_the_sea() > SEA_LENGTH){
 				s.playerGetProfit(this);
 			}
-			if(s.getHarbourID()!=-1)//即进港了
+			if(s.getHarbourID()!=-1){//即进港了
 				this.getaBlackMarket().updatePrice(s.getCargo_name());
+			}
 		}
 		this.shipYard.playerGetProfit(this);
 		this.harbour.playerGetProfit(this);
@@ -503,20 +506,33 @@ public class Game {
 		current_pid=(avigator.getFirstId());
 		gameV.updatePlayersView(avigator.getFirstId(),true);
 		avigator.switchPos_id();
+		System.out.println(">------------------------------------------------------");
+		System.out.println("请领航员-"+getPlayerByID(current_pid).getName()+"选择小船并将其移动");
 	}
 
 	public void switchToPirate(){
-
-		choosing=false;
-		if(current_round==2)
-			isRobbing=true;
-		else if(current_round==ROUND_NUMBER)
-			isReturning=true;
 		gameV.updatePlayersView(current_pid,false);
 		current_pid=(pirate.getFirstId());
+		choosing=false;
+		if(current_round==2) {
+			isRobbing=true;
+			System.out.println(">------------------------------------------------------");
+			System.out.println("遇到海盗了！");
+			System.out.println("请海盗-"+getPlayerByID(current_pid).getName()+"选择船上的位置抢劫");
+			System.out.println("点击海盗区域则视为放弃");
+		}
+		else if(current_round==ROUND_NUMBER) {
+			isReturning = true;
+			System.out.println(">------------------------------------------------------");
+			System.out.println("遇到海盗了！");
+			System.out.println("请海盗-"+getPlayerByID(current_pid).getName()+"选择把船归还到何处");
+			System.out.println("请点击船厂或者港口区域");
+		}
+
 		gameV.updatePlayersView(pirate.getFirstId(),true);
 		pirate.switchPos_id();
 		showBoats();
+
 	}
 
 	public void nextPirate(boolean isPass) {
@@ -557,7 +573,10 @@ public class Game {
 		setVoyageIsOver(true);
 		setChoosing(false);
 		calculateProfits();
-		showWinner();
+		System.out.println(">------------------------------------------------------");
+		System.out.println("该次航程结束，请点击下一次航程进入下一航程");
+		if(this.aBlackMarket.getTopPrice()==MAX_SHARES_PRICE)
+			gameIsOver=true;
 	}
 
 }

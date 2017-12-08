@@ -17,7 +17,7 @@ public class LogView extends JPanel {
         this.setPreferredSize(new Dimension(ABSOLUTE_W, ABSOLUTE_H));
         this.setBackground(Color.WHITE);
 
-        this.logText= new JTextArea("日志输出：\n",8,25);
+        this.logText= new JTextArea("",8,25);
         this.logText.setBackground(Color.LIGHT_GRAY);
         this.logText.setEditable(false);
         this.logText.setFont(new Font("SansSerif", Font.CENTER_BASELINE, 15));

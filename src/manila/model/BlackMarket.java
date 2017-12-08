@@ -65,6 +65,7 @@ public class BlackMarket {
                     for (int j = 0; j < cargo_shares[i].length; j++) {
                         cargo_shares[i][j].setPrice(price);
                     }
+                    System.out.println(cargo_name+"股票价格提高到"+price+"$");
                 }
         }
     }

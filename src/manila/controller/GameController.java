@@ -24,16 +24,14 @@ public class GameController implements MouseListener {
 		this.move_steps=0;
 	}
 
-	public void setSteps(int steps) {
-		this.steps = steps;
-	}
-
 	private void clickedOnArea(Area a, int x, int y){
 		if(isCursorInside(a,x,y)&&a.getAvailPosIndex()!=-1){
 			Player p = this.game.getCurrentPlayer();
 			p.payPos(a.getAvailPosPrice());
 			p.setWorker_nb(p.getWorker_nb()-1);
 			a.joinIn(p.getPid());
+			if(a instanceof Insurance)
+				System.out.println(p.getName()+"在保险公司获得10$");
 
 			// modify the view
 			this.game.getGameV().getPlayground().repaint();
@@ -167,6 +165,8 @@ public class GameController implements MouseListener {
 				cbv.getCardLayout().next(cbv);
 
 				//设置游戏开关
+				System.out.println(">------------------------------------------------------");
+				System.out.println("放置完成，开始游戏！！");
 				this.game.setChoosing(true);
 				this.game.setGameIsStart(true);
 				this.game.setVoyageIsOver(false);
@@ -218,6 +218,8 @@ public class GameController implements MouseListener {
 					int pos=this.game.getAvigator().getCurrent_pos();
 					this.game.setCurrent_pid(this.game.getAvigator().pos_list[pos].getSailorID());
 					this.game.setChoosingBoat(true);
+					System.out.println(">------------------------------------------------------");
+					System.out.println("请领航员-"+this.game.getPlayerByID(this.game.getCurrent_pid()).getName()+"选择小船并将其移动");
 				}
 				this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(), true);
 			}
@@ -366,9 +368,6 @@ public class GameController implements MouseListener {
 		}
 
 	}
-
-
-
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {

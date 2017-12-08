@@ -33,6 +33,7 @@ public class Harbour extends Area {
         for(int i=0;i<this.boatPositions.length;i++){
             if(boatPositions[i].isHaveBoat()&&this.pos_list[i].getSailorID()!=-1){
                 game.getPlayerByID(this.pos_list[i].getSailorID()).receiveProfit(boatPositions[i].getProfit());
+                System.out.println(game.getPlayerByID(this.pos_list[i].getSailorID()).getName()+"在港口获得了"+boatPositions[i].getProfit()+"$");
             }
         }
     }

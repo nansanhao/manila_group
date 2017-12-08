@@ -107,23 +107,24 @@ public class Boat extends Area{
 	 */
 	public void move(int step){
 		this.pos_in_the_sea += step;
-
 	}
 
 	@Override
 	public void playerGetProfit(Game game) {
-		Player[] players=game.getPlayers();
+		Player[] players = game.getPlayers();
 		int money_to_share;
-		System.out.println("The boat "+this.getCargo_name()+" has arrived");
-		if(getAvailPosIndex()!=0){ //如果船不为空才能算钱
-			money_to_share = this.getCargo_value()/this.getFilledPosNum();
-			System.out.println("money_to_share: "+money_to_share);
-			for(Position pos : this.getPos_list()){
-				if(pos.getSailorID() != -1)//-1是空位
+		String s = new String("");
+		if (getAvailPosIndex() != 0) { //如果船不为空才能算钱
+			System.out.println(this.cargo_name + "船运送成功！");
+			money_to_share = this.getCargo_value() / this.getFilledPosNum();
+			for (Position pos : this.getPos_list()) {
+				if (pos.getSailorID() != -1) {//-1是空位
 					players[pos.getSailorID()].receiveProfit(money_to_share);
+					s += "玩家" + players[pos.getSailorID()].getName() + "获得" + money_to_share + "$\n";
+				}
 			}
+			System.out.println(s);
 		}
 	}
-
 
 }

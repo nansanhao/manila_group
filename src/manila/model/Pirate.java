@@ -30,20 +30,32 @@ public class Pirate extends Area{
      * 船长决定船去哪
      */
     public void playerGetProfit(Game game) {
-        if(this.getAvailPosIndex()!=0){//不为空
-            int profit=0;
-            for(Boat b:game.getBoats()){
-                if(b.getPos_in_the_sea()==Game.SEA_LENGTH)
-                    profit+=b.getCargo_value();
+        if (this.getAvailPosIndex() != 0&&boatIsRobbed(game)) {//不为空
+            int profit = 0;
+            for (Boat b : game.getBoats()) {
+                if (b.getPos_in_the_sea() == Game.SEA_LENGTH)
+                    profit += b.getCargo_value();
             }
-            Player[] players=game.getPlayers();
-            for(Position pos : this.getPos_list()){
-                if(pos.getSailorID() != -1)//-1是空位
-                    players[pos.getSailorID()].receiveProfit(profit/getFilledPosNum());
+            Player[] players = game.getPlayers();
+            for (Position pos : this.getPos_list()) {
+                if (pos.getSailorID() != -1&&profit!=0) {//-1是空位{
+                    players[pos.getSailorID()].receiveProfit(profit / getFilledPosNum());
+                    System.out.println(game.getPlayerByID(pos.getSailorID()).getName() + "作为海盗劫船" + profit / getFilledPosNum() + "$");
+                }
             }
         }
-
     }
+
+    private boolean boatIsRobbed(Game game){
+        for (Boat b : game.getBoats()) {
+            if (b.getPos_in_the_sea() == Game.SEA_LENGTH)
+                return true;
+        }
+        return false;
+    }
+
+
+
 
 
     /**

@@ -22,7 +22,6 @@ public class ChoosingBossController implements ActionListener {
 
 	private int bid_amount;
 	private int boss_pid;
-
 	private int currentBoatId;
 	private int numOfHasChoosenBoats;
 
@@ -30,24 +29,8 @@ public class ChoosingBossController implements ActionListener {
 		return cbv;
 	}
 
-	public void setCbv(ChoosingBossView cbv) {
-		this.cbv = cbv;
-	}
-
-	public int getBid_amount() {
-		return bid_amount;
-	}
-
 	public void setBid_amount(int bid_amount) {
 		this.bid_amount = bid_amount;
-	}
-
-	public int getBoss_pid() {
-		return boss_pid;
-	}
-
-	public void setBoss_pid(int boss_pid) {
-		this.boss_pid = boss_pid;
 	}
 
 	public void setCurrentBoatId(int currentBoatId) {
@@ -87,20 +70,17 @@ public class ChoosingBossController implements ActionListener {
 						+ " " + this.bid_amount+"$");
 				this.cbv.getAmountT().setText("");
 				this.cbv.updateBidView(this.boss_pid, false);
-
+				System.out.println(cbv.getGame().getPlayerByID(boss_pid).getName()+"以"+amount+"$竞标");
 				this.cbv.getGame().switchPlayer();
 				this.cbv.updateBidView(this.cbv.getGame().getCurrent_pid(), true);
 
 			}
 			else{
-				pass();
+				System.out.println("价格太低，竞标无效，请重新输入");
 			}
-			
-
 		}
 		else
-			System.out.println("请输入金额");
-		
+			System.out.println("输入有误请输入数字");
 	}
 	
 	/**
@@ -108,7 +88,7 @@ public class ChoosingBossController implements ActionListener {
 	 * 将下一名玩家设为当前玩家，并更新竞选面板的显示内容。
 	 */
 	public void pass(){
-		System.out.println("跳过了该玩家");
+		System.out.println("该玩家跳过竞选");
 		this.cbv.updateBidView(this.cbv.getGame().getCurrent_pid(), false);
 		
 		this.cbv.getGame().switchPlayer();
@@ -128,35 +108,15 @@ public class ChoosingBossController implements ActionListener {
 		// 设置当前玩家
 		g.setCurrent_pid(boss_pid);
 		g.setBoss_pid(boss_pid);
-		
-
+		System.out.println(">------------------------------------------------------");
+		System.out.println(g.getPlayerByID(boss_pid).getName()+"以"+bid_amount+"$竞选成功");
+		System.out.println("请"+g.getPlayerByID(boss_pid).getName()+"选择购买股票");
 
 		// 显示边框
 		g.getGameV().updatePlayersView(boss_pid, true);
 
 		//窗口改变
 		this.cbv.getCardLayout().next(this.cbv);
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		String command = arg0.getActionCommand();
-		if(command.equals("bid")){
-			this.bid();
-		}
-		else if(command.equals("pass")){
-			this.pass();
-		}
-		else if(command.equals("confirm")&&this.bid_amount!=0){
-			this.confirm();
-		}
-		else if(command.equals("4")||command.equals("5")||command.equals("6")||command.equals("7")||command.equals("8")){
-			this.buyshares(command);
-		}
-		else if(command.equals("0")||command.equals("1")||command.equals("2")||command.equals("3")){
-			this.setBoatPosition(Integer.parseInt(command));
-		}
 	}
 
 	private void setBoatPosition(int i) {
@@ -185,14 +145,21 @@ public class ChoosingBossController implements ActionListener {
 				s.setOwner(p);
 				p.payPos(s.getPrice());
 				g.getGameV().updatePlayersView(boss_pid,true);
+				System.out.println(">------------------------------------------------------");
+				System.out.println(p.getName()+"以"+s.getPrice()+"$购买了"+s.getCargo_name()+"股票");
+				System.out.println("请"+p.getName()+"开始放置船的位置");
+				System.out.println("注意：\n1.每艘船最远能放置位置不超过5\n2.三艘船位置之和不超过9");
 				this.cbv.getCardLayout().next(this.cbv);
 			}
 		}
 		else {
 			g.getGameV().updatePlayersView(boss_pid,true);
 			this.cbv.getCardLayout().next(this.cbv);
+			System.out.println(">------------------------------------------------------");
+			System.out.println(p.getName()+"放弃了购买股票股票");
+			System.out.println("请"+p.getName()+"开始放置船的位置");
+			System.out.println("注意：\n1.每艘船最远能放置位置不超过5\n2.三艘船位置之和不超过9");
 		}
-
 	}
 
 	public static boolean isNumeric(String str){
@@ -203,5 +170,27 @@ public class ChoosingBossController implements ActionListener {
 		}
 		return true;
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		String command = arg0.getActionCommand();
+		if(command.equals("bid")){
+			this.bid();
+		}
+		else if(command.equals("pass")){
+			this.pass();
+		}
+		else if(command.equals("confirm")&&this.bid_amount!=0){
+			this.confirm();
+		}
+		else if(command.equals("4")||command.equals("5")||command.equals("6")||command.equals("7")||command.equals("8")){
+			this.buyshares(command);
+		}
+		else if(command.equals("0")||command.equals("1")||command.equals("2")||command.equals("3")){
+			this.setBoatPosition(Integer.parseInt(command));
+		}
+	}
+
 
 }
