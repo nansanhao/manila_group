@@ -7,8 +7,10 @@ import manila.model.Position;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * 船停靠的区域，子类有海港和修理厂
+ */
 public class YardView extends AreaView {
-
 
     public static final int ABSOLUTE_W=220;
     public static final int ABSOLUTE_H=PlaygroundView.SEA_L/2-5;
@@ -27,10 +29,7 @@ public class YardView extends AreaView {
     public static final int PROFIT_BLOCK_START_X=POS_START_X-INTERVAL-PROFIT_BLOCK_W;
     public static final int PROFIT_BLOCK_START_Y=POS_START_Y;
 
-
     public static final int SHIP_POS_START_X=ABSOLUTE_X+PROFIT_BLOCK_START_X-INTERVAL-PlaygroundView.BOAT_W;
-
-
 
     public YardView(Game game) {
         super(game);

@@ -19,7 +19,6 @@ public class PlaygroundView extends JPanel {
 	private PirateAreaView pirateAreaView;
 	private InsuranceAreaView insuranceAreaView;
 	private ShipYardView shipYardView;
-
 	private AvigatorView avigatorView;
 	private HarbourView harbourView;
 
@@ -74,7 +73,6 @@ public class PlaygroundView extends JPanel {
 		this.pirateAreaView=new PirateAreaView(this.game);
 		this.insuranceAreaView=new InsuranceAreaView(this.game);
 		this.shipYardView=new ShipYardView(this.game);
-
 		this.avigatorView=new AvigatorView(this.game);
 		this.harbourView=new HarbourView(this.game);
 

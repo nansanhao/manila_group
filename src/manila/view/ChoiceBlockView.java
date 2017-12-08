@@ -6,10 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * 用于选择
+ * 用于真正游戏开始之前选择先决条件的区域，比如船老大。
  */
 
 public class ChoiceBlockView extends JPanel {
+
     private JButton button;
     private Boat boat;
     private ChoosingBossView choosingBossView;

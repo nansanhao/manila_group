@@ -14,15 +14,13 @@ public class ChoosingBossView extends JPanel {
     private Game game;
     private ChoosingBossController cbc;
 
-
+    /**view的宽度*/
     public static final int CHOOSING_VIEW_W=350;
-
+    /**view的高度*/
     public static final int CHOOSING_VIEW_H=200;
 
-
-
+    /**卡片布局*/
     private CardLayout cardLayout;
-
 
     /**日志板*/
     private JPanel consolePanel;
@@ -260,7 +258,6 @@ public class ChoosingBossView extends JPanel {
         }
 
     }
-
 
     public void reset() {
         this.bossLabel.setText("xxxx");

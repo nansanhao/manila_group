@@ -7,6 +7,10 @@ import manila.model.Position;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * 海港view，用于停靠船。
+ */
+
 public class HarbourView extends YardView{
     public static final int ABSOLUTE_Y=PlaygroundView.SEA_START_Y;
     public static final int SHIP_POS_START_Y=ABSOLUTE_Y+POS_START_Y;
