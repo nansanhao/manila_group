@@ -320,7 +320,7 @@ public class Game {
 		// TODO: 2017/11/19 海盗结算 完成
 		// TODO: 2017/11/19 保险公司结算 完成
 		// TODO: 2017/11/19 修船厂/港口结算 12.1完成
-		System.out.println(">------------------------------------------------------");
+		System.out.println(">-------------------------------------------------");
 		for(Boat s : this.boats){
 			if(s.getPos_in_the_sea() > SEA_LENGTH){
 				s.playerGetProfit(this);
@@ -346,7 +346,7 @@ public class Game {
 	public void showWinner(){
 		int winner_id = 0;
 		int high_balance = -1;
-		System.out.println(">------------------------------------------------------");
+		System.out.println(">-------------------------------------------------");
 		System.out.println("游戏结束！");
 		for(Player p : this.players){
 			if(p.getFinalMoney() > high_balance){
@@ -494,7 +494,7 @@ public class Game {
 		current_pid=(avigator.getFirstId());
 		gameV.updatePlayersView(avigator.getFirstId(),true);
 		avigator.switchPos_id();
-		System.out.println(">------------------------------------------------------");
+		System.out.println(">-------------------------------------------------");
 		System.out.println("请领航员-"+getPlayerByID(current_pid).getName()+"选择小船并将其移动");
 	}
 
@@ -507,14 +507,14 @@ public class Game {
 		choosing=false;
 		if(current_round==2) {
 			isRobbing=true;
-			System.out.println(">------------------------------------------------------");
+			System.out.println(">-------------------------------------------------");
 			System.out.println("遇到海盗了！");
 			System.out.println("请海盗-"+getPlayerByID(current_pid).getName()+"选择船上的位置抢劫");
 			System.out.println("点击海盗区域则视为放弃");
 		}
 		else if(current_round==ROUND_NUMBER) {
 			isReturning = true;
-			System.out.println(">------------------------------------------------------");
+			System.out.println(">-------------------------------------------------");
 			System.out.println("遇到海盗了！");
 			System.out.println("请海盗-"+getPlayerByID(current_pid).getName()+"选择把船归还到何处");
 			System.out.println("请点击船厂或者港口区域");
@@ -577,7 +577,7 @@ public class Game {
 		setVoyageIsOver(true);
 		setChoosing(false);
 		calculateProfits();
-		System.out.println(">------------------------------------------------------");
+		System.out.println(">-------------------------------------------------");
 		System.out.println("该次航程结束，请点击下一次航程进入下一航程");
 		if(this.aBlackMarket.getTopPrice()==MAX_SHARES_PRICE){
 			gameIsOver=true;

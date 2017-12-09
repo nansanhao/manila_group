@@ -39,6 +39,8 @@ public class DiceController implements ActionListener {
 				this.game.boatLand();
 				this.game.getGameV().getPlayground().repaint();
 			}
+
+
 			if(this.game.getCurrent_round()!=1&&this.game.isRobbed()&&this.game.getPirate().getFirstId()!=-1){ //第二、三回合时判断有没有到达13格
 				this.game.switchToPirate();
 			}
