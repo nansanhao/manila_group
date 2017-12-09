@@ -197,7 +197,7 @@ public class GameController implements MouseListener {
 				cbv.getCardLayout().next(cbv);
 
 				//设置游戏开关
-				System.out.println(">------------------------------------------------------");
+				System.out.println(">-------------------------------------------------");
 				System.out.println("放置完成，开始游戏！！");
 				this.game.setChoosing(true);
 				this.game.setGameIsStart(true);
@@ -267,7 +267,7 @@ public class GameController implements MouseListener {
 					int pos=this.game.getAvigator().getCurrent_pos();
 					this.game.setCurrent_pid(this.game.getAvigator().pos_list[pos].getSailorID());
 					this.game.setChoosingBoat(true);
-					System.out.println(">------------------------------------------------------");
+					System.out.println(">-------------------------------------------------");
 					System.out.println("请领航员-"+this.game.getPlayerByID(this.game.getCurrent_pid()).getName()+"选择小船并将其移动");
 				}
 				this.game.getGameV().updatePlayersView(this.game.getCurrent_pid(), true);

@@ -185,7 +185,7 @@ public class Player {
 			if(s.getStatus_pledge()==2)
 				num_pledgeShares++;
 		}
-		money-=(12*num_pledgeShares);
+		money-=(15*num_pledgeShares);
 		if(money<0)
 			money=0;
 		return  money;
