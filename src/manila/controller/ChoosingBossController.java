@@ -109,7 +109,7 @@ public class ChoosingBossController implements ActionListener {
 		// 设置当前玩家
 		g.setCurrent_pid(boss_pid);
 		g.setBoss_pid(boss_pid);
-		System.out.println(">------------------------------------------------------");
+		System.out.println(">-------------------------------------------------");
 		System.out.println(g.getPlayerByID(boss_pid).getName()+"以"+bid_amount+"$竞选成功");
 		System.out.println("请"+g.getPlayerByID(boss_pid).getName()+"选择购买股票");
 
@@ -154,7 +154,7 @@ public class ChoosingBossController implements ActionListener {
 				s.setOwner(p);
 				p.payPos(s.getPrice());
 				g.getGameV().updatePlayersView(boss_pid,true);
-				System.out.println(">------------------------------------------------------");
+				System.out.println(">-------------------------------------------------");
 				System.out.println(p.getName()+"以"+s.getPrice()+"$购买了"+s.getCargo_name()+"股票");
 				System.out.println("请"+p.getName()+"开始放置船的位置");
 				System.out.println("注意：\n1.每艘船最远能放置位置不超过5\n2.三艘船位置之和不超过9");
@@ -164,7 +164,7 @@ public class ChoosingBossController implements ActionListener {
 		else {
 			g.getGameV().updatePlayersView(boss_pid,true);
 			this.cbv.getCardLayout().next(this.cbv);
-			System.out.println(">------------------------------------------------------");
+			System.out.println(">-------------------------------------------------");
 			System.out.println(p.getName()+"放弃了购买股票股票");
 			System.out.println("请"+p.getName()+"开始放置船的位置");
 			System.out.println("注意：\n1.每艘船最远能放置位置不超过5\n2.三艘船位置之和不超过9");
